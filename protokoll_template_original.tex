@@ -1,0 +1,84 @@
+\documentclass[11pt]{scrartcl}
+
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+
+\usepackage[labelsep=colon,justification=justified,labelfont=bf,textfont=sl]{caption,subcaption}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[margin=3cm,a4paper]{geometry}
+\usepackage{enumitem} %für Numerierung bei enumerate
+%bsp: \begin{enumerate}[label=(\roman*)]
+\usepackage{gensymb} %eigentlich nur für ° da,,
+%Ok mit dem geht auch \celius für °C
+
+%Tabellen und Bilder
+\captionsetup[table]{name=Tabelle }
+\captionsetup[figure]{name=Abbildung }
+
+%Kopf & Fuß
+\pagestyle{fancy}
+\setlength{\headheight}{25.3pt}
+\lhead{Versuchsname}
+\chead{Name1\\ Name2}
+\rhead{dd.mm.yyyy}
+\cfoot{\thepage \hspace{1pt} / \pageref{LastPage}}
+
+%Neue Namen
+\renewcommand{\contentsname}{Inhaltsangabe}
+\renewcommand{\listtablename}{Tabellenverzeichnis}
+\renewcommand{\listfigurename}{Abbildungsverzeichnis}
+
+%Bilder Directories
+%\graphicspath{{{Plots/}}
+
+%Eigene Commands
+\newcommand{\der}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+\newcommand{\pder}[2]{\frac{\partial #1}{\partial #2}}
+
+\begin{document}
+\tableofcontents
+\newpage
+
+\section{Aufgabenstellung\label{Auf0}}
+
+Siehe:
+
+\section{Vorbereitung}
+
+Siehe: 
+
+\section{Grundlagen \& Berechnungen}
+%Gleichungen werden so oder mit \begin{equation} formatiert
+\begin{align}
+\nabla \cdot \textbf{E} &= \frac{\rho}{\varepsilon_0} \\
+\nabla \cdot \textbf{B} &= 0 \\
+\nabla \times \textbf{E} &= \frac{\partial \textbf{B}}{\partial t} \\
+\nabla \times \textbf{B} &= \mu_{0}\left(\textbf{J} + \varepsilon_{0} \frac{\partial \textbf{B}}{\partial t}\right)\\
+\end{align}
+
+$$\lim_{n\to\infty} (\frac{1}{2})^n$$
+$\frac{1}{2}$
+\section{Versuchsdurchführung \& Messergebnisse}
+Hello Test Miau
+\subsection{Geräteliste}
+%Beispiel Tabelle 
+\captionof{table}{Verwendete Geräte}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|} \hline
+\textbf{Gerät} & \textbf{Modell} & \textbf{Hersteller} & \textbf{Nr.} & \textbf{Us}\\ \hline
+Der Gerät & Nie müde & Schweißfrei Inc. & 12 & $10^{-42}$ \\ \hline
+\end{tabular}
+\end{center}
+
+\section{Auswertung}
+
+\section{Diskussion \& Zusammenfassung}
+
+%\section*{Literatur}
+%\listoffigures
+%\listoftables
+\end{document}
