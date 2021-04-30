@@ -1,46 +1,57 @@
+% Protokoll-Template by Andreas Zach
+
 \documentclass[11pt]{scrartcl}
 
-% standard packages
+% input and font
 \usepackage[utf8]{inputenc}  % input in UTF-8
 \usepackage[T1]{fontenc}  % output in T1 fonts (westeuropäische Codierung)
 \usepackage{lmodern}  % latin modern fonts
 \usepackage[ngerman]{babel}  % deutsches Sprachpaket, neue Rechtschreibung
 
-% Seitensetup
+% Seitengeometrie
 \usepackage{scrlayer-scrpage}  % Seitenformatierung durch KOMA-interne Optionen
 \usepackage[top=4cm, bottom=4cm]{geometry}  % Seitengeometrie
+
+% Inhalt - Aussehen
+\usepackage{amsmath, amssymb, amstext, mathtools}  % math packages (American Math Society) + Verbesserung von amsmath
 \usepackage[hypcap=false]{caption, subcaption}  % caption editing - hypcap warning with hyperref
 \usepackage{array}  % table editing
-
-% additional packages
-\usepackage{amsmath, amssymb, amstext}  % math packages (American Math Society)
-\usepackage{mathtools}  % verbessert package amsmath
+\usepackage[separate-uncertainty=true]{siunitx}  % bessere Darstellung von Einheiten - \pm soll \pm bleiben und nicht ..(.)
 \usepackage{icomma}  % Kommata in Dezimalzahlen verursachen keinen Abstand mehr
+
+% einfügen
 \usepackage{graphicx}  % Bilder einfügen
 \usepackage{pdfpages}  % PDF als vollständige Seiten einfügen
 \usepackage{lastpage}  % referenziert die letzte Seite
-\usepackage[separate-uncertainty=true]{siunitx}  % bessere Darstellung von Einheiten
-\usepackage[hidelinks]{hyperref}  % should be last to loaded, produces most errors
+\usepackage[hidelinks]{hyperref}  % als letztes laden, sorgt für die meisten Fehler
 
-% package setups
+% Literaturverwaltung
+\usepackage[style=apa]{biblatex}  % backend=biber is standard
+\usepackage{csquotes}  % warning - should be used in combination with package babel
+
+% KOMA setups
 % Kopf- und Fußzeile durch KOMA
 \pagestyle{scrheadings}  % KOMA darf entscheiden
 \clearpairofpagestyles  % reset
 \setkomafont{pageheadfoot}{\normalfont}  % Standardschrift in Kopf- und Fußzeile
 %\setlength{\headheight}{0pt}
-\ihead{Versuch: \\ Versuchsname}  % Kopf links (inner)
-\chead{\textsc{Nachname1} Vorname1 \\ \textsc{Nachname2} Vorname2}  % Kopf mittig (center)
-\ohead{Datum: \\ Datum der Messung}  % Kopf rechts (outer)
-\cfoot{\pagemark \, / \pageref{LastPage}}  % Fuß Mitte
+\ihead{Versuchsname}  % Kopf links (inner)
+\chead{\textsc{Zach} Andreas}  % Kopf mittig (center)
+\ohead{Datum der Messung}  % Kopf rechts (outer)
+\cfoot{\pagemark{} / \pageref{LastPage}}  % Fuß Mitte
+% {}: empty statement
+% \ : protected space
+% \,: small space
+\DeclareTOCStyleEntry{dottedtocline}{section}  % Inhaltsverzeichnis mit Punkten (nur sections)
 
-% Table of Contents
-\DeclareTOCStyleEntry{dottedtocline}{section}  % KOMA intern - Inhaltsverzeichnis mit Punkten (nur sections)
-
-% SI
-\sisetup{locale = DE}
-
+% other packages
 % array
 \renewcommand{\arraystretch}{1.2}  % stretched die Zellengröße in tables auf das 1,2-fache
+% siunitx
+\sisetup{locale = DE}
+% biblatex source
+\addbibresource{C:/Users/andre/Dropbox/Uni/Physik/Allgemeines/JabRef_Database/physics.bib}  % database import with absolute path - .bib!
+
 
 % neue Namen (babel überschreibt Standardbezeichnungen aus dem Englischen am Dokumentanfang - therefore gehören die neuen commands erst am Dokumentbeginn ausgeführt)
 %\AtBeginDocument{\renewcommand{\contentsname}{Inhaltsangabe}}
@@ -55,7 +66,7 @@
 
 \begin{document}
 
-\includepdf{deckblatt.pdf}
+%\includepdf{deckblatt.pdf}
 
 \tableofcontents
 \newpage
@@ -69,7 +80,7 @@ Text
 \section{Voraussetzungen und Grundlagen}
 \label{sec:voraussetzungen-rundlagen}
 
-Text
+Text (\cite[S. 1000]{ref:dem1})
 
 
 \section{Versuchsanordnung}
@@ -111,7 +122,7 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
 \section{Versuchsdurchführung und Messergebnisse}
 \label{sec:versuchsdurchfuehrung-messergebnisse}
 
-Hello Test Miau
+Text
 
 \section{Auswertung}
 \label{sec:auswertung}
@@ -120,9 +131,12 @@ Hello Test Miau
 \label{sec:diskussion-zusammenfassung}
 
 % Literaturtabelle
-%\bibliographystyle{unsrt}
-%\bibliography{Literatur}
+\printbibliography
+
+% Abbiludngsverzeichnis
 \listoffigures
+
+% Tabellenverzeichnis
 \listoftables
 
 \end{document}
