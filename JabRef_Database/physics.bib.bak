@@ -1,0 +1,18 @@
+% Encoding: UTF-8
+
+@Book{ref:dem1,
+  author    = {Wolfgang Demtröder},
+  publisher = {Springer Spektrum},
+  title     = {Experimentalphysik 1: Mechanik und Wärme},
+  year      = {2018},
+  address   = {Berlin},
+  edition   = {8},
+  isbn      = {978-3-662-54846-2},
+}
+
+@Misc{ref:knoll,
+  author = {Peter Knoll},
+  title  = {Mechanik und Wärme (Mechanics and Heat): Skriptum zur Vorlesung},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}
