@@ -7,12 +7,26 @@
   year      = {2018},
   address   = {Berlin},
   edition   = {8},
-  isbn      = {978-3-662-54846-2},
+  isbn      = {978-3-662-54847-9},
+  note      = {eBook},
 }
 
 @Misc{ref:knoll,
-  author = {Peter Knoll},
-  title  = {Mechanik und Wärme (Mechanics and Heat): Skriptum zur Vorlesung},
+  author       = {Peter Knoll},
+  howpublished = {ÖH-Servicecenter, Uni-Graz},
+  title        = {Mechanik und Wärme (Mechanics and Heat): Skriptum zur Vorlesung},
+  year         = {\},
+}
+
+@Book{ref:dem2,
+  author    = {Wolfgang Demtröder},
+  publisher = {Springer Spektrum},
+  title     = {Experimentalphysik 2: Elektrizität und Optik},
+  year      = {2017},
+  address   = {Berlin},
+  edition   = {7},
+  isbn      = {978-3-662-55790-7},
+  note      = {eBook},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

@@ -1,6 +1,5 @@
 {
-
-"latex-workshop.latex.tools": [
+    "latex-workshop.latex.tools": [
         {
             "name": "pdflatex",
             "command": "pdflatex",
@@ -22,13 +21,7 @@
 
     "latex-workshop.latex.recipes": [
         {
-            "name": "pdflatex x2",
-            "tools": [
-                "pdflatex"
-            ]
-        },
-        {
-            "name": "pdflatex -> biber -> pdflatex x2",
+            "name": "pdflatex \u2192 biber \u2192 pdflatex \u00D7 2",
             "tools": [
                 "pdflatex",
                 "biber",
