@@ -53,14 +53,18 @@
 \addbibresource{C:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/files/JabRef_Database/physics.bib}  % database import with absolute path - .bib!
 
 
-% neue Namen (babel überschreibt Standardbezeichnungen aus dem Englischen am Dokumentanfang - therefore gehören die neuen commands erst am Dokumentbeginn ausgeführt)
-%\AtBeginDocument{\renewcommand{\contentsname}{Inhaltsangabe}}
-%\AtBeginDocument{{\renewcommand{\listtablename}{Tabellenverzeichnis}}
-%\AtBeginDocument{{\renewcommand{\listfigurename}{Abbildungsverzeichnis}}
+% neue Namen (babel überschreibt Standardbezeichnungen aus dem Englischen in der Präambel - therefore gehören die neuen commands erst am Dokumentbeginn ausgeführt)
+\AtBeginDocument{\renewcommand{\refname}{Literaturverzeichnis}}
+% weitere:
+%\contentsname
+%\listtablename
+%\listfigurename
+
 
 % eigene Commands
-%\newcommand{\der}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}  % derivative
-%\newcommand{\pder}[2]{\frac{\partial #1}{\partial #2}}  % partial derivative
+%\newcommand{\der}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}  % derivative
+%\newcommand{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}  % partial derivative
+\newcommand{\mss}{\(\frac{\text{m}}{\text{s}^2}\)}  % m/s^2
 
 
 
@@ -74,13 +78,11 @@
 \section{Aufgabenstellung}
 \label{sec:aufgabenstellung}
 
-Text
-
-
 \section{Voraussetzungen und Grundlagen}
 \label{sec:voraussetzungen-rundlagen}
 
-Text (\cite[S. 1000]{ref:dem1})
+Text1 (\cite[S. 1000]{ref:dem1}) \\
+Text2 (\cite[Kapitel 74]{ref:knoll})
 
 
 \section{Versuchsanordnung}
@@ -89,11 +91,11 @@ Text (\cite[S. 1000]{ref:dem1})
 % Gleichungsumgebung
 \begin{equation}
 \label{eq:grenzen-oben-unten}
-    \int \limits_{a}^{b} x^2 \, dx =\frac{b^3-a^3}{3}  % \, liefert quasi ein Leerzeichen - single character exponent muss nicht in {}-Klammern
+    \int \limits_{a}^{b} x^2 \, dx =\frac{b^3-a^3}{3}  % \, liefert quasi ein Leerzeichen - single character exponent muss nicht in {}-Klammern stehen
 \end{equation}
 
 % inline math
-\( \lim \limits_{n \to \infty} \left( 1 + \frac{1}{n} \right) ^{n} = e\)  \\ % new, encouraged
+\(\lim \limits_{n \to \infty} \left( 1 + \frac{1}{n} \right) ^{n} = e\)  \\ % new, encouraged
 $\lim \limits_{n \to \infty} \frac{1}{2n} = 0$  % old, disencouraged
 
 % display math
@@ -103,8 +105,7 @@ $\lim \limits_{n \to \infty} \frac{1}{2n} = 0$  % old, disencouraged
 
 \[ \int \frac{1}{x} \, dx = \ln|x| \]  % new, encouraged - same as \begin{equation*} when using amsmath
 $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
-
-
+Eihneit von $\textbf{a}$: \mss
 
 \section{Geräteliste}
 \label{sec:geraeteliste}
@@ -121,8 +122,6 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
 
 \section{Versuchsdurchführung und Messergebnisse}
 \label{sec:versuchsdurchfuehrung-messergebnisse}
-
-Text
 
 \section{Auswertung}
 \label{sec:auswertung}
