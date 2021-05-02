@@ -52,7 +52,6 @@
 % biblatex source
 \addbibresource{C:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/files/JabRef_Database/physics.bib}  % database import with absolute path - .bib!
 
-
 % neue Namen (babel überschreibt Standardbezeichnungen aus dem Englischen in der Präambel - therefore gehören die neuen commands erst am Dokumentbeginn ausgeführt)
 \AtBeginDocument{\renewcommand{\refname}{Literaturverzeichnis}}
 % weitere:
@@ -60,11 +59,9 @@
 %\listtablename
 %\listfigurename
 
-
 % eigene Commands
 %\newcommand{\der}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}  % derivative
-%\newcommand{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}  % partial derivative
-\newcommand{\mss}{\(\frac{\text{m}}{\text{s}^2}\)}  % m/s^2
+\newcommand{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}  % partial derivative
 
 
 
@@ -72,14 +69,15 @@
 
 %\includepdf{deckblatt.pdf}
 
+\clearpage
 \tableofcontents
 \newpage
 
 \section{Aufgabenstellung}
 \label{sec:aufgabenstellung}
 
-\section{Voraussetzungen und Grundlagen}
-\label{sec:voraussetzungen-rundlagen}
+\section{Grundlagen und Voraussetzungen}
+\label{sec:grundlagen_voraussetzungen}
 
 Text1 (\cite[S. 1000]{ref:dem1}) \\
 Text2 (\cite[Kapitel 74]{ref:knoll})
@@ -105,7 +103,6 @@ $\lim \limits_{n \to \infty} \frac{1}{2n} = 0$  % old, disencouraged
 
 \[ \int \frac{1}{x} \, dx = \ln|x| \]  % new, encouraged - same as \begin{equation*} when using amsmath
 $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
-Eihneit von $\textbf{a}$: \mss
 
 \section{Geräteliste}
 \label{sec:geraeteliste}
@@ -121,13 +118,13 @@ Eihneit von $\textbf{a}$: \mss
 \end{center}
 
 \section{Versuchsdurchführung und Messergebnisse}
-\label{sec:versuchsdurchfuehrung-messergebnisse}
+\label{sec:versuchsdurchfuehrung_messergebnisse}
 
 \section{Auswertung}
 \label{sec:auswertung}
 
 \section{Diskussion und Zusammenfassung}
-\label{sec:diskussion-zusammenfassung}
+\label{sec:diskussion_zusammenfassung}
 
 % Literaturtabelle
 \printbibliography

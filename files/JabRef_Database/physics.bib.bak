@@ -15,7 +15,7 @@
   author       = {Peter Knoll},
   howpublished = {ÖH-Servicecenter, Uni-Graz},
   title        = {Mechanik und Wärme (Mechanics and Heat): Skriptum zur Vorlesung},
-  year         = {o.D.},
+  year         = {o.D.,},
 }
 
 @Book{ref:dem2,
@@ -27,6 +27,14 @@
   edition   = {7},
   isbn      = {978-3-662-55790-7},
   note      = {eBook},
+}
+
+@Misc{ref:genol2013,
+  howpublished = {Schmierstoff Handbuch},
+  month        = feb,
+  title        = {ProduktInformationen Motoröle: Genol Rasenmäheröl},
+  year         = {2013},
+  url          = {https://cdn.lagerhaus.at/rwa/lh3/media/download/2014.07.08/1404820306140132.pdf?d=Produktinformationsblatt_GENOL_RASENM_HER_L.pdf&dc=1404820306},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
