@@ -27,16 +27,16 @@
 
 % Literaturverwaltung
 \usepackage[style=apa]{biblatex}  % backend=biber is standard
-\usepackage{csquotes}  % warning - should be used in combination with package babel
+\usepackage{csquotes}  % better quotation - should also be used in combination with package babel (warning)
 
 % KOMA setups
 % Kopf- und Fußzeile durch KOMA
 \pagestyle{scrheadings}  % KOMA darf entscheiden
 \clearpairofpagestyles  % reset
 \setkomafont{pageheadfoot}{\normalfont}  % Standardschrift in Kopf- und Fußzeile
-%\setlength{\headheight}{0pt}
+\setlength{\headheight}{27.2pt}  % just look at the warning
 \ihead{Versuchsname}  % Kopf links (inner)
-\chead{\textsc{Zach} Andreas}  % Kopf mittig (center)
+\chead{\textsc{Zach} Andreas \\ 12004790}  % Kopf mittig (center)
 \ohead{Datum der Messung}  % Kopf rechts (outer)
 \cfoot{\pagemark{} / \pageref{LastPage}}  % Fuß Mitte
 % {}: empty statement
@@ -79,7 +79,7 @@
 \section{Grundlagen und Voraussetzungen}
 \label{sec:grundlagen_voraussetzungen}
 
-Text1 (\cite[S. 1000]{ref:dem1}) \\
+Text1 (\cite[1000]{ref:dem1}) \\
 Text2 (\cite[Kapitel 74]{ref:knoll})
 
 

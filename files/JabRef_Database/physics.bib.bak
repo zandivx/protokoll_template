@@ -37,4 +37,12 @@
   url          = {https://cdn.lagerhaus.at/rwa/lh3/media/download/2014.07.08/1404820306140132.pdf?d=Produktinformationsblatt_GENOL_RASENM_HER_L.pdf&dc=1404820306},
 }
 
+@Misc{ref:phyphox,
+  author       = {2nd Institute of Physics, RWTH Aachen University},
+  howpublished = {Website},
+  title        = {Phyphox: Unterstützte Sensoren},
+  year         = {o.D.,},
+  url          = {https://phyphox.org/de/unterstutzte-sensoren/},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
