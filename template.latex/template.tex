@@ -23,11 +23,12 @@
 \usepackage{graphicx}  % Bilder einfügen
 \usepackage{pdfpages}  % PDF als vollständige Seiten einfügen
 \usepackage{lastpage}  % referenziert die letzte Seite
-\usepackage[hidelinks]{hyperref}  % als letztes laden, sorgt für die meisten Fehler
 
 % Literaturverwaltung
 \usepackage[style=apa]{biblatex}  % backend=biber is standard
 \usepackage{csquotes}  % better quotation - should also be used in combination with package babel (warning)
+\usepackage{xurl}  % breaks links - after biblatex, but before hyperref!
+\usepackage[hidelinks]{hyperref}  % angeblich errorlastig
 
 % KOMA setups
 % Kopf- und Fußzeile durch KOMA
@@ -79,8 +80,10 @@
 \section{Grundlagen und Voraussetzungen}
 \label{sec:grundlagen_voraussetzungen}
 
-Text1 (\cite[1000]{ref:dem1}) \\
-Text2 (\cite[Kapitel 74]{ref:knoll})
+Text1\footcite[1000]{ref:dem1} \\
+Text2\footcite[Kapitel 74]{ref:knoll} \\
+Text3\footnote{\url{https://online.uni-graz.at/kfu_online/ee/ui/ca2/app/desktop/\#/login?$ctx=&redirect=Li4vLi4vLi4vZWUvdWkvY2EyL2FwcC9kZXNrdG9wLyMvc2xjLnRtLmNwL3N0dWRlbnQvY291cnNlcy82Mjg3OTk=}} \\  % must escape the # (\#), error otherwise!!
+Text4\footcite{ref:genol2013}
 
 
 \section{Versuchsanordnung}

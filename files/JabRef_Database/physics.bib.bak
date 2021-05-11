@@ -34,15 +34,22 @@
   month        = feb,
   title        = {ProduktInformationen Motoröle: Genol Rasenmäheröl},
   year         = {2013},
-  url          = {https://cdn.lagerhaus.at/rwa/lh3/media/download/2014.07.08/1404820306140132.pdf?d=Produktinformationsblatt_GENOL_RASENM_HER_L.pdf&dc=1404820306},
+  url          = {\url{cdn.lagerhaus.at/rwa/lh3/media/download/2014.07.08/1404820306140132.pdf}},
 }
 
 @Misc{ref:phyphox,
-  author       = {2nd Institute of Physics, RWTH Aachen University},
+  author       = {RWTH Aachen University, 2nd Institute of Physics},
   howpublished = {Website},
   title        = {Phyphox: Unterstützte Sensoren},
   year         = {o.D.,},
   url          = {https://phyphox.org/de/unterstutzte-sensoren/},
+}
+
+@Misc{ref:viskositaet_knoll,
+  author       = {Peter Knoll and Robert Nuster and Joachim Krenn},
+  howpublished = {Laborübungen Mechanik, Wärme},
+  title        = {Reibung, Innere Reibung},
+  year         = {o.D.,},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
