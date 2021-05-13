@@ -15,7 +15,7 @@
   author       = {Peter Knoll},
   howpublished = {ÖH-Servicecenter, Uni-Graz},
   title        = {Mechanik und Wärme (Mechanics and Heat): Skriptum zur Vorlesung},
-  year         = {o.D.,},
+  year         = {o. D.},
 }
 
 @Book{ref:dem2,
@@ -34,22 +34,37 @@
   month        = feb,
   title        = {ProduktInformationen Motoröle: Genol Rasenmäheröl},
   year         = {2013},
-  url          = {\url{cdn.lagerhaus.at/rwa/lh3/media/download/2014.07.08/1404820306140132.pdf}},
+  url          = {cdn.lagerhaus.at/rwa/lh3/media/download/2014.07.08/1404820306140132.pdf},
 }
 
 @Misc{ref:phyphox,
   author       = {RWTH Aachen University, 2nd Institute of Physics},
   howpublished = {Website},
   title        = {Phyphox: Unterstützte Sensoren},
-  year         = {o.D.,},
-  url          = {https://phyphox.org/de/unterstutzte-sensoren/},
+  year         = {o. D.},
+  url          = {phyphox.org/de/unterstutzte-sensoren/},
 }
 
 @Misc{ref:viskositaet_knoll,
   author       = {Peter Knoll and Robert Nuster and Joachim Krenn},
   howpublished = {Laborübungen Mechanik, Wärme},
   title        = {Reibung, Innere Reibung},
-  year         = {o.D.,},
+  year         = {o. D.},
+}
+
+@Misc{ref:eurospezifikation,
+  author = {{Europäische Zentralbank}},
+  title  = {Gemeinsame Seiten},
+  year   = {o. D.},
+  url    = {www.ecb.europa.eu/euro/coins/common/html/index.de.html},
+}
+
+@Misc{ref:uncertainties,
+  author       = {Eric O. Lebigot},
+  howpublished = {Website},
+  title        = {Uncertainties: a Python package for calculations with uncertainties},
+  year         = {o. D.},
+  url          = {pythonhosted.org/uncertainties/},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

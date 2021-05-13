@@ -16,8 +16,10 @@
 \usepackage{amsmath, amssymb, amstext, mathtools}  % math packages (American Math Society) + Verbesserung von amsmath
 \usepackage[hypcap=false]{caption, subcaption}  % caption editing - hypcap warning with hyperref
 \usepackage{array}  % table editing
-\usepackage[separate-uncertainty=true]{siunitx}  % bessere Darstellung von Einheiten - \pm soll \pm bleiben und nicht ..(.)
+\usepackage[locale=DE, separate-uncertainty=true]{siunitx}  % bessere Darstellung von Einheiten - \pm soll \pm bleiben und nicht ..(.)
 \usepackage{icomma}  % Kommata in Dezimalzahlen verursachen keinen Abstand mehr
+\usepackage{listings}  % code display
+\usepackage{scrhack}  % listings in combination with KOMA
 
 % einfügen
 \usepackage{graphicx}  % Bilder einfügen
@@ -29,6 +31,7 @@
 \usepackage{csquotes}  % better quotation - should also be used in combination with package babel (warning)
 \usepackage{xurl}  % breaks links - after biblatex, but before hyperref!
 \usepackage[hidelinks]{hyperref}  % angeblich errorlastig
+
 
 % KOMA setups
 % Kopf- und Fußzeile durch KOMA
@@ -45,11 +48,12 @@
 % \,: small space
 \DeclareTOCStyleEntry{dottedtocline}{section}  % Inhaltsverzeichnis mit Punkten (nur sections)
 
+
 % other packages
+
 % array
 \renewcommand{\arraystretch}{1.2}  % stretched die Zellengröße in tables auf das 1,2-fache
-% siunitx
-\sisetup{locale = DE}
+
 % biblatex source
 \addbibresource{C:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/files/JabRef_Database/physics.bib}  % database import with absolute path - .bib!
 
@@ -60,7 +64,25 @@
 %\listtablename
 %\listfigurename
 
+% listings
+\lstdefinestyle{code_python}{
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=code_python}
+
+
 % eigene Commands
+
 %\newcommand{\der}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}  % derivative
 \newcommand{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}  % partial derivative
 
@@ -77,6 +99,8 @@
 \section{Aufgabenstellung}
 \label{sec:aufgabenstellung}
 
+
+
 \section{Grundlagen und Voraussetzungen}
 \label{sec:grundlagen_voraussetzungen}
 
@@ -84,6 +108,7 @@ Text1\footcite[1000]{ref:dem1} \\
 Text2\footcite[Kapitel 74]{ref:knoll} \\
 Text3\footnote{\url{https://online.uni-graz.at/kfu_online/ee/ui/ca2/app/desktop/\#/login?$ctx=&redirect=Li4vLi4vLi4vZWUvdWkvY2EyL2FwcC9kZXNrdG9wLyMvc2xjLnRtLmNwL3N0dWRlbnQvY291cnNlcy82Mjg3OTk=}} \\  % must escape the # (\#), error otherwise!!
 Text4\footcite{ref:genol2013}
+
 
 
 \section{Versuchsanordnung}
@@ -107,29 +132,40 @@ $\lim \limits_{n \to \infty} \frac{1}{2n} = 0$  % old, disencouraged
 \[ \int \frac{1}{x} \, dx = \ln|x| \]  % new, encouraged - same as \begin{equation*} when using amsmath
 $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
 
+
+
 \section{Geräteliste}
 \label{sec:geraeteliste}
 
 % Beispieltabelle 
 \begin{center}
-\captionof{table}[Geräteliste]{Verwendete Geräte + genaue, lange Beschreibung}  % optionales Argument wird in Verzeichnissen verwendet, verpflichtendes Argument direkt im Text
+\captionof{table}[Geräteliste]{Verwendete Geräte + genaue, lange Beschreibung}  % optionales Argument für Verzeichniss, verpflichtendes Argument direkt in der caption
 \label{tab:geraeteliste}
     \begin{tabular}{|c|c|c|c|} \hline
-        Gerät & Hersteller & Modell & Genauigkeitsklasse \\ \hline
-        Der Gerät & Schweißfrei Inc. & Nie-Müde & 12 \\ \hline
+        Gerät       & Hersteller        & Modell    & Genauigkeitsklasse  \\ \hline
+        Der Gerät   & Schweißfrei Inc.  & Nie-Müde  & \num{1.20(8)}       \\ \hline
+        -           & -                 & -         & \num{3.1415(9)}     \\ \hline
     \end{tabular}
 \end{center}
+
+
 
 \section{Versuchsdurchführung und Messergebnisse}
 \label{sec:versuchsdurchfuehrung_messergebnisse}
 
+
+
 \section{Auswertung}
 \label{sec:auswertung}
+
+
 
 \section{Diskussion und Zusammenfassung}
 \label{sec:diskussion_zusammenfassung}
 
-% Literaturtabelle
+
+
+% Literaturverzeichnis
 \printbibliography
 
 % Abbiludngsverzeichnis
