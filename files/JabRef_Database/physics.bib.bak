@@ -34,7 +34,7 @@
   month        = feb,
   title        = {ProduktInformationen Motoröle: Genol Rasenmäheröl},
   year         = {2013},
-  url          = {cdn.lagerhaus.at/rwa/lh3/media/download/2014.07.08/1404820306140132.pdf},
+  url          = {https://cdn.lagerhaus.at/rwa/lh3/media/download/2014.07.08/1404820306140132.pdf},
 }
 
 @Misc{ref:phyphox,
@@ -42,7 +42,7 @@
   howpublished = {Website},
   title        = {Phyphox: Unterstützte Sensoren},
   year         = {o. D.},
-  url          = {phyphox.org/de/unterstutzte-sensoren/},
+  url          = {https://phyphox.org/de/unterstutzte-sensoren/},
 }
 
 @Misc{ref:viskositaet_knoll,
@@ -56,7 +56,7 @@
   author = {{Europäische Zentralbank}},
   title  = {Gemeinsame Seiten},
   year   = {o. D.},
-  url    = {www.ecb.europa.eu/euro/coins/common/html/index.de.html},
+  url    = {https://www.ecb.europa.eu/euro/coins/common/html/index.de.html},
 }
 
 @Misc{ref:uncertainties,
@@ -64,7 +64,29 @@
   howpublished = {Website},
   title        = {Uncertainties: a Python package for calculations with uncertainties},
   year         = {o. D.},
-  url          = {pythonhosted.org/uncertainties/},
+  url          = {https://pythonhosted.org/uncertainties/},
+}
+
+@Misc{ref:e-modul_biegung,
+  author       = {Institut für Experimentalphysik, Technische Universität Graz},
+  howpublished = {Moodle},
+  month        = apr,
+  title        = {Bestimmung des Elastizitätsmoduls durch Biegung},
+  year         = {2018},
+}
+
+@Article{ref:e-modul-nudel,
+  author    = {Ronald H. Heisser and Vishal P. Patil and Norbert Stoop and Emmanuel Villermaux and Jörn Dunkel},
+  journal   = {Proceedings of the National Academy of Sciences},
+  title     = {Controlling fracture cascades through twisting and quenching},
+  year      = {2018},
+  month     = {aug},
+  number    = {35},
+  pages     = {8665--8670},
+  volume    = {115},
+  doi       = {10.1073/pnas.1802831115},
+  file      = {:C\:/Users/andre/Downloads/8665.full.pdf:PDF},
+  publisher = {Proceedings of the National Academy of Sciences},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

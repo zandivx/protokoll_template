@@ -16,17 +16,17 @@
 \usepackage{amsmath, amssymb, amstext, mathtools}  % math packages (American Math Society) + Verbesserung von amsmath
 \usepackage[hypcap=false]{caption, subcaption}  % caption editing - hypcap warning with hyperref
 \usepackage{array}  % table editing
+\usepackage{float}  % for [H] specifier
 \usepackage[locale=DE, separate-uncertainty=true]{siunitx}  % bessere Darstellung von Einheiten - \pm soll \pm bleiben und nicht ..(.)
 \usepackage{icomma}  % Kommata in Dezimalzahlen verursachen keinen Abstand mehr
 \usepackage{listings}  % code display
 \usepackage{scrhack}  % listings in combination with KOMA
 
 % einfügen
-\usepackage{graphicx}  % Bilder einfügen
-\usepackage{svg}  % uses Inkscape as SVGtoPDF compiler (--shell-escape in compiler args!)
-\usepackage{float}  % for [H] specifier
+\usepackage{graphicx}  % JPEG, PNG, PDF, etc. einfügen
 \usepackage{pdfpages}  % PDF als vollständige Seiten einfügen
 \usepackage{lastpage}  % referenziert die letzte Seite
+%\usepackage{svg}  % uses Inkscape as SVGtoPDF compiler (--shell-escape in compiler args!)
 
 % Literaturverwaltung
 \usepackage[style=apa]{biblatex}  % backend=biber is standard
