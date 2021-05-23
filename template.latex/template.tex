@@ -23,6 +23,8 @@
 
 % einfügen
 \usepackage{graphicx}  % Bilder einfügen
+\usepackage{svg}  % uses Inkscape as SVGtoPDF compiler (--shell-escape in compiler args!)
+\usepackage{float}  % for [H] specifier
 \usepackage{pdfpages}  % PDF als vollständige Seiten einfügen
 \usepackage{lastpage}  % referenziert die letzte Seite
 
@@ -121,8 +123,8 @@ Text4\footcite{ref:genol2013}
 \end{equation}
 
 % inline math
-\(\lim \limits_{n \to \infty} \left( 1 + \frac{1}{n} \right) ^{n} = e\)  \\ % new, encouraged
-$\lim \limits_{n \to \infty} \frac{1}{2n} = 0$  % old, disencouraged
+Inline math: \(\lim \limits_{n \to \infty} \left( 1 + \frac{1}{n} \right) ^{n} = e\)  \\ \\ % new, encouraged
+Inline math: $\lim \limits_{n \to \infty} \frac{1}{2n} = 0$  % old, disencouraged
 
 % display math
 \begin{displaymath}
@@ -131,6 +133,8 @@ $\lim \limits_{n \to \infty} \frac{1}{2n} = 0$  % old, disencouraged
 
 \[ \int \frac{1}{x} \, dx = \ln|x| \]  % new, encouraged - same as \begin{equation*} when using amsmath
 $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
+
+
 
 
 
@@ -160,8 +164,8 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
 
 
 
-\section{Diskussion und Zusammenfassung}
-\label{sec:diskussion_zusammenfassung}
+\section{Zusammenfassung und Diskussion}
+\label{sec:zusammenfassung_diskussion}
 
 
 
