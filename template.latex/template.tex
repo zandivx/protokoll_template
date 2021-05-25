@@ -1,12 +1,12 @@
 % Protokoll-Template by Andreas Zach
 
-\documentclass[11pt]{scrartcl}
+\documentclass[11pt, ngerman]{scrartcl}
 
 % input and font
 \usepackage[utf8]{inputenc}  % input in UTF-8
 \usepackage[T1]{fontenc}  % output in T1 fonts (westeuropäische Codierung)
 \usepackage{lmodern}  % latin modern fonts
-\usepackage[ngerman]{babel}  % deutsches Sprachpaket, neue Rechtschreibung
+\usepackage{babel}
 
 % Seitengeometrie
 \usepackage{scrlayer-scrpage}  % Seitenformatierung durch KOMA-interne Optionen
@@ -86,13 +86,13 @@
 % eigene Commands
 
 %\newcommand{\der}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}  % derivative
-\newcommand{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}  % partial derivative
+%\newcommand{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}  % partial derivative
 
 
 
 \begin{document}
 
-%\includepdf{deckblatt.pdf}
+\includepdf{deckblatt.pdf}
 
 \clearpage
 \tableofcontents
@@ -111,11 +111,6 @@ Text2\footcite[Kapitel 74]{ref:knoll} \\
 Text3\footnote{\url{https://online.uni-graz.at/kfu_online/ee/ui/ca2/app/desktop/\#/login?$ctx=&redirect=Li4vLi4vLi4vZWUvdWkvY2EyL2FwcC9kZXNrdG9wLyMvc2xjLnRtLmNwL3N0dWRlbnQvY291cnNlcy82Mjg3OTk=}} \\  % must escape the # (\#), error otherwise!!
 Text4\footcite{ref:genol2013}
 
-
-
-\section{Versuchsanordnung}
-\label{sec:versuchsanordnung}
-
 % Gleichungsumgebung
 \begin{equation}
 \label{eq:grenzen-oben-unten}
@@ -128,7 +123,7 @@ Inline math: $\lim \limits_{n \to \infty} \frac{1}{2n} = 0$  % old, disencourage
 
 % display math
 \begin{displaymath}
-    \frac{df}{dx} = f'
+    \frac{a}{a} = 1
 \end{displaymath}
 
 \[ \int \frac{1}{x} \, dx = \ln|x| \]  % new, encouraged - same as \begin{equation*} when using amsmath
@@ -136,21 +131,35 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
 
 
 
+\section{Versuchsanordnung}
+\label{sec:versuchsanordnung}
+
+\begin{figure}[H]  % GENAU hier (package float)
+    \centering
+    \begin{samepage}  % caption sticks to float
+        \includegraphics{example-image-golden}
+        \caption{Example image golden}
+        \label{fig:example-image-golden}
+    \end{samepage}
+\end{figure}
+
 
 
 \section{Geräteliste}
 \label{sec:geraeteliste}
 
-% Beispieltabelle 
-\begin{center}
-\captionof{table}[Geräteliste]{Verwendete Geräte + genaue, lange Beschreibung}  % optionales Argument für Verzeichniss, verpflichtendes Argument direkt in der caption
-\label{tab:geraeteliste}
-    \begin{tabular}{|c|c|c|c|} \hline
-        Gerät       & Hersteller        & Modell    & Genauigkeitsklasse  \\ \hline
-        Der Gerät   & Schweißfrei Inc.  & Nie-Müde  & \num{1.20(8)}       \\ \hline
-        -           & -                 & -         & \num{3.1415(9)}     \\ \hline
-    \end{tabular}
-\end{center}
+\begin{table}[H]
+    \centering  % zentriert
+    \begin{samepage}  % caption and table on same page
+        \caption[Geräteliste]{Verwendete Geräte + genaue, lange Beschreibung}  % optionales Argument für Verzeichniss, verpflichtendes Argument direkt in der caption
+        \label{tab:geraeteliste}
+        \begin{tabular}{|c|c|c|c|} \hline
+            Gerät       & Hersteller        & Modell    & Genauigkeitsklasse      \\ \hline
+            Der Gerät   & Schweißfrei Inc.  & Nie-Müde  & \num{1.20(8)}           \\ \hline
+            -           & -                 & -         & \numrange{3.1415(9)}{4} \\ \hline
+        \end{tabular}
+    \end{samepage}
+\end{table}
 
 
 
