@@ -75,7 +75,7 @@
   year         = {2018},
 }
 
-@Article{ref:e-modul-nudel,
+@Article{ref:e-modul_nudel,
   author    = {Ronald H. Heisser and Vishal P. Patil and Norbert Stoop and Emmanuel Villermaux and Jörn Dunkel},
   journal   = {Proceedings of the National Academy of Sciences},
   title     = {Controlling fracture cascades through twisting and quenching},
@@ -87,6 +87,45 @@
   doi       = {10.1073/pnas.1802831115},
   file      = {:C\:/Users/andre/Downloads/8665.full.pdf:PDF},
   publisher = {Proceedings of the National Academy of Sciences},
+}
+
+@Misc{ref:table_capacities,
+  author    = {Wikibooks.org},
+  month     = mar,
+  title     = {Tabellensammlung Chemie/ spezifische Wärmekapazitäten},
+  year      = {2021},
+  timestamp = {11.03.2021 um 12:17 Uhr},
+  url       = {https://de.wikibooks.org/wiki/Tabellensammlung_Chemie/_spezifische_Wärmekapazitäten},
+}
+
+@Book{ref:stein,
+  author    = {Nikolaus Hannoschöck},
+  publisher = {Springer Berlin Heidelberg},
+  title     = {Wärmeleitung und -transport},
+  year      = {2018},
+  doi       = {10.1007/978-3-662-57572-7},
+  file      = {:C\:/Users/andre/Dropbox/Uni/Physik/Module/Modul D/D2 - Laborübungen 1 - Mechanik und Wärme - LU/D2 - Protokolle/KF_4_Kaloriemetrie_Thermometrie/2018_Bookmatter_WärmeleitungUnd-transport.pdf:PDF},
+}
+
+@InProceedings{ref:pieper_kalorimetrie,
+  author = {Martin Pieper},
+  title  = {HomeLab SS 2020: Versuch Kalorimetrie / spezifische Wärme},
+  year   = {2020},
+  file   = {:C\:/Users/andre/Dropbox/Uni/Physik/Module/Modul D/D2 - Laborübungen 1 - Mechanik und Wärme - LU/D2 - Protokolle/KF_4_Kaloriemetrie_Thermometrie/Moodle/Kalorimetrie/M. Pieper - Hinweise und Anmerkungen.pdf:PDF},
+}
+
+@Misc{ref:oberflaechenspannung,
+  author = {Chemie.de},
+  title  = {Oberflächenspannung},
+  year   = {o. D.},
+  url    = {https://www.chemie.de/lexikon/Oberflächenspannung.html},
+}
+
+@InProceedings{ref:stirling,
+  author = {{LD Didactic GmbH}},
+  title  = {Gebrauchsanweisung 388 182},
+  file   = {:C\:/Users/andre/Dropbox/Uni/Physik/Module/Modul D/D2 - Laborübungen 1 - Mechanik und Wärme - LU/D2 - Protokolle/TU_2_Stirlingmotor/TC/Heißluftmotor_Betriebsanleitung Fa. Leybold.pdf:PDF},
+  url    = {https://www.ld-didactic.de/documents/de-DE/GA/GA/3/388/388182d.pdf},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

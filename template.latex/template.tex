@@ -6,7 +6,7 @@
 \usepackage[utf8]{inputenc}  % input in UTF-8
 \usepackage[T1]{fontenc}  % output in T1 fonts (westeuropäische Codierung)
 \usepackage{lmodern}  % latin modern fonts
-\usepackage{babel}
+\usepackage{babel}  % language package
 
 % Seitengeometrie
 \usepackage{scrlayer-scrpage}  % Seitenformatierung durch KOMA-interne Optionen
@@ -19,6 +19,7 @@
 \usepackage{float}  % for [H] specifier
 \usepackage[locale=DE, separate-uncertainty=true]{siunitx}  % bessere Darstellung von Einheiten - \pm soll \pm bleiben und nicht ..(.)
 \usepackage{icomma}  % Kommata in Dezimalzahlen verursachen keinen Abstand mehr
+\usepackage{enumitem}  % better enumerating with style options
 \usepackage{listings}  % code display
 \usepackage{scrhack}  % listings in combination with KOMA
 
@@ -26,7 +27,6 @@
 \usepackage{graphicx}  % JPEG, PNG, PDF, etc. einfügen
 \usepackage{pdfpages}  % PDF als vollständige Seiten einfügen
 \usepackage{lastpage}  % referenziert die letzte Seite
-%\usepackage{svg}  % uses Inkscape as SVGtoPDF compiler (--shell-escape in compiler args!)
 
 % Literaturverwaltung
 \usepackage[style=apa]{biblatex}  % backend=biber is standard
@@ -49,6 +49,7 @@
 % \ : protected space
 % \,: small space
 \DeclareTOCStyleEntry{dottedtocline}{section}  % Inhaltsverzeichnis mit Punkten (nur sections)
+\KOMAoptions{parskip=half-}  % paragraphs with half a line heigth space instead of indentation, last line with no special treatment
 
 
 % other packages
@@ -84,9 +85,8 @@
 
 
 % eigene Commands
-
-%\newcommand{\der}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}  % derivative
-%\newcommand{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}  % partial derivative
+\newcommand{\der}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}  % derivative
+\newcommand{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}  % partial derivative
 
 
 
