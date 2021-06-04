@@ -1,6 +1,6 @@
 % Protokoll-Template by Andreas Zach
 
-\documentclass[11pt, ngerman]{scrartcl}
+\documentclass[11pt, DIV=8, ngerman]{scrartcl}
 
 % input and font
 \usepackage[utf8]{inputenc}  % input in UTF-8
@@ -89,6 +89,10 @@
 \newcommand{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}  % partial derivative
 
 
+% notes
+% ~6 inch textwidth
+
+
 
 \begin{document}
 
@@ -137,7 +141,7 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
 \begin{figure}[H]  % GENAU hier (package float)
     \centering
     \begin{samepage}  % caption sticks to float
-        \includegraphics{example-image-golden}
+        \includegraphics[width=\textwidth]{example-image-golden}
         \caption{Example image golden}
         \label{fig:example-image-golden}
     \end{samepage}
@@ -148,7 +152,7 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
 \section{Geräteliste}
 \label{sec:geraeteliste}
 
-\begin{table}[H]
+\begin{table}[!h]
     \centering  % zentriert
     \begin{samepage}  % caption and table on same page
         \caption[Geräteliste]{Verwendete Geräte + genaue, lange Beschreibung}  % optionales Argument für Verzeichniss, verpflichtendes Argument direkt in der caption
@@ -178,6 +182,7 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
 
 
 
+\clearpage
 % Literaturverzeichnis
 \printbibliography
 
