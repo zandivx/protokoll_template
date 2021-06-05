@@ -16,6 +16,7 @@
 \usepackage{amsmath, amssymb, amstext, mathtools}  % math packages (American Math Society) + Verbesserung von amsmath
 \usepackage[hypcap=false]{caption, subcaption}  % caption editing - hypcap warning with hyperref
 \usepackage{array}  % table editing
+\usepackage{tabularx}  % better table
 \usepackage{float}  % for [H] specifier
 \usepackage[locale=DE, separate-uncertainty=true]{siunitx}  % bessere Darstellung von Einheiten - \pm soll \pm bleiben und nicht ..(.)
 \usepackage{icomma}  % Kommata in Dezimalzahlen verursachen keinen Abstand mehr
@@ -56,6 +57,9 @@
 
 % array
 \renewcommand{\arraystretch}{1.2}  % stretched die Zellengröße in tables auf das 1,2-fache
+
+% tabularx
+\newcolumntype{Y}{>{\centering\arraybackslash}X}  % centered X column in tabularx called Y
 
 % biblatex source
 \addbibresource{C:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/files/JabRef_Database/physics.bib}  % database import with absolute path - .bib!
@@ -155,13 +159,12 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
 \begin{table}[!h]
     \centering  % zentriert
     \begin{samepage}  % caption and table on same page
-        \caption[Geräteliste]{Verwendete Geräte + genaue, lange Beschreibung}  % optionales Argument für Verzeichniss, verpflichtendes Argument direkt in der caption
+        \caption[Geräteliste]{Verwendete Geräte und wichtige Materialien}  % optionales Argument für Verzeichniss, verpflichtendes Argument direkt in der caption
         \label{tab:geraeteliste}
-        \begin{tabular}{|c|c|c|c|} \hline
-            Gerät       & Hersteller        & Modell    & Genauigkeitsklasse      \\ \hline
-            Der Gerät   & Schweißfrei Inc.  & Nie-Müde  & \num{1.20(8)}           \\ \hline
-            -           & -                 & -         & \numrange{3.1415(9)}{4} \\ \hline
-        \end{tabular}
+        \begin{tabularx}{\textwidth}{|Y|Y|c|c|Y|} \hline
+            Gerät & Hersteller & Modell & Unsicherheit& Anmerkung \\ \hline
+            Gerät 1 & ich & meins & \num{0.01} & quasi perfekt genau \\ \hline
+        \end{tabularx}
     \end{samepage}
 \end{table}
 
