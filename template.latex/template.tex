@@ -1,7 +1,7 @@
 % Protokoll-Template
 % by Andreas Zach
 
-\documentclass[11pt, DIV=calc, ngerman]{scrartcl}
+\documentclass[ngerman]{scrartcl}
 
 % input and font
 \usepackage[utf8]{inputenc}  % input in UTF-8
@@ -26,9 +26,10 @@
 \usepackage{lastpage}  % referenziert die letzte Seite
 
 % text
-\usepackage[locale=DE, separate-uncertainty=true]{siunitx}  % bessere Darstellung von Einheiten - \pm soll \pm bleiben und nicht ..(.)
+\usepackage[locale=DE, uncertainty-mode=separate]{siunitx}  % bessere Darstellung von Einheiten - \pm soll \pm bleiben und nicht ..(.)
 \usepackage{icomma}  % Kommata in Dezimalzahlen verursachen keinen Abstand mehr
 \usepackage{enumitem}  % better enumerating with style options
+\usepackage{nicefrac}  % inline-fractions in n/d-style
 \usepackage{listings, scrhack}  % code display; listings in combination with KOMA
 
 % Literaturverwaltung
