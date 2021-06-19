@@ -1,7 +1,7 @@
 % Protokoll-Template
 % by Andreas Zach
 
-\documentclass[11pt, DIV=8, ngerman]{scrartcl}
+\documentclass[11pt, DIV=calc, ngerman]{scrartcl}
 
 % input and font
 \usepackage[utf8]{inputenc}  % input in UTF-8
@@ -17,9 +17,8 @@
 % floats
 \usepackage[hypcap=false]{caption, subcaption}  % caption editing - hypcap warning with hyperref
 \usepackage{float}  % for [H] specifier
-\usepackage{tabularx}
-\usepackage{array}  % table editing (stretching z.B.)
-\usepackage{multirow}
+\usepackage{tabularray}  % best table ever
+\usepackage{diagbox}  % diagonal boxes in tables
 
 % einfügen
 \usepackage{graphicx}  % JPEG, PNG, PDF, etc. einfügen
@@ -30,8 +29,7 @@
 \usepackage[locale=DE, separate-uncertainty=true]{siunitx}  % bessere Darstellung von Einheiten - \pm soll \pm bleiben und nicht ..(.)
 \usepackage{icomma}  % Kommata in Dezimalzahlen verursachen keinen Abstand mehr
 \usepackage{enumitem}  % better enumerating with style options
-\usepackage{listings}  % code display
-\usepackage{scrhack}  % listings in combination with KOMA
+\usepackage{listings, scrhack}  % code display; listings in combination with KOMA
 
 % Literaturverwaltung
 \usepackage[style=apa]{biblatex}  % backend=biber is standard
@@ -58,12 +56,6 @@
 
 
 % other packages
-
-% array
-\renewcommand{\arraystretch}{1.2}  % stretched die Zellengröße in tables auf das 1,2-fache
-
-% tabularx
-\newcolumntype{Y}{>{\centering\arraybackslash}X}  % centered X column in tabularx called Y
 
 % biblatex source
 \addbibresource{C:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/files/JabRef_Database/physics.bib}  % database import with absolute path - .bib!
@@ -165,13 +157,13 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
     \begin{samepage}  % caption and table on same page
         \caption[Geräteliste]{Verwendete Geräte und wichtige Materialien}  % optionales Argument für Verzeichniss, verpflichtendes Argument direkt in der caption
         \label{tab:geraeteliste}
-        \begin{tabularx}{\textwidth}{|Y|Y|c|c|Y|} \hline
-            Gerät & Hersteller & Modell & Unsicherheit& Anmerkung \\ \hline
-            Gerät 1 & ich & meins & \num{0.01} & quasi perfekt genau \\ \hline
-        \end{tabularx}
+        \begin{tblr}{|c|c|c|c|X[-1,c]|} \hline
+            Gerät   & Hersteller & Modell & Unsicherheit & Anmerkung \\ \hline
+            Gerät 1 & ich & meins & \num{0.01} & {quasi \\ perfekt \\ genau} \\ \hline
+            Gerät 2 & ich & meins & - & quasi perfekt genau \\ \hline
+        \end{tblr}
     \end{samepage}
 \end{table}
-
 
 
 \section{Versuchsdurchführung und Messergebnisse}
