@@ -9,6 +9,7 @@
 \usepackage{lmodern}  % latin modern fonts
 \usepackage{babel}  % language package
 \usepackage{amsmath, amssymb, amstext, mathtools}  % math packages (American Math Society) + Verbesserung von amsmath (mathtools - amsmath eigentlich nicht nötig)
+\usepackage{letltxmacro}  % \let command for robust macros (new sqrt)
 
 % Seitengeometrie
 \usepackage{scrlayer-scrpage}  % Seitenformatierung durch KOMA-interne Optionen
@@ -85,6 +86,20 @@
 \lstset{style=code_python}
 
 
+% new sqrt
+% https://en.wikibooks.org/wiki/LaTeX/Mathematics
+\makeatletter
+\let\oldr@@t\r@@t
+\def\r@@t#1#2{%
+\setbox0=\hbox{$\oldr@@t#1{#2\,}$}\dimen0=\ht0
+\advance\dimen0-0.2\ht0
+\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+{\box0\lower0.4pt\box2}}
+\LetLtxMacro{\oldsqrt}{\sqrt}
+\renewcommand*{\sqrt}[2][\ ]{\oldsqrt[#1]{#2} }
+\makeatother
+
+
 % eigene Commands
 \newcommand{\der}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}  % derivative
 \newcommand{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}  % partial derivative
@@ -128,7 +143,7 @@ Inline math: $\lim \limits_{n \to \infty} \frac{1}{2n} = 0$  % old, disencourage
 
 % display math
 \begin{displaymath}
-    \frac{a}{a} = 1
+    \sqrt[3]{27} = 3
 \end{displaymath}
 
 \[ \int \frac{1}{x} \, dx = \ln|x| \]  % new, encouraged - same as \begin{equation*} when using amsmath
