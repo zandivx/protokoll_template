@@ -16,10 +16,11 @@
 \usepackage[top=4cm, bottom=4cm]{geometry}  % Seitengeometrie
 
 % floats
-\usepackage[hypcap=false]{caption, subcaption}  % caption editing - hypcap warning with hyperref
+\usepackage[hypcap=false, labelfont=bf]{caption, subcaption}  % caption editing - hypcap warning with hyperref
 \usepackage{float}  % for [H] specifier
 \usepackage{tabularray}  % best table ever
-\usepackage{diagbox}  % diagonal boxes in tables
+%\usepackage{xcolor}
+%\usepackage{diagbox}  % diagonal boxes in tables  NOT WORKING RN WITH TABULARRAY!
 
 % einfügen
 \usepackage{graphicx}  % JPEG, PNG, PDF, etc. einfügen
@@ -101,8 +102,10 @@
 
 
 % eigene Commands
-\newcommand{\der}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}  % derivative
-\newcommand{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}  % partial derivative
+\newcommand*{\der}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}  % derivative
+\newcommand*{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}  % partial derivative
+% \newcommand* can't contain multiple lines
+% \newcommand can
 
 
 % notes
@@ -130,22 +133,22 @@ Text1\footcite[1000]{ref:dem1} \\
 Text2\footcite[Kapitel 74]{ref:knoll} \\
 Text3\footnote{\url{https://online.uni-graz.at/kfu_online/ee/ui/ca2/app/desktop/\#/login?$ctx=&redirect=Li4vLi4vLi4vZWUvdWkvY2EyL2FwcC9kZXNrdG9wLyMvc2xjLnRtLmNwL3N0dWRlbnQvY291cnNlcy82Mjg3OTk=}} \\  % must escape the # (\#), error otherwise!!
 Text4\footcite{ref:genol2013}
-
+%
 % Gleichungsumgebung
 \begin{equation}
 \label{eq:grenzen-oben-unten}
     \int \limits_{a}^{b} x^2 \, dx =\frac{b^3-a^3}{3}  % \, liefert quasi ein Leerzeichen - single character exponent muss nicht in {}-Klammern stehen
 \end{equation}
-
+%
 % inline math
 Inline math: \(\lim \limits_{n \to \infty} \left( 1 + \frac{1}{n} \right) ^{n} = e\)  \\ \\ % new, encouraged
 Inline math: $\lim \limits_{n \to \infty} \frac{1}{2n} = 0$  % old, disencouraged
-
+%
 % display math
 \begin{displaymath}
     \sqrt[3]{27} = 3
 \end{displaymath}
-
+%
 \[ \int \frac{1}{x} \, dx = \ln|x| \]  % new, encouraged - same as \begin{equation*} when using amsmath
 $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
 
@@ -154,9 +157,9 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
 \section{Versuchsanordnung}
 \label{sec:versuchsanordnung}
 
-\begin{figure}[H]  % GENAU hier (package float)
+\begin{figure}[!h]
     \centering
-    \begin{samepage}  % caption sticks to float
+    \begin{samepage}
         \includegraphics[width=\textwidth]{example-image-golden}
         \caption{Example image golden}
         \label{fig:example-image-golden}
@@ -168,18 +171,29 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
 \section{Geräteliste}
 \label{sec:geraeteliste}
 
-\begin{table}[!h]
-    \centering  % zentriert
+\begin{table}[H]   % GENAU hier (package float)
+    \centering
     \begin{samepage}  % caption and table on same page
         \caption[Geräteliste]{Verwendete Geräte und wichtige Materialien}  % optionales Argument für Verzeichniss, verpflichtendes Argument direkt in der caption
         \label{tab:geraeteliste}
-        \begin{tblr}{|c|c|c|c|X[-1,c]|} \hline
-            Gerät   & Hersteller & Modell & Unsicherheit & Anmerkung \\ \hline
-            Gerät 1 & ich & meins & \num{0.01} & {quasi \\ perfekt \\ genau} \\ \hline
-            Gerät 2 & ich & meins & - & quasi perfekt genau \\ \hline
+        \begin{tblr}{
+            hlines,
+            vlines,
+            %width=0.8\linewidth,
+            columns={c,m},  % center, middle as base case if not specified differently
+            colspec={*{4}{X[c,m]}},  % multiplication syntax: *{n}{thing}
+            cell{2}{2}={r=2}{c,m},  % like \SetCell
+            cell{3}{3}={r=3,c=2}{c,m},
+        }
+            Gerät   & Hersteller & Modell   & Unsicherheit & Anmerkung                   \\
+            Gerät 1 & ich        & meins    & \num{0.01}   & {quasi \\ perfekt \\ genau} \\
+            Gerät 2 &            & passt so &              & quasi perfekt genau         \\
+            Gerät 3 & -          &          &              & quasi perfekt genau         \\
+            Gerät 4 & -          &          &              & -                           \\
         \end{tblr}
     \end{samepage}
 \end{table}
+
 
 
 \section{Versuchsdurchführung und Messergebnisse}
