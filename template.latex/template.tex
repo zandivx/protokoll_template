@@ -7,19 +7,20 @@
 \usepackage[utf8]{inputenc}  % input in UTF-8
 \usepackage[T1]{fontenc}  % output in T1 fonts (westeuropäische Codierung)
 \usepackage{lmodern}  % latin modern fonts
+\usepackage{inconsolata}  % Consolas font for monospaced text
 \usepackage{babel}  % language package
 \usepackage{amsmath, amssymb, amstext, mathtools}  % math packages (American Math Society) + Verbesserung von amsmath (mathtools - amsmath eigentlich nicht nötig)
 \usepackage{letltxmacro}  % \let command for robust macros (new sqrt)
 
 % Seitengeometrie
 \usepackage{scrlayer-scrpage}  % Seitenformatierung durch KOMA-interne Optionen
-\usepackage[top=4cm, bottom=4cm]{geometry}  % Seitengeometrie
+\usepackage{geometry}  % Seitengeometrie
 
 % floats
 \usepackage[hypcap=false, labelfont=bf]{caption, subcaption}  % caption editing - hypcap warning with hyperref
 \usepackage{float}  % for [H] specifier
 \usepackage{tabularray}  % best table ever
-%\usepackage{xcolor}
+\usepackage{xcolor}  % custom colors
 %\usepackage{diagbox}  % diagonal boxes in tables  NOT WORKING RN WITH TABULARRAY!
 
 % einfügen
@@ -50,7 +51,7 @@
 \ihead{Versuchsname}  % Kopf links (inner)
 \chead{\textsc{Zach} Andreas \\ 12004790}  % Kopf mittig (center)
 \ohead{Datum der Messung}  % Kopf rechts (outer)
-\cfoot{\pagemark{} / \pageref{LastPage}}  % Fuß Mitte
+\cfoot{\pagemark{} / \pageref*{LastPage}}  % Fuß Mitte - * ref but no hyperlink
 % {}: empty statement
 % \ : protected space
 % \,: small space
@@ -61,7 +62,7 @@
 % other packages
 
 % biblatex source
-\addbibresource{C:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/files/JabRef_Database/physics.bib}  % database import with absolute path - .bib!
+\addbibresource{C:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/files/JabRef_Database/physics.bib}  % database import with absolute path - file ending!
 
 % neue Namen (babel überschreibt Standardbezeichnungen aus dem Englischen in der Präambel - therefore gehören die neuen commands erst am Dokumentbeginn ausgeführt)
 \AtBeginDocument{\renewcommand{\refname}{Literaturverzeichnis}}
@@ -70,9 +71,21 @@
 %\listtablename
 %\listfigurename
 
+% xcolor
+\definecolor{code_keyword}{HTML}{A06E9D}
+\definecolor{code_string}{HTML}{AD6E3E}
+\definecolor{code_comment}{HTML}{6A9955}
+%\definecolor{code_basic}{HTML}{D4D4D4}
+%\definecolor{code_background}{HTML}{1E1E1E}
+
 % listings
-\lstdefinestyle{code_python}{
-    basicstyle=\ttfamily\footnotesize,
+\lstdefinestyle{python}{
+    basicstyle=\fontfamily{zi4}\footnotesize,%\color{code_basic},  % \footnotesize contains \selectfont implicitly
+    %backgroundcolor=\color{code_background},   
+    commentstyle=\color{code_comment},
+    keywordstyle=\bfseries\color{code_keyword},
+    numberstyle=\tiny,
+    stringstyle=\color{code_string},
     breakatwhitespace=false,         
     breaklines=true,                 
     captionpos=b,                    
@@ -82,9 +95,10 @@
     showspaces=false,                
     showstringspaces=false,
     showtabs=false,                  
-    tabsize=2
+    tabsize=2,
 }
-\lstset{style=code_python}
+\lstset{style=python}
+\renewcommand*{\ttdefault}{cmtt}
 
 
 % new sqrt
@@ -106,10 +120,6 @@
 \newcommand*{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}  % partial derivative
 % \newcommand* can't contain multiple lines
 % \newcommand can
-
-
-% notes
-% ~6 inch textwidth
 
 
 
@@ -208,6 +218,13 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
 
 \section{Zusammenfassung und Diskussion}
 \label{sec:zusammenfassung_diskussion}
+
+
+
+\addsec{Python-Skript}
+\label{sec:python}
+
+\lstinputlisting[language=Python]{../uncertainties.python/error_propagation.py}
 
 
 
