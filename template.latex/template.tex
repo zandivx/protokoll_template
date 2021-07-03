@@ -5,57 +5,57 @@
 
 % input and font
 \usepackage[utf8]{inputenc}  % input in UTF-8
-\usepackage[T1]{fontenc}  % output in T1 fonts (westeuropäische Codierung)
+\usepackage[T1]{fontenc}  % output in T1 fonts (west-european encoding)
 \usepackage{lmodern}  % latin modern fonts
 \usepackage{inconsolata}  % Consolas font for monospaced text
 \usepackage{babel}  % language package
-\usepackage{amsmath, amssymb, amstext, mathtools}  % math packages (American Math Society) + Verbesserung von amsmath (mathtools - amsmath eigentlich nicht nötig)
+\usepackage{amsmath, amssymb, amstext, mathtools}  % math packages (American Math Society) + correction of amsmath (mathtools) [loads amsmath automatically]
 \usepackage{letltxmacro}  % \let command for robust macros (new sqrt)
 
-% Seitengeometrie
-\usepackage{scrlayer-scrpage}  % Seitenformatierung durch KOMA-interne Optionen
-\usepackage{geometry}  % Seitengeometrie
+% page geometry
+\usepackage{scrlayer-scrpage}  % page formatting with KOMA options
+\usepackage{geometry}
 
 % floats
 \usepackage[hypcap=false, labelfont=bf]{caption, subcaption}  % caption editing - hypcap warning with hyperref
-\usepackage{float}  % for [H] specifier
+\usepackage{float}  % for [H] (forced here) specifier
 \usepackage{tabularray}  % best table ever
 \usepackage{xcolor}  % custom colors
-%\usepackage{diagbox}  % diagonal boxes in tables  NOT WORKING RN WITH TABULARRAY!
+%\usepackage{diagbox}  % diagonal boxes in tables - NOT WORKING RN WITH TABULARRAY!
 
-% einfügen
-\usepackage{graphicx}  % JPEG, PNG, PDF, etc. einfügen
-\usepackage{pdfpages}  % PDF als vollständige Seiten einfügen
-\usepackage{lastpage}  % referenziert die letzte Seite
+% input
+\usepackage{graphicx}  % input JPEG, PNG, PDF, etc.
+\usepackage{pdfpages}  % input PDF as whole pages
+\usepackage{lastpage}  % reference to last page
 
 % text
-\usepackage[locale=DE, uncertainty-mode=separate]{siunitx}  % bessere Darstellung von Einheiten - \pm soll \pm bleiben und nicht ..(.)
-\usepackage{icomma}  % Kommata in Dezimalzahlen verursachen keinen Abstand mehr
+\usepackage[locale=DE, uncertainty-mode=separate]{siunitx}  % SI units, Germany-formatting - \pm stays \pm instead of ..(.)
+\usepackage{icomma}  % no space after commata Iinstead of english points) in decimal values
 \usepackage{enumitem}  % better enumerating with style options
 \usepackage{nicefrac}  % inline-fractions in n/d-style
 \usepackage{listings, scrhack}  % code display; listings in combination with KOMA
 
-% Literaturverwaltung
+% literacy
 \usepackage[style=apa]{biblatex}  % backend=biber is standard
 \usepackage{csquotes}  % better quotation - should also be used in combination with package babel (warning)
 \usepackage{xurl}  % breaks links - after biblatex, but before hyperref!
-\usepackage[hidelinks]{hyperref}  % angeblich errorlastig
+\usepackage[hidelinks]{hyperref}  % produces most erros, last to load
 
 
 % KOMA setups
-% Kopf- und Fußzeile durch KOMA
-\pagestyle{scrheadings}  % KOMA darf entscheiden
+% header and footer
+\pagestyle{scrheadings}  % KOMA style
 \clearpairofpagestyles  % reset
-\setkomafont{pageheadfoot}{\normalfont}  % Standardschrift in Kopf- und Fußzeile
+\setkomafont{pageheadfoot}{\normalfont}  % standard font in header and footer
 \setlength{\headheight}{27.2pt}  % just look at the warning
-\ihead{Versuchsname}  % Kopf links (inner)
-\chead{\textsc{Zach} Andreas \\ 12004790}  % Kopf mittig (center)
-\ohead{Datum der Messung}  % Kopf rechts (outer)
-\cfoot{\pagemark{} / \pageref*{LastPage}}  % Fuß Mitte - * ref but no hyperlink
+\ihead{Versuchsname}  % inner (left) head
+\chead{\textsc{Zach} Andreas \\ 12004790}  % center head
+\ohead{Datum der Messung}  % outer (right) head
+\cfoot{\pagemark{} / \pageref*{LastPage}}  % center foot - *: ref but no hyperlink
 % {}: empty statement
 % \ : protected space
 % \,: small space
-\DeclareTOCStyleEntry{dottedtocline}{section}  % Inhaltsverzeichnis mit Punkten (nur sections)
+\DeclareTOCStyleEntry{dottedtocline}{section}  % sections in TableOfContents with dotted lines
 \KOMAoptions{parskip=half-}  % paragraphs with half a line heigth space instead of indentation, last line with no special treatment
 
 
@@ -64,9 +64,9 @@
 % biblatex source
 \addbibresource{C:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/files/JabRef_Database/physics.bib}  % database import with absolute path - file ending!
 
-% neue Namen (babel überschreibt Standardbezeichnungen aus dem Englischen in der Präambel - therefore gehören die neuen commands erst am Dokumentbeginn ausgeführt)
+% rewrite names (babel overwrites german with standard english names, therefore at document beginn [after everything is loaded])
 \AtBeginDocument{\renewcommand{\refname}{Literaturverzeichnis}}
-% weitere:
+% others:
 %\contentsname
 %\listtablename
 %\listfigurename
@@ -115,7 +115,7 @@
 \makeatother
 
 
-% eigene Commands
+% own commands
 \newcommand*{\der}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}  % derivative
 \newcommand*{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}  % partial derivative
 % \newcommand* can't contain multiple lines
@@ -181,7 +181,7 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
 \section{Geräteliste}
 \label{sec:geraeteliste}
 
-\begin{table}[H]   % GENAU hier (package float)
+\begin{table}[H]
     \centering
     \begin{samepage}  % caption and table on same page
         \caption[Geräteliste]{Verwendete Geräte und wichtige Materialien}  % optionales Argument für Verzeichniss, verpflichtendes Argument direkt in der caption
@@ -190,7 +190,7 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very disencouraged
             hlines,
             vlines,
             %width=0.8\linewidth,
-            columns={c,m},  % center, middle as base case if not specified differently
+            columns={c,m},  % center+middle as base case if not specified differently
             colspec={*{4}{X[c,m]}},  % multiplication syntax: *{n}{thing}
             cell{2}{2}={r=2}{c,m},  % like \SetCell
             cell{3}{3}={r=3,c=2}{c,m},
