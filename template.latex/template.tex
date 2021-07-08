@@ -1,20 +1,25 @@
 % Protokoll-Template
 % by Andreas Zach
 
+
+% class
 \documentclass[ngerman]{scrartcl}
+
 
 % input and font
 \usepackage[utf8]{inputenc}  % input in UTF-8
 \usepackage[T1]{fontenc}  % output in T1 fonts (west European encoding)
-\usepackage{lmodern}  % Latin modern fonts
+\usepackage{lmodern}  % Latin modern font
 \usepackage{inconsolata}  % Consolas font for monospaced text
 \usepackage{babel}  % language package
 \usepackage{amsmath, amssymb, amstext, mathtools}  % math packages (American Math Society) + correction of amsmath (mathtools) [loads amsmath automatically]
 \usepackage{letltxmacro}  % \let command for robust macros (new sqrt)
 
+
 % page geometry
 \usepackage{scrlayer-scrpage}  % page formatting with KOMA options
 \usepackage{geometry}
+
 
 % floats
 \usepackage[hypcap=false, labelfont=bf]{caption, subcaption}  % caption editing - hypcap warning with hyperref
@@ -22,19 +27,22 @@
 \usepackage{tabularray}  % best tables
 \UseTblrLibrary{diagbox}  % diagonal boxes in tables (auto-import from tabularray - separate import not needed)
 
+
 % input
 \usepackage{graphicx}  % input JPEG, PNG, PDF, etc.
 \usepackage{pdfpages}  % input PDF as whole pages
 \usepackage{lastpage}  % reference to last page
 
+
 % text
 \usepackage[locale=DE, uncertainty-mode=separate]{siunitx}  % SI units, German formatting - \pm stays \pm instead of ..(.)
-\UseTblrLibrary{siunitx}  % S column for tabularray - TRIPLE BRACKETS!! {{{}}} - separate load for options needed
+\UseTblrLibrary{siunitx}  % S column for tabularray - TRIPLE BRACKETS!! {{{}}} - separate import in order to use options
 \usepackage{icomma}  % no space after commas instead of English points) in decimal values
 \usepackage{enumitem}  % better enumerating with style options
 \usepackage{nicefrac}  % inline-fractions in n/d-style
 \usepackage{xcolor}  % custom colors (tabularray loads package nicecolors)
 \usepackage{listings, scrhack}  % code display; listings in combination with KOMA
+
 
 % literacy
 \usepackage[style=apa]{biblatex}  % backend=Biber is standard
@@ -60,17 +68,19 @@
 \KOMAoptions{parskip=half-}  % paragraphs with half a line height space instead of indentation, last line with no special treatment
 
 
-% other packages
+% package setups
 
 % BibLaTeX source
 \addbibresource{C:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/files/JabRef_Database/physics.bib}  % database import with absolute path - file ending!
 
+
 % rewrite names (babel overwrites German with standard English names, therefore at document beginn [after everything is loaded])
 \AtBeginDocument{\renewcommand{\refname}{Literaturverzeichnis}}
 % others:
-%\contentsname
-%\listtablename
-%\listfigurename
+% \contentsname
+% \listtablename
+% \listfigurename
+
 
 % xcolor
 \definecolor{code_keyword}{HTML}{A06E9D}
@@ -78,6 +88,7 @@
 \definecolor{code_comment}{HTML}{6A9955}
 %\definecolor{code_basic}{HTML}{D4D4D4}
 %\definecolor{code_background}{HTML}{1E1E1E}
+
 
 % listings
 \lstdefinestyle{python}{
@@ -115,15 +126,14 @@
 \renewcommand*{\sqrt}[2][\ ]{\oldsqrt[#1]{#2} }
 \makeatother
 
+    
 % tabularray
 \SetTblrInner{  % set mandatory options
     hlines,
     vlines,
-    cells={
+    columns={
         halign=c,
         valign=m,
-    },
-    columns={
         co=-1,  % ~ X column with best fit (standard: co=1)
     },
     width=\linewidth,
@@ -132,12 +142,13 @@
 }
 
 
-
 % own commands
 \newcommand*{\der}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}  % derivative
-\newcommand*{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}  % partial derivative
+\newcommand*{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}     % partial derivative
 % \newcommand* can't contain multiple lines
 % \newcommand can
+
+
 
 
 
@@ -208,7 +219,7 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very discouraged
                 colspec={
                         *{3}{Q}  % multiplication syntax: *{n}{thing}
                         S[table-format=2.2]
-                        Q  % Q column for not overwriting standard values of preamble
+                        Q[co=0]  % Q column for not overwriting standard values of preamble (no extendable width in order to work with diagbox)
                     },
                 cell{2}{2}={r=2}{},  % empty specifier for not overwriting standard values of preamble
                 cell{4}{3}={r=2,c=2}{},
@@ -217,7 +228,7 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very discouraged
             Gerät 1 & ich        & meins    & 0.01                  & {quasi \\ perfekt \\ genau}         \\
             Gerät 2 &            & passt so & 21.4                  & quasi perfekt genau                 \\
             Gerät 3 & -          & passt so &                       & --//--                              \\
-            Gerät 4 & -          &          &                       & \diagbox[dir=NE, width=182pt]{a}{b} \\  % if diagbox is not the widest column, width must be typeset manually -.-
+            Gerät 4 & -          &          &                       & \diagbox[dir=NE]{Alle meine}{Entchen} \\  % if diagbox is not the widest column, width must be typeset manually -.-
         \end{tblr}
     \end{samepage}
 \end{table}
