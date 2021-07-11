@@ -1,5 +1,5 @@
 from uncertainties import ufloat
-from uncertainties.umath import *
+from uncertainties.umath import radians, sin, cos  # type:ignore
 
 alpha = ufloat(radians(13.5), radians(0.5))
 s = ufloat(0.1485, 0.0005)
@@ -9,10 +9,11 @@ g = 9.81
 names = ["alpha", "s", "t", "g"]
 variables = [alpha, s, t]
 
-function = (sin(alpha) - (2*s)/(g * t**2)) / cos(alpha)
+function = (sin(alpha) - (2*s)/(g * t**2)) / cos(alpha)  # type:ignore
 
 derivatives = [function.derivatives[variable] for variable in variables]
-terms = [abs(derivative * variable.s) for variable, derivative in zip(variables, derivatives)]
+terms = [abs(derivative * variable.s)
+         for variable, derivative in zip(variables, derivatives)]
 
 for name, derivative, term in zip(names, derivatives, terms):
     print(f"Derivative {name}:")
@@ -20,5 +21,3 @@ for name, derivative, term in zip(names, derivatives, terms):
     print(f"  Term:\t\t{term}\n")
 
 print(f"Total uncertainty is {sum(terms)}")
-
-# comment
