@@ -1,0 +1,28 @@
+\documentclass[parskip=half-]{scrartcl}
+
+\input{tabularray-environments.tex}
+
+\begin{document}
+
+\begin{table}
+    \centering
+    \caption{hand written}
+    \begin{tblr}{}
+        a & b & c \\
+        d & e & f \\
+    \end{tblr}
+\end{table}
+
+\begin{table}
+    \centering
+    \caption{\textbackslash input}
+    \input{table2.tex}
+\end{table}
+
+\begin{table}
+    \centering
+    \caption{\textbackslash input}
+    \input{table3.tex}
+\end{table}
+
+\end{document}
