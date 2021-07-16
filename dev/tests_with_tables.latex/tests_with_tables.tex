@@ -1,5 +1,7 @@
 \documentclass[parskip=half-]{scrartcl}
 
+\usepackage[locale=DE, uncertainty-mode=separate]{siunitx}
+\usepackage{icomma}
 \input{tabularray-environments.tex}
 
 \begin{document}
@@ -23,6 +25,12 @@
     \centering
     \caption{\textbackslash input}
     \input{table3.tex}
+\end{table}
+
+\begin{table}
+    \centering
+    \caption{\textbackslash input}
+    \input{table4.tex}
 \end{table}
 
 \end{document}
