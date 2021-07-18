@@ -1,8 +1,8 @@
-PWD c:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/dev/tests_with_tables.latex
+PWD c:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/lab_tool.python/additionals/tests_with_tables.latex
 INPUT c:/Program Files (x86)/TeX_Live/2021/texmf.cnf
 INPUT c:/Program Files (x86)/TeX_Live/2021/texmf-dist/web2c/texmf.cnf
 INPUT c:/Program Files (x86)/TeX_Live/2021/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT c:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/dev/tests_with_tables.latex/tests_with_tables.tex
+INPUT c:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/lab_tool.python/additionals/tests_with_tables.latex/tests_with_tables.tex
 OUTPUT tests_with_tables.log
 INPUT c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/koma-script/scrartcl.cls
 INPUT c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/koma-script/scrartcl.cls
@@ -423,3 +423,10 @@ INPUT table4.tex
 INPUT c:/Program Files (x86)/TeX_Live/2021/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
 INPUT c:/Program Files (x86)/TeX_Live/2021/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
 INPUT c:/Program Files (x86)/TeX_Live/2021/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
+OUTPUT tests_with_tables.pdf
+INPUT c:/Program Files (x86)/TeX_Live/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT tests_with_tables.aux
+INPUT c:/Program Files (x86)/TeX_Live/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+INPUT c:/Program Files (x86)/TeX_Live/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+INPUT c:/Program Files (x86)/TeX_Live/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
+INPUT c:/Program Files (x86)/TeX_Live/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb

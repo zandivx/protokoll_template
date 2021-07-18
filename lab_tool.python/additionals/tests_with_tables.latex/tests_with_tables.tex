@@ -9,10 +9,18 @@
 \begin{table}
     \centering
     \caption{hand written}
-    \begin{tblr}{}
-        a & b & c \\
-        d & e & f \\
+    \begin{tblr}{colspec={S l l}}
+        {{{a}}} & {{{b}}} & c \\
+        2,89 & e & f \\
     \end{tblr}
+\end{table}
+
+\begin{table}
+    \centering
+    \begin{tabular}{S l l}
+        {a}           & b & c \\
+        2,89 \pm 0,02 & e & f \\
+    \end{tabular}
 \end{table}
 
 \begin{table}
@@ -20,6 +28,9 @@
     \caption{\textbackslash input}
     \input{table2.tex}
 \end{table}
+
+
+\sisetup{table-alignment-mode=none}
 
 \begin{table}
     \centering

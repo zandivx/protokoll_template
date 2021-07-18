@@ -1,0 +1,35 @@
+\documentclass{scrartcl}
+
+\usepackage[uncertainty-mode=separate, locale=DE]{siunitx}
+\usepackage{tabularray}
+\UseTblrLibrary{siunitx}
+\sisetup{input-uncertainty-signs={\pm, +-, {+/-}, |}}
+
+\begin{document}
+
+\begin{table}
+    \centering
+    \begin{tabular}{Sll}
+        {a}         & b & c \\
+        1.2 \pm 0.3 & 4 & 5 \\
+    \end{tabular}
+\end{table}
+
+\begin{table}
+    \centering
+    \begin{tblr}{colspec={SSS}}
+        1       & 1 & 2 \\
+        1.2 +- 0.3 & 4 \pm 2 e6 & 5 \\
+    \end{tblr}
+\end{table}
+
+% \sisetup{
+%     separate-uncertainty=true,
+%     multi-part-units=single,
+%     scientific-notation = engineering,
+%     exponent-to-prefix = true
+% }
+
+\SI{7 \pm 1 e-05}{\volt}
+
+\end{document}

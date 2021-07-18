@@ -1,0 +1,10 @@
+setup.py
+physix/delta.py
+physix/file.py
+physix/fit.py
+physix/math.py
+physix.egg-info/PKG-INFO
+physix.egg-info/SOURCES.txt
+physix.egg-info/dependency_links.txt
+physix.egg-info/top_level.txt
+physix/data/student

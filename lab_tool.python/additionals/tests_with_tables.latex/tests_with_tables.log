@@ -1,0 +1,424 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.7.7)  19 JUL 2021 01:29
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**c:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/lab_tool.python/additionals/tests_with_tables.latex/tests_with_tables.tex
+(c:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/lab_tool.python/additionals/tests_with_tables.latex/tests_with_tables.tex
+LaTeX2e <2021-06-01> patch level 1
+L3 programming layer <2021-06-18> (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/koma-script/scrartcl.cls
+Document Class: scrartcl 2021/06/25 v3.34 KOMA-Script document class (article)
+(c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/koma-script/scrkbase.sty
+Package: scrkbase 2021/06/25 v3.34 KOMA-Script package (KOMA-Script-dependent basics and keyval usage)
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/koma-script/scrbase.sty
+Package: scrbase 2021/06/25 v3.34 KOMA-Script package (KOMA-Script-independent basics and keyval usage)
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/koma-script/scrlfile.sty
+Package: scrlfile 2021/06/25 v3.34 KOMA-Script package (file load hooks)
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
+Package: scrlfile-hook 2021/06/25 v3.34 KOMA-Script package (using LaTeX hooks)
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/koma-script/scrlogo.sty
+Package: scrlogo 2021/06/25 v3.34 KOMA-Script package (logo)
+))) (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+Applying: [2021/05/01] Usage of raw or classic option list on input line 252.
+Already applied: [0000/00/00] Usage of raw or classic option list on input line 368.
+)) (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/koma-script/tocbasic.sty
+Package: tocbasic 2021/06/25 v3.34 KOMA-Script package (handling toc-files)
+\scr@dte@tocline@numberwidth=\skip47
+\scr@dte@tocline@numbox=\box50
+)
+Package tocbasic Info: babel extension for `toc' omitted
+(tocbasic)             because of missing \bbl@set@language on input line 135.
+Class scrartcl Info: File `scrsize11pt.clo' used instead of
+(scrartcl)           file `scrsize11.clo' to setup font sizes on input line 2241.
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/koma-script/scrsize11pt.clo
+File: scrsize11pt.clo 2021/06/25 v3.34 KOMA-Script font size class option (11pt)
+) (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/koma-script/typearea.sty
+Package: typearea 2021/06/25 v3.34 KOMA-Script package (type area)
+\ta@bcor=\skip48
+\ta@div=\count182
+\ta@hblk=\skip49
+\ta@vblk=\skip50
+\ta@temp=\skip51
+\footheight=\skip52
+Package typearea Info: These are the values describing the layout:
+(typearea)             DIV  = 10
+(typearea)             BCOR = 0.0pt
+(typearea)             \paperwidth      = 597.50793pt
+(typearea)              \textwidth      = 418.25555pt
+(typearea)              DIV departure   = -6%
+(typearea)              \evensidemargin = 17.3562pt
+(typearea)              \oddsidemargin  = 17.3562pt
+(typearea)             \paperheight     = 845.04694pt
+(typearea)              \textheight     = 595.80026pt
+(typearea)              \topmargin      = -25.16531pt
+(typearea)              \headheight     = 17.0pt
+(typearea)              \headsep        = 20.40001pt
+(typearea)              \topskip        = 11.0pt
+(typearea)              \footskip       = 47.6pt
+(typearea)              \baselineskip   = 13.6pt
+(typearea)              on input line 1742.
+)
+\c@part=\count183
+\c@section=\count184
+\c@subsection=\count185
+\c@subsubsection=\count186
+\c@paragraph=\count187
+\c@subparagraph=\count188
+\scr@dte@section@maxnumwidth=\skip53
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\section on input line 4851.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\section on input line 4851.
+\scr@dte@part@maxnumwidth=\skip54
+Class scrartcl Info: using compatibility default `afterindent=false'
+(scrartcl)           for `\part on input line 4859.
+\scr@dte@subsection@maxnumwidth=\skip55
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\subsection on input line 4869.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\subsection on input line 4869.
+\scr@dte@subsubsection@maxnumwidth=\skip56
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\subsubsection on input line 4879.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\subsubsection on input line 4879.
+\scr@dte@paragraph@maxnumwidth=\skip57
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\paragraph on input line 4890.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\paragraph on input line 4890.
+\scr@dte@subparagraph@maxnumwidth=\skip58
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\subparagraph on input line 4900.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\subparagraph on input line 4900.
+\abovecaptionskip=\skip59
+\belowcaptionskip=\skip60
+\c@pti@nb@sid@b@x=\box51
+Package tocbasic Info: babel extension for `lof' omitted
+(tocbasic)             because of missing \bbl@set@language on input line 6075.
+\scr@dte@figure@maxnumwidth=\skip61
+\c@figure=\count189
+Package tocbasic Info: babel extension for `lot' omitted
+(tocbasic)             because of missing \bbl@set@language on input line 6087.
+\scr@dte@table@maxnumwidth=\skip62
+\c@table=\count190
+Class scrartcl Info: Redefining `\numberline' on input line 6251.
+\bibindent=\dimen138
+) (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/siunitx/siunitx.sty
+Package: siunitx 2021-07-06 v3.0.19 A comprehensive (SI) units package
+\l__siunitx_angle_tmp_dim=\dimen139
+\l__siunitx_angle_marker_box=\box52
+\l__siunitx_angle_unit_box=\box53
+\l__siunitx_compound_count_int=\count191
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/translations/translations.sty
+Package: translations 2021/01/17 v1.10a internationalization of LaTeX2e packages (CN)
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count192
+) (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+) (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+) (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+))
+\l__siunitx_number_exponent_fixed_int=\count193
+\l__siunitx_number_min_decimal_int=\count194
+\l__siunitx_number_min_integer_int=\count195
+\l__siunitx_number_round_precision_int=\count196
+\l__siunitx_number_group_minimum_int=\count197
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks17
+\ex@=\dimen140
+)) (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2020/02/24 v1.2b Standard LaTeX Color (DPC)
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 149.
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+))
+\l__siunitx_table_tmp_box=\box54
+\l__siunitx_table_tmp_dim=\dimen141
+\l__siunitx_table_column_width_dim=\dimen142
+\l__siunitx_table_integer_box=\box55
+\l__siunitx_table_decimal_box=\box56
+\l__siunitx_table_before_box=\box57
+\l__siunitx_table_after_box=\box58
+\l__siunitx_table_before_dim=\dimen143
+\l__siunitx_table_carry_dim=\dimen144
+\l__siunitx_unit_tmp_int=\count198
+\l__siunitx_unit_position_int=\count199
+\l__siunitx_unit_total_int=\count266
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2021-06-18 L3 programming layer (loader) 
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2021-05-07 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count267
+\l__pdf_internal_box=\box59
+))
+Package: l3keys2e 2021-06-18 LaTeX2e option processing using LaTeX3 keys
+) (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/tools/array.sty
+Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
+\col@sep=\dimen145
+\ar@mcellbox=\box60
+\extrarowheight=\dimen146
+\NC@list=\toks18
+\extratabsurround=\skip63
+\backup@length=\skip64
+\ar@cellbox=\box61
+)) (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/was/icomma.sty
+Package: icomma 2002/03/10 v2.0 (WaS)
+) (./tabularray-environments.tex (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/tabularray/tabularray.sty
+Package: tabularray 2021-07-01 v2021L Typeset tabulars and arrays with LaTeX3
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+Package: xparse 2021-06-18 L3 Experimental document command parser
+)
+\l__tblr_a_int=\count268
+\l__tblr_c_int=\count269
+\l__tblr_r_int=\count270
+\l__tblr_d_dim=\dimen147
+\l__tblr_h_dim=\dimen148
+\l__tblr_o_dim=\dimen149
+\l__tblr_p_dim=\dimen150
+\l__tblr_q_dim=\dimen151
+\l__tblr_r_dim=\dimen152
+\l__tblr_s_dim=\dimen153
+\l__tblr_t_dim=\dimen154
+\l__tblr_v_dim=\dimen155
+\l__tblr_w_dim=\dimen156
+\l__tblr_a_box=\box62
+\l__tblr_b_box=\box63
+\l__tblr_c_box=\box64
+\l__tblr_d_box=\box65
+\g__tblr_table_count_int=\count271
+\c@rownum=\count272
+\c@colnum=\count273
+\c@rowcount=\count274
+\c@colcount=\count275
+\abovesep=\dimen157
+\belowsep=\dimen158
+\leftsep=\dimen159
+\rightsep=\dimen160
+\g_tblr_level_int=\count276
+\g__tblr_data_row_key_count_int=\count277
+\g__tblr_data_column_key_count_int=\count278
+\g__tblr_data_cell_key_count_int=\count279
+\g__tblr_array_int=\count280
+\l__tblr_key_count_int=\count281
+\l__tblr_key_quotient_int=\count282
+\l__tblr_key_quotient_two_int=\count283
+\l__tblr_key_remainder_int=\count284
+\g__tblr_data_str_value_count_int=\count285
+\rulewidth=\dimen161
+\l__multicolumn_cell_number_int=\count286
+\l__tblr_strut_ht_box=\box66
+\l__tblr_strut_dp_box=\box67
+\g__tblr_cell_wd_dim=\dimen162
+\g__tblr_cell_ht_dim=\dimen163
+\g__tblr_cell_head_dim=\dimen164
+\g__tblr_cell_foot_dim=\dimen165
+\l__column_target_dim=\dimen166
+\l__tblr_caption_box=\box68
+\l__tblr_caption_left_box=\box69
+\l__tblr_row_head_box=\box70
+\l__tblr_row_foot_box=\box71
+\l__tblr_row_head_foot_dim=\dimen167
+\tablewidth=\dimen168
+\l__tblr_table_firsthead_box=\box72
+\l__tblr_table_middlehead_box=\box73
+\l__tblr_table_lasthead_box=\box74
+\l__tblr_table_firstfoot_box=\box75
+\l__tblr_table_middlefoot_box=\box76
+\l__tblr_table_lastfoot_box=\box77
+\l__tblr_remain_height_dim=\dimen169
+\l__tblr_table_page_int=\count287
+\l__tblr_table_head_box=\box78
+\l__tblr_table_foot_box=\box79
+\l__tblr_table_head_foot_dim=\dimen170
+\l__tblr_table_head_body_foot_dim=\dimen171
+\l__tblr_table_box=\box80
+\l__tblr_col_o_wd_dim=\dimen172
+\l__tblr_col_b_wd_dim=\dimen173
+\l__tblr_row_ht_dim=\dimen174
+\l__tblr_row_dp_dim=\dimen175
+\l__tblr_row_abovesep_dim=\dimen176
+\l__tblr_row_belowsep_dim=\dimen177
+\l__row_upper_dim=\dimen178
+\l__row_lower_dim=\dimen179
+\l__row_vpace_dim=\dimen180
+\l__tblr_cell_wd_dim=\dimen181
+\l__tblr_cell_ht_dim=\dimen182
+\l__tblr_diag_box=\box81
+) (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/diagbox/diagbox.sty
+Package: diagbox 2020/02/09 v2.3 Making table heads with diagonal lines
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/pict2e/pict2e.sty
+Package: pict2e 2020/09/30 v0.4b Improved picture commands (HjG,RN,JT)
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/pict2e/pict2e.cfg
+File: pict2e.cfg 2016/02/05 v0.1u pict2e configuration for teTeX/TeXLive
+)
+Package pict2e Info: Driver file: pdftex.def on input line 112.
+Package pict2e Info: Driver file for pict2e: p2e-pdftex.def on input line 114.
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/pict2e/p2e-pdftex.def
+File: p2e-pdftex.def 2016/02/05 v0.1u Driver-dependant file (RN,HjG,JT)
+) (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+\pIIe@GRAPH=\toks19
+\@arclen=\dimen183
+\@arcrad=\dimen184
+\pIIe@tempdima=\dimen185
+\pIIe@tempdimb=\dimen186
+\pIIe@tempdimc=\dimen187
+\pIIe@tempdimd=\dimen188
+\pIIe@tempdime=\dimen189
+\pIIe@tempdimf=\dimen190
+) (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count288
+\calc@Bcount=\count289
+\calc@Adimen=\dimen191
+\calc@Bdimen=\dimen192
+\calc@Askip=\skip65
+\calc@Bskip=\skip66
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count290
+\calc@Cskip=\skip67
+)
+\diagbox@boxa=\box82
+\diagbox@boxb=\box83
+\diagbox@boxm=\box84
+\diagbox@wd=\dimen193
+\diagbox@ht=\dimen194
+\diagbox@insepl=\dimen195
+\diagbox@insepr=\dimen196
+\diagbox@outsepl=\dimen197
+\diagbox@outsepr=\dimen198
+))
+Package translations Info: No language package found. I am going to use `english' as default language. on input line 7.
+ (./tests_with_tables.aux)
+\openout1 = `tests_with_tables.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+Package scrbase Info: activating english \contentsname on input line 7.
+Package scrbase Info: activating english \listfigurename on input line 7.
+Package scrbase Info: activating english \listtablename on input line 7.
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/translations/translations-basic-dictionary-english.trsl
+File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
+)
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 7.
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count291
+\scratchdimen=\dimen199
+\scratchbox=\box85
+\nofMPsegments=\count292
+\nofMParguments=\count293
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count294
+\MPscratchDim=\dimen256
+\MPnumerator=\count295
+\makeMPintoPDFobject=\count296
+\everyMPtoPDFconversion=\toks21
+)
+> Step: split table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 15.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 15.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 15.
+> Step: build the whole table.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 28.
+ (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 28.
+ (./table2.tex
+> Step: split table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+) (./table3.tex
+> Step: split table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+> Step: build the whole table.
+) (./table4.tex
+> Step: split table.
+> Step: init table outer spec.
+> Step: parse table options.
+> Step: init table inner spec.
+> Step: parse table inner spec.
+> Step: execute table commands.
+> Step: calculate cell and line sizes.
+
+
+Package tabularray Warning: Table width is too small, need 6.01114pt more!
+
+> Step: build the whole table.
+)
+Overfull \hbox (6.01114pt too wide) in paragraph at lines 14--45
+ [][] 
+ []
+
+[1{c:/Program Files (x86)/TeX_Live/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] (./tests_with_tables.aux) ) 
+Here is how much of TeX's memory you used:
+ 10160 strings out of 478517
+ 255832 string characters out of 5843347
+ 727080 words of memory out of 5000000
+ 28064 multiletter control sequences out of 15000+600000
+ 411327 words of font info for 48 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 108i,11n,108p,10729b,696s stack positions out of 5000i,500n,10000p,200000b,80000s
+<c:/Program Files (x86)/TeX_Live/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Program Files (x86)/TeX_Live/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Program Files (x86)/TeX_Live/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/Program Files (x86)/TeX_Live/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on tests_with_tables.pdf (2 pages, 47698 bytes).
+PDF statistics:
+ 31 PDF objects out of 1000 (max. 8388607)
+ 18 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
