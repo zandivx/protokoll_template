@@ -47,11 +47,14 @@ def write_table(
         # double curly braces produce literal curly brace in f string
         # three braces: evaluation surrounded by single braces
 
-    columns = [f"{{{{{{{x}}}}}}}" for x in columns] if isinstance(
-        columns, list) else columns  # make strings safe for tabularry's siunitx S columns
+    # make strings safe for tabularry's siunitx S columns
+    if columns == True:
+        columns = df.columns.tolist()
+    if isinstance(columns, list):
+        columns = [f"{{{{{{{col}}}}}}}" for col in columns]
 
     # strings
-    sisetup_str = ", ".join(sisetup) if sisetup else ""
+    sisetup_str = ", ".join(sisetup)
     inner_settings_str = ", ".join(inner_settings)
     df_str = df.to_csv(sep="&", line_terminator="\\\\\n",  # to_csv without path returns string
                        float_format=formatter, header=columns, index=index)
@@ -61,14 +64,14 @@ def write_table(
         df_str = df_str.replace('"', '')
 
         # replace +/- with \pm
-        df_str = re.sub(r"(\d)\+/-(\d)", r"\1 \\pm \2", df_str)
+        df_str = re.sub(r"(\d)\+/-(\d)", r"\1 +- \2", df_str)
 
         # delete parantheses and make extra spaces for numbers with uncertainties and exponents
-        df_str = re.sub(r"\((\d+\.?\d*) \\pm (\d+\.?\d*)\)e",
-                        r"\1 \\pm \2 e", df_str)
+        df_str = re.sub(r"\((\d+\.?\d*) \+- (\d+\.?\d*)\)e",
+                        r"\1 +- \2 e", df_str)
 
     # write to file
-    with open(path, "w", encoding="utf-8") as f:  # open() does not encode in utf-8 by default!
+    with open(path, "w", encoding="utf-8") as f:  # open() does not encode in utf-8 by default
 
         if sisetup_str:
             f.write(f"\\sisetup{{{sisetup_str}}}\n\n")

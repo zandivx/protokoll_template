@@ -40,7 +40,7 @@ def dimension_conventional(unc: Nums_Arraylikes) -> Int_Array:
     mask = np.floor(normalized_float) == 1
 
     try:
-        exponent[mask] -= 1  # type:ignore  # pylance ignore
+        exponent[mask] -= 1  # type:ignore
     except TypeError:
         if mask:
             exponent -= 1
@@ -113,75 +113,3 @@ def round_right(std_dev):
             return (with_exponent_2 * 10**(exponent - 1), exponent)
         else:
             return (np.ceil(with_exponent_1) * 10**exponent, exponent)
-
-
-not_yet = """
-def PDG_precision(std_dev):
-    '''
-    Return the number of significant digits to be used for the given
-    standard deviation, according to the rounding rules of the
-    Particle Data Group (2010)
-    (http://pdg.lbl.gov/2010/reviews/rpp2010-rev-rpp-intro.pdf).
-
-    Also returns the effective standard deviation to be used for
-    display.
-    '''
-
-    exponent = first_digit(std_dev)
-
-    # The first three digits are what matters: we get them as an
-    # integer number in [100; 999).
-    #
-    # In order to prevent underflow or overflow when calculating
-    # 10**exponent, the exponent is slightly modified first and a
-    # factor to be applied after "removing" the new exponent is
-    # defined.
-    #
-    # Furthermore, 10**(-exponent) is not used because the exponent
-    # range for very small and very big floats is generally different.
-    if exponent >= 0:
-        # The -2 here means "take two additional digits":
-        exponent, factor = exponent-2, 1
-    else:
-        exponent, factor = exponent+1, 1000
-    digits = int(std_dev * 10**-exponent * factor)  # int rounds towards zero
-
-    # Rules:
-    if digits <= 354:
-        return (2, std_dev)
-    elif digits <= 949:
-        return (1, std_dev)
-    else:
-        # The parentheses matter, for very small or very large
-        # std_dev:
-        return (2, 10.**exponent*(1000/factor))
-
-
-def signif_dgt_to_limit(value, num_signif_d):
-    '''
-    Return the precision limit necessary to display value with
-    num_signif_d significant digits.
-
-    The precision limit is given as -1 for 1 digit after the decimal
-    point, 0 for integer rounding, etc. It can be positive.
-    '''
-
-    fst_digit = first_digit(value)
-
-    limit_no_rounding = fst_digit - num_signif_d + 1
-
-    # The number of significant digits of the uncertainty, when
-    # rounded at this limit_no_rounding level, can be too large by 1
-    # (e.g., with num_signif_d = 1, 0.99 gives limit_no_rounding = -1, but
-    # the rounded value at that limit is 1.0, i.e. has 2
-    # significant digits instead of num_signif_d = 1). We correct for
-    # this effect by adjusting limit if necessary:
-    rounded = round(value, -limit_no_rounding)
-    fst_digit_rounded = first_digit(rounded)
-
-    if fst_digit_rounded > fst_digit:
-        # The rounded limit is fst_digit_rounded-num_signif_d+1;
-        # but this can only be 1 above the non-rounded limit:
-        limit_no_rounding += 1
-
-    return limit_no_rounding"""

@@ -10,8 +10,8 @@ import metrolopy as m
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 if True:
-    columns = ["{{{Gerät}}}", "{{{Hersteller}}}", "{{{Modell}}}",
-               "{{{Unsicherheit}}}", "{{{Anmerkung}}}"]
+    columns = ["Gerät", "Hersteller", "Modell",
+               "Unsicherheit", "Anmerkung"]
     df = pd.DataFrame(np.round(np.linspace(0.1, 1e8, 35),
                       3).reshape((-1, 5)), columns=columns)
 
@@ -20,7 +20,7 @@ if True:
 
     write_table(df, "additionals/tests_with_tables.latex/table3.tex",
                 inner_settings=["hlines={blue}"],
-                #colspec="S[table-number-alignment = center]"*5,
+                colspec="S"*5,
                 environ="tblr-x",
                 columns=True,
                 format_spec="#.3e",
