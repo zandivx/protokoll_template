@@ -1,14 +1,19 @@
+"functions.py of lab_tool"
+
+
 from typing import Union, Any
 
 
-def chdir() -> None:  # to be tested!
+def cd(current_frame: bool = False) -> None:  # to be tested!
     "Change current directory to directory of the script that executes this function"
 
     import os
     import inspect
 
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    print(f"current frame: {inspect.getfile(inspect.currentframe())}")
+
+    if current_frame:
+        print(f"current frame: {inspect.getfile(inspect.currentframe())}")
 
 
 def plt_latex() -> None:
