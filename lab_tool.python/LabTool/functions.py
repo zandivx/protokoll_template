@@ -133,6 +133,6 @@ def profile(func: Callable) -> Callable:
             func(*args, **kwargs)
         stats = pstats.Stats(pr)
         stats.sort_stats(pstats.SortKey.TIME)
-        stats.dump_stats(f"profiling_{func.__name__}.snakeviz")  # for snakeviz
+        stats.dump_stats(f"_profiling_{func.__name__}.snakeviz")
         stats.print_stats()
     return decorator
