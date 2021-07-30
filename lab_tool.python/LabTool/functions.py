@@ -1,19 +1,18 @@
 "functions.py of lab_tool"
 
+# typing imports
+from typing import Callable, Union, Any
 
-from typing import Union, Any
 
-
-def cd(current_frame: bool = False) -> None:  # to be tested!
-    "Change current directory to directory of the script that executes this function"
+def cd() -> None:
+    "Change current directory (working directory) to directory of the script that executes this function"
 
     import os
-    import inspect
 
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-    if current_frame:
-        print(f"current frame: {inspect.getfile(inspect.currentframe())}")
+    # future:
+    # additional information through module inspect
 
 
 def plt_latex() -> None:
@@ -29,7 +28,7 @@ def plt_latex() -> None:
 
 
 def pd_format(format_spec: str) -> None:
-    "Update float formatting of pandas.DataFrames"
+    "Update float formatting of pandas.DataFrame"
 
     import pandas as pd
 
@@ -67,6 +66,7 @@ def write_table(
     -> sisetup=[]\t\tlist with options for \\sisetup before tblr gets typeset
     -> msg=False\t\tboolean if a success-message and a reduced exception-message should be printed to the console
     """
+
     import pandas as pd
     import re
 
@@ -85,7 +85,7 @@ def write_table(
     # make strings safe for tabularry's siunitx S columns
     if columns == True:
         columns = df.columns.tolist()
-    if isinstance(columns, list):
+    elif isinstance(columns, list):
         columns = [f"{{{{{{{col}}}}}}}" for col in columns]
 
     # strings
@@ -120,3 +120,19 @@ def write_table(
         pd.options.display.float_format = formatter
         print(f"Successfully written pandas.DataFrame:\n{df}\n"
               f"as tabularray environment '{environ}' to file: '{path}'.")
+
+
+def profile(func: Callable) -> Callable:
+    "decorator for profiling a certain function call"
+
+    import cProfile
+    import pstats
+
+    def decorator(*args, **kwargs):
+        with cProfile.Profile() as pr:
+            func(*args, **kwargs)
+        stats = pstats.Stats(pr)
+        stats.sort_stats(pstats.SortKey.TIME)
+        stats.dump_stats(f"profiling_{func.__name__}.snakeviz")  # for snakeviz
+        stats.print_stats()
+    return decorator
