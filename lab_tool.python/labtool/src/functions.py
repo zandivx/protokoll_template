@@ -1,4 +1,6 @@
-"functions.py of lab_tool"
+"""
+./src/functions.py of package 'labtool'
+"""
 
 # typing imports
 from typing import Callable, Union, Any
@@ -14,6 +16,8 @@ def cd() -> None:
     # future:
     # additional information through module inspect
 
+    return None
+
 
 def plt_latex() -> None:
     "Use LaTeX as backend for matplotlib.pyplot"
@@ -26,6 +30,8 @@ def plt_latex() -> None:
         "font.family": "Latin Modern Roman"
     })
 
+    return None
+
 
 def pd_format(format_spec: str) -> None:
     "Update float formatting of pandas.DataFrame"
@@ -33,6 +39,8 @@ def pd_format(format_spec: str) -> None:
     import pandas as pd
 
     pd.options.display.float_format = f"{{:{format_spec}}}".format
+
+    return None
 
 
 def write_table(
@@ -121,6 +129,8 @@ def write_table(
         print(f"Successfully written pandas.DataFrame:\n{df}\n"
               f"as tabularray environment '{environ}' to file: '{path}'.")
 
+    return None
+
 
 def profile(func: Callable) -> Callable:
     "decorator for profiling a certain function call"
@@ -136,3 +146,15 @@ def profile(func: Callable) -> Callable:
         stats.dump_stats(f"_profiling_{func.__name__}.snakeviz")
         stats.print_stats()
     return decorator
+
+
+def relative_import_hack() -> None:
+    "Prints code to be included in modules in a self-written library to handel relative imports."
+
+    print("import sys\n"
+          "sys.path.append('whatever/directory/is_needed')\n"
+          "\nif auto-formatting alter to:\n"
+          "import contextlib\n"
+          "with contextlib.nullcontext():\n"
+          "    sys.path.append('...')")
+    return None

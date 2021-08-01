@@ -1,7 +1,6 @@
-import core
+from core1 import core
 import numpy as np
 import pandas as pd
-import metrolopy as m
 
 if False:
     columns = ["Gerät", "Hersteller", "Modell",
@@ -9,7 +8,7 @@ if False:
     df = pd.DataFrame(np.round(np.linspace(0.1, 1e8, 35),
                       3).reshape((-1, 5)), columns=columns)
 
-    # write_table(df, "additionals/tests_with_tables/table2.tex", columns=columns,
+    # write_table(df, "tables/table2.tex", columns=columns,
     #             colspec="Q|Q|Q|S|S", digits=3)
 
     core.write_table(df, "additionals/tests_with_tables.latex/table3.tex",
@@ -27,7 +26,7 @@ df = pd.DataFrame(uarr)
 df = df.astype("string")
 
 
-core.write_table(df, path="../tests_with_tables.latex/table4.tex",
+core.write_table(df, path="tables.latex/table4.tex",
                  colspec="S[table-number-alignment = center]"*4,
                  columns=["Test +/- 4e", "1", "2", "3"],
                  uarray=True,
