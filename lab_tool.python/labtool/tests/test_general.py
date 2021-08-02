@@ -12,19 +12,19 @@ import uncertainties as u
 import uncertainties.unumpy as unp
 
 # own
-from core1 import core
+from labtool_ import labtool as lt
 
-# core.plt_latex()
-# core.chdir()
+# lt.plt_latex()
+# lt.chdir()
 
 #plt.plot([i for i in range(10)], [i**2 for i in range(10)])
 #plt.title("LaTeX test ß €")
 # plt.show()
 
 # print(os.getcwd())
-# with core.cdContextManager("C:/Users/andre"):
+# with lt.cdContextManager("C:/Users/andre"):
 #     print(os.getcwd())
-#     print(core.Student.t_df)
+#     print(lt.Student.t_df)
 # print(os.getcwd())
 
 
@@ -84,9 +84,9 @@ def test5():
 
 
 def test6():
-    uarr = core.unp.uarray(lst_n, lst_s)
-    lst = [float(x.n) for x in uarr]
-    print(lst)
+    uarr = lt.unp.uarray(lst_n, lst_s)
+    lst = [f"{float(x.n)}+/-{float(x.s)}" for x in uarr]
+    print(f"original:\n{uarr}\n\ncomprehension:\n{lst}")
 
 
 test6()

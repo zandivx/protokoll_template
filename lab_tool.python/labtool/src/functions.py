@@ -148,13 +148,6 @@ def profile(func: Callable) -> Callable:
     return decorator
 
 
-def relative_import_hack() -> None:
-    "Prints code to be included in modules in a self-written library to handel relative imports."
-
-    print("import sys\n"
-          "sys.path.append('whatever/directory/is_needed')\n"
-          "\nif auto-formatting alter to:\n"
-          "import contextlib\n"
-          "with contextlib.nullcontext():\n"
-          "    sys.path.append('...')")
-    return None
+del Callable
+del Union
+del Any

@@ -2,98 +2,18 @@
 ./src/classes.py of package 'labtool'
 """
 
-# typing imports
+# std lib
 from typing import Union, Any
-
-from numpy.core.fromnumeric import std
-
-
-class MonkeyPatch:
-    "Monkey patches for certain 3rd party libraries"
-
-    class uncertainties:
-        """
-        Modifications of the module 'uncertainties'
-        Uncertainties: a Python package for calculations with uncertainties,
-        Eric O. LEBIGOT, http://pythonhosted.org/uncertainties/
-        """
-
-        @staticmethod
-        def rounding(msg: bool = False) -> None:
-            """
-            Update uncertainties' rounding function to a convention used in "Einführung in
-            die physikalischen Messmethoden" (EPM), scriptum version 7.
-            """
-
-            import uncertainties.core as uc
-            from math import ceil
-
-            def EPM_precision(std_dev):
-                """
-                Return the number of significant digits to be used for the given
-                standard deviation, according to the rounding rules of EPM.
-                Also returns the effective standard deviation to be used for display.
-                """
-
-                exponent = uc.first_digit(std_dev)
-                normalized_float = std_dev * 10**(-exponent)
-
-                # return (significant digits, uncertainty)
-                if normalized_float <= 1.9:
-                    return 2, ceil(normalized_float * 10) * 10**(exponent-1)
-                else:
-                    return 1, ceil(normalized_float) * 10**exponent
-
-            def round_correct(nominal_value, std_dev):
-                exponent = uc.first_digit(std_dev)
-                sig_dig, s = EPM_precision(std_dev)
-                exponent += sig_dig - 1
-                n = round(nominal_value, -exponent)
-                return n, s
-
-            def new_Variable__repr__(self):
-                "A modified version of uncertainties.core.Variable.__repr__"
-
-                if self.tag is None:
-                    return uc.AffineScalarFunc.__str__(self)
-                else:
-                    return f"< {self.tag} = {uc.AffineScalarFunc.__repr__(self)} >"
-
-            def new_Variable__init__(self, value, std_dev, tag=None):
-                value, self.std_dev = round_correct(value, std_dev)
-                uc.AffineScalarFunc.__init__(
-                    self, value, uc.LinearCombination({self: 1.0}))
-                self.tag = tag
-
-            # ufloat is a factory function with return type uncertainties.core.Variable
-            # which inherits from uncertainties.core.AffineScalarFunc
-            # uncertainties.core.PDG_precision is used for uncertainties.core.AffineScalarFunc.__format__
-            # which is used for uncertainties.core.AffineScalarFunc.__str__ (printing)
-            # therefore changing the behavior of that function changes the way ufloats are diplayed
-            uc.PDG_precision = EPM_precision
-
-            # uncertainties.unumpy.core.uarray is a factory function which vectorizes uncertainties.core.Variable (__init__)
-            # however class Variable does not have __str__ defined, but __repr__ instead, which just plain prints the input
-            # -> change __repr__ to more sophisticated behavior of uncertainties.core.AffineScalarFunc.__str__
-            uc.Variable.__repr__ = new_Variable__repr__
-            # easier way if tag functionality can be omitted completely:
-            # uc.Variable.__repr__ = uc.AffineScalarFunc.__str__
-
-            # TODO
-            uc.Variable.__init__ = new_Variable__init__
-
-            if msg:
-                print("Monkey patch successful: MonkeyPatch.uncertainties.rounding")
-
-            return None
 
 
 class cdContextManager:
-    """A context manager that changes the working directory temporarily to the directory
-    of the calling script or to an optional path."""
+    """
+    A context manager that changes the working directory temporarily to the directory
+    of the calling script or to an optional path.
+    """
 
     import os
-    from functions import cd
+    from .functions import cd
 
     def __init__(self, path: str = ""):
         self.path = path
@@ -108,6 +28,26 @@ class cdContextManager:
 
     def __exit__(self, type, value, traceback):
         self.os.chdir(self.olddir)
+
+
+class SysPathContextManager:
+    """
+    A context manager that appends the sys.path-variable with a given init-path.
+    Useful for relative imports in a package, where the importing module should be run
+    as a script.
+
+    """
+    import sys
+
+    def __init__(self, path: str):
+        self.path = path
+
+    def __enter__(self):
+        exec("#type:ignore")
+        self.sys.path.append(self.path)
+
+    def __exit__(self, *args):
+        self.sys.path.pop()
 
 
 class Student:
@@ -135,3 +75,7 @@ class Student:
 
 # TODO
 # print(Student([1, 2, 3, 4, 5]).t_factor())
+
+
+del Union
+del Any
