@@ -1,12 +1,12 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.7.7)  19 JUL 2021 02:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.8.2)  2 AUG 2021 16:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/lab_tool.python/additionals/tests_with_tables.latex/tests_with_tables.tex
-(c:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/lab_tool.python/additionals/tests_with_tables.latex/tests_with_tables.tex
+**c:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/labtool.python/labtool/tests/tables.latex/tests_with_tables.tex
+(c:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/labtool.python/labtool/tests/tables.latex/tests_with_tables.tex
 LaTeX2e <2021-06-01> patch level 1
-L3 programming layer <2021-06-18> (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/koma-script/scrartcl.cls
+L3 programming layer <2021-07-12> (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/koma-script/scrartcl.cls
 Document Class: scrartcl 2021/06/25 v3.34 KOMA-Script document class (article)
 (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/koma-script/scrkbase.sty
 Package: scrkbase 2021/06/25 v3.34 KOMA-Script package (KOMA-Script-dependent basics and keyval usage)
@@ -109,7 +109,7 @@ Package tocbasic Info: babel extension for `lot' omitted
 Class scrartcl Info: Redefining `\numberline' on input line 6251.
 \bibindent=\dimen138
 ) (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/siunitx/siunitx.sty
-Package: siunitx 2021-07-06 v3.0.19 A comprehensive (SI) units package
+Package: siunitx 2021-07-26 v3.0.23 A comprehensive (SI) units package
 \l__siunitx_angle_tmp_dim=\dimen139
 \l__siunitx_angle_marker_box=\box52
 \l__siunitx_angle_unit_box=\box53
@@ -165,9 +165,9 @@ File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 \l__siunitx_unit_position_int=\count199
 \l__siunitx_unit_total_int=\count266
  (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2021-06-18 L3 programming layer (loader) 
+Package: expl3 2021-07-12 L3 programming layer (loader) 
  (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2021-05-07 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2021-07-12 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count267
 \l__pdf_internal_box=\box59
 ))
@@ -184,7 +184,7 @@ Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
 )) (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/was/icomma.sty
 Package: icomma 2002/03/10 v2.0 (WaS)
 ) (./tabularray-environments.tex (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/tabularray/tabularray.sty
-Package: tabularray 2021-07-01 v2021L Typeset tabulars and arrays with LaTeX3
+Package: tabularray 2021-08-01 v2021M Typeset tabulars and arrays with LaTeX3
  (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
 Package: xparse 2021-06-18 L3 Experimental document command parser
 )
@@ -246,7 +246,11 @@ Package: xparse 2021-06-18 L3 Experimental document command parser
 \l__tblr_table_middlefoot_box=\box76
 \l__tblr_table_lastfoot_box=\box77
 \l__tblr_remain_height_dim=\dimen169
-\l__tblr_table_page_int=\count287
+\l__tblr_long_from_int=\count287
+\l__tblr_long_to_int=\count288
+\l__tblr_curr_i_int=\count289
+\l__tblr_prev_i_int=\count290
+\l__tblr_table_page_int=\count291
 \l__tblr_table_head_box=\box78
 \l__tblr_table_foot_box=\box79
 \l__tblr_table_head_foot_dim=\dimen170
@@ -289,15 +293,15 @@ Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 \pIIe@tempdimf=\dimen190
 ) (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count288
-\calc@Bcount=\count289
+\calc@Acount=\count292
+\calc@Bcount=\count293
 \calc@Adimen=\dimen191
 \calc@Bdimen=\dimen192
 \calc@Askip=\skip65
 \calc@Bskip=\skip66
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count290
+\calc@Ccount=\count294
 \calc@Cskip=\skip67
 )
 \diagbox@boxa=\box82
@@ -337,21 +341,21 @@ File: translations-basic-dictionary-english.trsl (english translation file `tran
 Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 7.
  (c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count291
+\scratchcounter=\count295
 \scratchdimen=\dimen199
 \scratchbox=\box85
-\nofMPsegments=\count292
-\nofMParguments=\count293
+\nofMPsegments=\count296
+\nofMParguments=\count297
 \everyMPshowfont=\toks20
-\MPscratchCnt=\count294
+\MPscratchCnt=\count298
 \MPscratchDim=\dimen256
-\MPnumerator=\count295
-\makeMPintoPDFobject=\count296
+\MPnumerator=\count299
+\makeMPintoPDFobject=\count300
 \everyMPtoPDFconversion=\toks21
 )
-> Step: split table.
 > Step: init table outer spec.
 > Step: parse table options.
+> Step: split table.
 > Step: init table inner spec.
 > Step: parse table inner spec.
 > Step: execute table commands.
@@ -370,27 +374,27 @@ File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 28.
  (./table2.tex
-> Step: split table.
 > Step: init table outer spec.
 > Step: parse table options.
+> Step: split table.
 > Step: init table inner spec.
 > Step: parse table inner spec.
 > Step: execute table commands.
 > Step: calculate cell and line sizes.
 > Step: build the whole table.
 ) (./table3.tex
-> Step: split table.
 > Step: init table outer spec.
 > Step: parse table options.
+> Step: split table.
 > Step: init table inner spec.
 > Step: parse table inner spec.
 > Step: execute table commands.
 > Step: calculate cell and line sizes.
 > Step: build the whole table.
 ) (./table4.tex
-> Step: split table.
 > Step: init table outer spec.
 > Step: parse table options.
+> Step: split table.
 > Step: init table inner spec.
 > Step: parse table inner spec.
 > Step: execute table commands.
@@ -407,15 +411,15 @@ Overfull \hbox (6.01114pt too wide) in paragraph at lines 14--45
 
 [1{c:/Program Files (x86)/TeX_Live/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] (./tests_with_tables.aux) ) 
 Here is how much of TeX's memory you used:
- 10160 strings out of 478517
- 255832 string characters out of 5843347
- 734568 words of memory out of 5000000
- 28064 multiletter control sequences out of 15000+600000
- 411327 words of font info for 48 fonts, out of 8000000 for 9000
+ 10266 strings out of 478542
+ 258497 string characters out of 5843848
+ 732583 words of memory out of 5000000
+ 28145 multiletter control sequences out of 15000+600000
+ 411352 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,11n,108p,10729b,804s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 108i,11n,108p,10719b,827s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/Program Files (x86)/TeX_Live/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Program Files (x86)/TeX_Live/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Program Files (x86)/TeX_Live/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/Program Files (x86)/TeX_Live/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Program Files (x86)/TeX_Live/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on tests_with_tables.pdf (2 pages, 56418 bytes).
+Output written on tests_with_tables.pdf (2 pages, 56427 bytes).
 PDF statistics:
  36 PDF objects out of 1000 (max. 8388607)
  21 compressed objects within 1 object stream

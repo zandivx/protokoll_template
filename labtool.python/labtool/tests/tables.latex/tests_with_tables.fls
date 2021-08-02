@@ -1,8 +1,8 @@
-PWD c:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/lab_tool.python/additionals/tests_with_tables.latex
+PWD c:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/labtool.python/labtool/tests/tables.latex
 INPUT c:/Program Files (x86)/TeX_Live/2021/texmf.cnf
 INPUT c:/Program Files (x86)/TeX_Live/2021/texmf-dist/web2c/texmf.cnf
 INPUT c:/Program Files (x86)/TeX_Live/2021/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT c:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/lab_tool.python/additionals/tests_with_tables.latex/tests_with_tables.tex
+INPUT c:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/labtool.python/labtool/tests/tables.latex/tests_with_tables.tex
 OUTPUT tests_with_tables.log
 INPUT c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/koma-script/scrartcl.cls
 INPUT c:/Program Files (x86)/TeX_Live/2021/texmf-dist/tex/latex/koma-script/scrartcl.cls

@@ -1,5 +1,5 @@
 """
-./src/functions.py of package 'labtool'
+labtool/src/functions.py
 """
 
 # typing imports
@@ -24,7 +24,7 @@ def plt_latex() -> None:
 
     import matplotlib.pyplot as plt
 
-    plt.rcParams.update({  # type:ignore
+    plt.rcParams.update({  # type: ignore
         "text.usetex": True,
         "text.latex.preamble": r"\usepackage{lmodern}",
         "font.family": "Latin Modern Roman"
@@ -91,9 +91,10 @@ def write_table(
         # three braces: evaluation surrounded by single braces
 
     # make strings safe for tabularry's siunitx S columns
-    if columns == True:
+    if columns == True:  # boolean check with == because columns could be a non-empty container
         columns = df.columns.tolist()
-    elif isinstance(columns, list):
+    # if columns was True, it's now a list
+    if isinstance(columns, list):
         columns = [f"{{{{{{{col}}}}}}}" for col in columns]
 
     # strings
@@ -106,10 +107,10 @@ def write_table(
         # delete string quotes
         df_str = df_str.replace('"', '')
 
-        # replace +/- with \pm
+        # replace +/- with +-
         df_str = re.sub(r"(\d)\+/-(\d)", r"\1 +- \2", df_str)
 
-        # delete parantheses and make extra spaces for numbers with uncertainties and exponents
+        # delete parantheses and make extra spaces if exponents
         df_str = re.sub(r"\((\d+\.?\d*) \+- (\d+\.?\d*)\)e",
                         r"\1 +- \2 e", df_str)
 
@@ -126,8 +127,13 @@ def write_table(
     # message printing
     if msg:
         pd.options.display.float_format = formatter
-        print(f"Successfully written pandas.DataFrame:\n{df}\n"
-              f"as tabularray environment '{environ}' to file: '{path}'.")
+
+        with open(path, "r", encoding="utf-8") as f:
+            string = f.read()
+
+        print(f"\nSuccessfully written pandas.DataFrame:\n\n{df}\n\n"
+              f"as tabularray environment '{environ}' to file: '{path}'\n\n"
+              f"output:\n\n{string}")
 
     return None
 

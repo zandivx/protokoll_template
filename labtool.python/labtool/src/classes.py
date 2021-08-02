@@ -1,5 +1,5 @@
 """
-./src/classes.py of package 'labtool'
+labtool/src/classes.py
 """
 
 # std lib
