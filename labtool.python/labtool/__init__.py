@@ -6,8 +6,6 @@ A python library for LU Experimentalphysik 2
 # currently none
 
 # 3rd party library imports
-from scipy.optimize import curve_fit
-from scipy.signal import find_peaks
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt

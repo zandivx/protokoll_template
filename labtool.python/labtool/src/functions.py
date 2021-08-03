@@ -152,8 +152,3 @@ def profile(func: Callable) -> Callable:
         stats.dump_stats(f"_profiling_{func.__name__}.snakeviz")
         stats.print_stats()
     return decorator
-
-
-del Callable
-del Union
-del Any

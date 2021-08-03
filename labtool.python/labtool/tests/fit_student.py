@@ -1,23 +1,12 @@
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-#import core
+# type: ignore[attr-defined]
+from labtool_ import labtool as lt
 
-a = """
-if False:
-    df = core.Student.t_df
 
-    popt, *_ = core.curve_fit(lambda x, a: a * x **
-                              (-2.0) + 1, df["N"], df["68.3%"])
-    print(popt)
-    x = np.linspace(0, 200, 300)
-    y = x**popt
-    plt.plot(x, y, label="fit")
+df = lt.Student.t_values
+def func2(x, a, d, n): return a/x**n + d
 
-    plt.plot(df["N"], df["68.3%"], label="data")
-    #plt.plot(df["N"], df["95.5%"])
-    #plt.plot(df["N"], df["99.7%"])
-    plt.ylim(0.9, 2)
-    plt.legend()
-    plt.show()
-"""
+
+student = lt.Fit(func2, df["N"], df["1"], bounds=(
+    (1, 0, 1), (lt.np.inf, 100, 4)))
+print(student)
+student.plot()

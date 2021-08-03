@@ -89,4 +89,9 @@ def test6():
     print(f"original:\n{uarr}\n\ncomprehension:\n{lst}")
 
 
-test6()
+def test7():
+    uf = lt.u.ufloat(3, 2.2)
+    print(uf)
+
+
+test7()
