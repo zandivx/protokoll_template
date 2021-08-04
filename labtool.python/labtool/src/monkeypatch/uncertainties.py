@@ -44,7 +44,7 @@ class Rounding:
             return dig, s
 
         def new__repr__(self):
-            "A modified version of uncertainties.core.Variable.__repr__"
+            """A modified version of uncertainties.core.Variable.__repr__"""
 
             if self.tag is None:
                 return uc.AffineScalarFunc.__str__(self)
@@ -75,7 +75,7 @@ class Rounding:
         """
 
         def round_n_s(nominal_value: Union[int, float], std_dev: Union[int, float]) -> tuple[float, float]:
-            "Round nominal value and standard deviation according to EPM."
+            """Round nominal value and standard deviation according to EPM."""
 
             _, exponent, s = _digits_exponent_std_dev(std_dev)
             n = round(nominal_value, -exponent)
@@ -83,7 +83,7 @@ class Rounding:
             return n, s
 
         def new__init__(self, value, std_dev, tag=None):
-            "A modified version of uncertainties.core.Variable.__init__"
+            """A modified version of uncertainties.core.Variable.__init__"""
 
             value, self.std_dev = round_n_s(value, std_dev)
             uc.AffineScalarFunc.__init__(

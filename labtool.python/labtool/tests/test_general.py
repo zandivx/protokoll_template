@@ -95,3 +95,5 @@ def test7():
 
 
 test7()
+
+print(lt.Student.t_df)
