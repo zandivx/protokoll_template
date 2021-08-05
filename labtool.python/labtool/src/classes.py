@@ -1,17 +1,18 @@
-"""
-labtool/src/classes.py
-"""
+"""labtool/src/classes.py"""
 
-# std lib
+# dunders
+__author__ = "Andreas Zach"
+__all__ = ["CDContxt", "SysPathContxt", "CurveFit", "Interpolate", "Student"]
+
+# std lib imports
 from typing import Callable, Union, Any
 
-# 3rd party
+# 3rd party imports
 from numpy.typing import ArrayLike
 
 
-class cdContextManager:
-    """
-    A context manager that changes the working directory temporarily to the directory
+class CDContxt:
+    """A context manager that changes the working directory temporarily to the directory
     of the calling script or to an optional path.
     """
 
@@ -33,9 +34,8 @@ class cdContextManager:
         self.os.chdir(self.olddir)
 
 
-class SysPathContextManager:
-    """
-    A context manager that appends the sys.path-variable with a given init-path.
+class SysPathContxt:
+    """A context manager that appends the sys.path-variable with a given init-path.
     Useful for relative imports in a package, where the importing module should be run
     as a script.
 
@@ -53,28 +53,35 @@ class SysPathContextManager:
         self.sys.path.pop()
 
 
-class Fit:
-    import numpy as np
+class AbstractFit:
+    """An abstract class as superclass for other fit-like classes.
+    Currently for:
+    -> CurveFit
+    -> Interpolate
+    """
 
     def __init__(self,
-                 function: Callable,
-                 x: ArrayLike,
-                 y: ArrayLike,
-                 p0: Union[ArrayLike, None] = None,
-                 sigma: Union[ArrayLike, None] = None,
-                 bounds: tuple[ArrayLike, ArrayLike] = ((-np.inf,), (np.inf,))):
+                 x_in: ArrayLike,
+                 y_in: ArrayLike,
+                 f: Callable,
+                 divisions: int = 0):
 
-        from scipy.optimize import curve_fit
+        import numpy as np
 
-        self.f = function
-        self.x_in = x
-        self.y_in = y
+        self.f = f
+        self.x_in = x_in
+        self.y_in = y_in
 
-        self.p, pcov, *_ = curve_fit(self.f, self.x_in, self.y_in,
-                                     p0=p0, sigma=sigma, absolute_sigma=True, bounds=bounds)
-        self.u = self.np.sqrt(self.np.diag(pcov))
+        a = np.min(x_in)
+        b = np.max(x_in)
+        c = divisions if divisions > 0 else int(20 * (b - a))
+
+        self.x_out = np.linspace(a, b, c)
+        self.y_out = f(self.x_out)
 
     def plot(self,
+             style_in: str = "-",
+             style_out: str = "-",
              label_in: str = "Data in",
              label_out: str = "Data out",
              title: str = "",
@@ -83,71 +90,158 @@ class Fit:
              xlim: Union[bool, tuple] = False,
              ylim: Union[bool, tuple] = False,
              grid: bool = False,
-             divisions: int = 0) -> None:
+             plot: bool = True
+             ) -> None:
 
         import matplotlib.pyplot as plt
 
-        a = self.np.min(self.x_in)
-        b = self.np.max(self.x_in)
-        c = divisions if isinstance(divisions, int) \
-            and divisions > 0 else 10 * (b - a)
+        # make sure to start with an empty figure
+        plt.clf()
 
-        self.x_out = self.np.linspace(a, b, c)
-        self.y_out = self.f(self.x_out, *self.p)
+        plt.plot(self.x_in, self.y_in, style_in, label=label_in)
+        plt.plot(self.x_out, self.y_out, style_out, label=label_out)
+        plt.title(title)
+        plt.legend()
 
-        fig, ax = plt.subplots()  # type: ignore
-
-        ax.plot(self.x_in, self.y_in, label=label_in)
-        ax.plot(self.x_out, self.y_out, label=label_out)
-        ax.set_title(title)
-        ax.legend()
-
-        ax.set_xlabel = xlabel
-        ax.set_ylabel = ylabel
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
 
         if xlim:
-            ax.set_xlim = xlim
+            plt.xlim(xlim)
         if ylim:
-            ax.set_ylim = ylim
+            plt.ylim(ylim)
         if grid:
-            ax.grid()
+            plt.grid()
 
-        plt.show()
+        # pass plot=None if other plt.methods() are needed,
+        # plt.show() afterwards
+        if plot:
+            plt.show()
 
         return None
 
+
+class CurveFit(AbstractFit):
+    """A class for fits with scipy.optimize.curve_fit"""
+
+    from numpy import inf
+
+    def __init__(self,
+                 function: Callable,
+                 x: ArrayLike,
+                 y: ArrayLike,
+                 p0: Union[ArrayLike, None] = None,
+                 sigma: Union[ArrayLike, None] = None,
+                 bounds: tuple[ArrayLike, ArrayLike] = ((-inf,), (inf,)),
+                 divisions: int = 0):
+
+        import numpy as np
+        from scipy.optimize import curve_fit
+
+        self.p, pcov, *_ = curve_fit(function, x, y, p0=p0, sigma=sigma,
+                                     absolute_sigma=True, bounds=bounds)
+        self.u = np.sqrt(np.diag(pcov))
+        super().__init__(x, y, lambda x: function(x, *self.p), divisions=divisions)
+
+    del inf
+
     def __str__(self):
+
+        from pandas import DataFrame
         from uncertainties.unumpy import uarray
-        return "Fit:\n" + str(uarray(self.p, self.u))
 
-    def precise(self) -> str:
-        return f"Fit:\n{self.p}\n{self.u}"
+        uarr = uarray(self.p, self.u)
+
+        ufloat_df = DataFrame({"n": [x.n for x in uarr],
+                               "s": [x.s for x in uarr]})
+
+        precise_df = DataFrame({"n": self.p,
+                                "s": self.u})
+
+        return f"Fit parameters:\n\nufloats:\n{ufloat_df}\n\nprecisely:\n{precise_df}"
+
+    def __repr__(self):
+        return self.__str__()
 
 
-class Interpolate:
-    def __init__(self):
-        pass
+class Interpolate(AbstractFit):
+    """A class for interpolation with scipy.interpolate.interp1d"""
+
+    def __init__(self,
+                 x: ArrayLike,
+                 y: ArrayLike,
+                 kind: str = "linear",
+                 divisions: int = 0):
+
+        from pandas import DataFrame
+        from scipy.interpolate import interp1d
+
+        func = interp1d(x, y, kind=kind)
+
+        super().__init__(x, y, lambda x: func(x), divisions=divisions)
+        self.data = DataFrame({"x": self.x_out, "y": self.y_out})
+
+    def __str__(self):
+        return f"Interpolation: table of values\n\n{self.data}"
+
+    def __repr__(self):
+        return self.__str__()
 
 
 class Student:
-    "A class for student t distributions."
+    """A class for Student-t distributions.
+    Calculates the mean of a given series and the uncertainty of the
+    mean with a given sigma-niveau.
+    """
 
     from pandas import DataFrame
 
-    __t_values = DataFrame({"N": [2, 3, 4, 5, 6, 8, 10, 20, 30, 50, 100, 200],
-                            "1": [1.84, 1.32, 1.20, 1.15, 1.11, 1.08, 1.06, 1.03, 1.02, 1.01, 1.00, 1.00],
-                            "2": [13.97, 4.53, 3.31, 2.87, 2.65, 2.43, 2.32, 2.14, 2.09, 2.05, 2.03, 2.01],
-                            "3": [235.8, 19.21, 9.22, 6.62, 5.51, 4.53, 4.09, 3.45, 3.28, 3.16, 3.08, 3.04]})
+    # _t_df_old = DataFrame({"N": [2, 3, 4, 5, 6, 8, 10, 20, 30, 50, 100, 200],
+    #                        "1": [1.84, 1.32, 1.20, 1.15, 1.11, 1.08, 1.06, 1.03, 1.02, 1.01, 1.00, 1.00],
+    #                        "2": [13.97, 4.53, 3.31, 2.87, 2.65, 2.43, 2.32, 2.14, 2.09, 2.05, 2.03, 2.01],
+    #                        "3": [235.8, 19.21, 9.22, 6.62, 5.51, 4.53, 4.09, 3.45, 3.28, 3.16, 3.08, 3.04]})
 
-    t_df = DataFrame({"N": list(range(2, 51)),
-                      "1": [1.84, 1.32, 1.2, 1.15, 1.11, 1.09, 1.08, 1.07, 1.06, 1.051, 1.045, 1.04, 1.036, 1.033, 1.032, 1.031, 1.03, 1.03, 1.03, 1.03, 1.029, 1.028, 1.027, 1.026, 1.025, 1.024, 1.022, 1.021, 1.02, 1.019, 1.018, 1.017, 1.016, 1.016, 1.015, 1.014, 1.014, 1.013, 1.013, 1.012, 1.012, 1.012, 1.011, 1.011, 1.011, 1.011, 1.01, 1.01, 1.01],
-                      "2": [13.97, 4.53, 3.31, 2.87, 2.65, 2.53, 2.43, 2.364, 2.32, 2.285, 2.255, 2.23, 2.209, 2.191, 2.177, 2.165, 2.155, 2.147, 2.14, 2.133, 2.127, 2.121, 2.116, 2.111, 2.106, 2.102, 2.097, 2.094, 2.09, 2.087, 2.083, 2.08, 2.078, 2.075, 2.072, 2.07, 2.068, 2.066, 2.064, 2.062, 2.06, 2.059, 2.057, 2.056, 2.055, 2.053, 2.052, 2.051, 2.05],
-                      "3": [235.8, 19.21, 9.22, 6.62, 5.51, 5.02, 4.53, 4.31, 4.09, 4.026, 3.962, 3.898, 3.834, 3.77, 3.706, 3.642, 3.578, 3.514, 3.45, 3.433, 3.416, 3.399, 3.382, 3.365, 3.348, 3.331, 3.314, 3.297, 3.28, 3.274, 3.268, 3.262, 3.256, 3.25, 3.244, 3.238, 3.232, 3.226, 3.22, 3.214, 3.208, 3.202, 3.196, 3.19, 3.184, 3.178, 3.172, 3.166, 3.16]})
+    # class attribute
+    t_df = DataFrame({
+        "1": [1.84, 1.32, 1.2, 1.15, 1.11, 1.09, 1.08, 1.07, 1.06, 1.051, 1.045, 1.04, 1.036, 1.033, 1.032, 1.031, 1.03, 1.03, 1.03, 1.03, 1.029, 1.028, 1.027, 1.026, 1.025, 1.024, 1.022, 1.021, 1.02, 1.019, 1.018, 1.017, 1.016, 1.016, 1.015, 1.014, 1.014, 1.013, 1.013, 1.012, 1.012, 1.012, 1.011, 1.011, 1.011, 1.011, 1.01, 1.01, 1.01],
+        "2": [13.97, 4.53, 3.31, 2.87, 2.65, 2.53, 2.43, 2.364, 2.32, 2.285, 2.255, 2.23, 2.209, 2.191, 2.177, 2.165, 2.155, 2.147, 2.14, 2.133, 2.127, 2.121, 2.116, 2.111, 2.106, 2.102, 2.097, 2.094, 2.09, 2.087, 2.083, 2.08, 2.078, 2.075, 2.072, 2.07, 2.068, 2.066, 2.064, 2.062, 2.06, 2.059, 2.057, 2.056, 2.055, 2.053, 2.052, 2.051, 2.05],
+        "3": [235.8, 19.21, 9.22, 6.62, 5.51, 5.02, 4.53, 4.31, 4.09, 4.026, 3.962, 3.898, 3.834, 3.77, 3.706, 3.642, 3.578, 3.514, 3.45, 3.433, 3.416, 3.399, 3.382, 3.365, 3.348, 3.331, 3.314, 3.297, 3.28, 3.274, 3.268, 3.262, 3.256, 3.25, 3.244, 3.238, 3.232, 3.226, 3.22, 3.214, 3.208, 3.202, 3.196, 3.19, 3.184, 3.178, 3.172, 3.166, 3.16]
+    }, index=list(range(2, 51)))
 
-    def __init__(self, series: Any = [], sigma: str = "1"):
-        assert sigma in ("1", "2", "3")
-        self.series = series
+    def __init__(self, series: ArrayLike, sigma: str = "1"):
 
+        from numpy import array, mean
+        from scipy.stats import sem
+        from uncertainties import ufloat
 
-# TODO
-# print(Student([1, 2, 3, 4, 5]).t_factor())
+        # test if sigma is reasonable
+        assert sigma in (
+            "1", "2", "3"), "Sigma must be amongst the following:\n'1', '2', '3'"
+
+        # maximum length of series is 50
+        try:
+            self.t = self.t_df.loc[len(series), sigma]  # type: ignore
+        except KeyError:
+            raise KeyError("Series is too big, maximum length is 50")
+
+        self.series = array(series)
+
+        self._n = mean(self.series)
+        self._s = sem(self.series)
+        self.mean = ufloat(self._n, self.t*self._s)
+
+        if self.mean.s == ufloat(0, self._s).s:
+            print("Student: t-factor is negligible!")
+
+    def __str__(self):
+
+        from pandas import DataFrame
+
+        df = DataFrame({"n": [self.mean.n, self._n],
+                        "s": [self.mean.s, self._s]},
+                       index=["ufloat:", "precisely:"])
+
+        return f"Student-t distribution of series:\n{self.series}\n{df}"
+
+    def __repr__(self):
+        return self.__str__()

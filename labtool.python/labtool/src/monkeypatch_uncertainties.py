@@ -1,5 +1,4 @@
-"""
-Monkey patches for package 'uncertainties':
+"""Monkey patches for package 'uncertainties':
 
 Uncertainties: a Python package for calculations with uncertainties,
 Eric O. LEBIGOT, http://pythonhosted.org/uncertainties/
@@ -13,8 +12,7 @@ import uncertainties.core as uc
 
 
 class Rounding:
-    """
-    A class which only contains two staticmethods:
+    """A class which only contains two staticmethods:
     -> display
     -> init
 
@@ -27,14 +25,12 @@ class Rounding:
 
     @staticmethod
     def display() -> None:
-        """
-        Update uncertainties' formatting function to a convention used in "Einführung
+        """Update uncertainties' formatting function to a convention used in "Einführung
         in die physikalischen Messmethoden" (EPM), scriptum version 7.
         """
 
         def EPM_precision(std_dev: float) -> tuple[int, float]:
-            """
-            Return the number of significant digits to be used for the given
+            """Return the number of significant digits to be used for the given
             standard deviation, according to the rounding rules of EPM.
             Also returns the effective standard deviation to be used for display.
             """
@@ -69,8 +65,7 @@ class Rounding:
 
     @staticmethod
     def init() -> None:
-        """
-        Round nominal value and standard deviation according to the convention of
+        """Round nominal value and standard deviation according to the convention of
         EPM at the instantiation of an uncertainties.core.Variable.
         """
 
@@ -97,8 +92,7 @@ class Rounding:
 
 
 def _digits_exponent_std_dev(std_dev: float) -> tuple[int, int, float]:
-    """
-    Find the amount of significant digits and in reference to that the exponent
+    """Find the amount of significant digits and in reference to that the exponent
     of base 10. Also returns the effective standard deviation.
 
     This function provides data needed by Rounding.display (EPM_precision) and

@@ -1,8 +1,6 @@
+#type: ignore
 # std library
 import os
-import sys
-import cProfile
-import pstats
 
 # 3rd party
 import numpy as np
@@ -12,37 +10,27 @@ import uncertainties as u
 import uncertainties.unumpy as unp
 
 # own
-from labtool_ import labtool as lt
-
-# lt.plt_latex()
-# lt.chdir()
-
-#plt.plot([i for i in range(10)], [i**2 for i in range(10)])
-#plt.title("LaTeX test ß €")
-# plt.show()
-
-# print(os.getcwd())
-# with lt.cdContextManager("C:/Users/andre"):
-#     print(os.getcwd())
-#     print(lt.Student.t_df)
-# print(os.getcwd())
+from labtool_ import lt
 
 
-def profile(func):
-    def wrapper(*args, **kwargs):
-        with cProfile.Profile() as pr:
-            func(*args, **kwargs)
-        stats = pstats.Stats(pr)
-        stats.sort_stats(pstats.SortKey.TIME)
-        stats.dump_stats("profiling.snakeviz")  # for snakeviz
-    return wrapper
+def test0():
+    lt.plt_latex()
+    lt.cd()
+    lt.plt.plot(list(range(10)), [i**2 for i in range(10)])
+    lt.plt.title("LaTeX test ß €")
+    plt.show()
+    print(os.getcwd())
+    with lt.CDContxt("C:/Users/andre"):
+        print(os.getcwd())
+        print(lt.Student.t_df)
+    print(os.getcwd())
 
 
 lst_n = [i/1.1 for i in range(10, 30)]
 lst_s = [i/11 for i in range(10, 30)]
 
 
-@profile
+@lt.profile
 def test():
     var = unp.core.uncert_core.Variable(12.8, 0.23)
     uarr = unp.uarray([12.8], [.23])
@@ -50,7 +38,7 @@ def test():
     print(uarr)
 
 
-@profile
+@lt.profile
 def test2():
     vec_func = (np.vectorize(
         lambda v, s: unp.core.uncert_core.Variable(v, s), otypes=[object]))
@@ -61,7 +49,7 @@ def test2():
     print(type(vec_func_2))
 
 
-@profile
+@lt.profile
 def test3():
     uarr = unp.uarray(lst_n, lst_s)
     print(uarr)
@@ -69,13 +57,12 @@ def test3():
     return np.asarray(uarr, dtype=object)
 
 
-@profile
+@lt.profile
 def test4():
-    #print(map(lambda v, s: unp.core.uncert_core.Variable(v, s), zip(lst_n, lst_s)))
-    pass
+    print(map(lambda v, s: unp.core.uncert_core.Variable(v, s), zip(lst_n, lst_s)))
 
 
-@profile
+@lt.profile
 def test5():
     lst = []
     for n, s in zip(lst_n, lst_s):
@@ -94,6 +81,30 @@ def test7():
     print(uf)
 
 
-test7()
+def test8():
+    x = np.linspace(-np.pi, np.pi, 1000)
+    y = np.sin(x**2)
 
-print(lt.Student.t_df)
+    fit = lt.Interpolate(x, y)
+    print(fit)
+    fit.plot(style_in="o", style_out=".--")
+
+
+def test9():
+    print(lt.Student.t_df)
+    st = lt.Student(list(range(50)))
+    print(f"t: {st.t}\n{st.mean}")
+    print(st)
+
+
+def test10():
+    x = lt.np.linspace(-lt.np.pi, lt.np.pi, 1000)
+    y = lt.np.sin(2*x)
+    def func(x, a): return lt.np.sin(a*x)
+    fit = lt.CurveFit(func, x, y)
+
+    # fit.plot(style_in=".")
+    print(fit)
+
+
+test10()

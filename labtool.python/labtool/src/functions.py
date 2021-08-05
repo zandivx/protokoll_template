@@ -1,13 +1,17 @@
-"""
-labtool/src/functions.py
-"""
+"""labtool/src/functions.py"""
+
+# dunders
+__author__ = "Andreas Zach"
+__all__ = ["cd", "plt_latex", "pd_format", "write_table", "profile"]
 
 # typing imports
 from typing import Callable, Union, Any
 
 
 def cd() -> None:
-    "Change current directory (working directory) to directory of the script that executes this function"
+    """Change current directory (working directory) to directory of
+    the script that executes this function
+    """
 
     import os
 
@@ -20,7 +24,7 @@ def cd() -> None:
 
 
 def plt_latex() -> None:
-    "Use LaTeX as backend for matplotlib.pyplot"
+    """Use LaTeX as backend for matplotlib.pyplot"""
 
     import matplotlib.pyplot as plt
 
@@ -34,7 +38,7 @@ def plt_latex() -> None:
 
 
 def pd_format(format_spec: str) -> None:
-    "Update float formatting of pandas.DataFrame"
+    """Update float formatting of pandas.DataFrame"""
 
     import pandas as pd
 
@@ -43,25 +47,23 @@ def pd_format(format_spec: str) -> None:
     return None
 
 
-def write_table(
-    df: Any,
-    path: str,
-    environ: str = "tblr",
-    colspec: str = "",
-    inner_settings: list[str] = [],
-    columns: Union[bool, list[str]] = False,
-    index: bool = False,
-    format_spec: Union[None, str] = None,
-    uarray: bool = False,
-    sisetup: list[str] = [],
-    msg: bool = False
-) -> None:
-    """
-    Creates a tex-file with a correctly formatted table for LaTeX-package 'tabularray' from the given input-array.
+def write_table(df: Any,
+                path: str,
+                environ: str = "tblr",
+                colspec: str = "",
+                inner_settings: list[str] = [],
+                columns: Union[bool, list[str]] = False,
+                index: bool = False,
+                format_spec: Union[None, str] = None,
+                uarray: bool = False,
+                sisetup: list[str] = [],
+                msg: bool = False
+                ) -> None:
+    """Creates a tex-file with a correctly formatted table for LaTeX-package 'tabularray' from the given input-array.
 
     Mandatory parameters:
     -> df\t\t\tarray-like, must be convertible to pandas.DataFrame
-    -> path\t\t\tname (opt. relative path) to tex-file for writing the table to
+    -> path\t\t\tname (or relative path) to tex-file for writing the table to
 
     Optional parameters:
     -> environ='tblr'\t\ttblr environment specified in file 'tabularray-environments.tex'
@@ -139,7 +141,7 @@ def write_table(
 
 
 def profile(func: Callable) -> Callable:
-    "decorator for profiling a certain function call"
+    """A decorator for profiling a certain function call"""
 
     import cProfile
     import pstats
