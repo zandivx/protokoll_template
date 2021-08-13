@@ -4,10 +4,8 @@
 __author__ = "Andreas Zach"
 __all__ = ["CDContxt", "SysPathContxt", "CurveFit", "Interpolate", "Student"]
 
-# std lib imports
-from typing import Callable, Union, Any
-
-# 3rd party imports
+# typing imports
+from typing import Callable, Union
 from numpy.typing import ArrayLike
 
 
@@ -196,10 +194,10 @@ class Student:
 
     from pandas import DataFrame
 
-    # _t_df_old = DataFrame({"N": [2, 3, 4, 5, 6, 8, 10, 20, 30, 50, 100, 200],
-    #                        "1": [1.84, 1.32, 1.20, 1.15, 1.11, 1.08, 1.06, 1.03, 1.02, 1.01, 1.00, 1.00],
-    #                        "2": [13.97, 4.53, 3.31, 2.87, 2.65, 2.43, 2.32, 2.14, 2.09, 2.05, 2.03, 2.01],
-    #                        "3": [235.8, 19.21, 9.22, 6.62, 5.51, 4.53, 4.09, 3.45, 3.28, 3.16, 3.08, 3.04]})
+    _t_df_old = DataFrame({"N": [2, 3, 4, 5, 6, 8, 10, 20, 30, 50, 100, 200],
+                           "1": [1.84, 1.32, 1.20, 1.15, 1.11, 1.08, 1.06, 1.03, 1.02, 1.01, 1.00, 1.00],
+                           "2": [13.97, 4.53, 3.31, 2.87, 2.65, 2.43, 2.32, 2.14, 2.09, 2.05, 2.03, 2.01],
+                           "3": [235.8, 19.21, 9.22, 6.62, 5.51, 4.53, 4.09, 3.45, 3.28, 3.16, 3.08, 3.04]})
 
     # class attribute
     t_df = DataFrame({

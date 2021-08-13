@@ -1,4 +1,4 @@
-from labtool_ import labtool as lt
+from labtool_ import lt
 
 
 def table1():

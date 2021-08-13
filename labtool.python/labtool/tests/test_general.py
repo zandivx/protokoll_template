@@ -31,7 +31,7 @@ lst_s = [i/11 for i in range(10, 30)]
 
 
 @lt.profile
-def test():
+def test1():
     var = unp.core.uncert_core.Variable(12.8, 0.23)
     uarr = unp.uarray([12.8], [.23])
     print(var)
@@ -107,4 +107,16 @@ def test10():
     print(fit)
 
 
-test10()
+def test11():
+    x = lt.u.ufloat(1, 3)
+    y = lt.u.ufloat(1, 1.2e-4)
+    print(x*y)
+    print(lt.u.ufloat(3, 0.24))
+
+
+def test12():
+    uf = lt.u.ufloat(2.978, 0.2)
+    print(uf.format(".5f"))
+
+
+test12()

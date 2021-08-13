@@ -1,21 +1,20 @@
 # type: ignore[attr-defined]
 from numpy import dtype
-from labtool_ import labtool as lt
+from labtool_ import lt
 from scipy.interpolate import interp1d, splrep, splev
 
-df = lt.Student.t_values
-df_N, df_1 = df["N"], df["1"]
+df = lt.Student._t_df_old
 
 
-def fit():
+def fit(sigma: str):
     def func2(x, n, a): return a/x**n + 1
-    student = lt.Fit(func2, df_N, df_1, bounds=(
+    student = lt.CurveFit(func2, df["N"], df[sigma], bounds=(
         (1, 0), (2, 10)))
-    student.precise()
+    print(student)
     student.plot(xlim=(0, 30))
 
 
-def interpolate(sigma):
+def interpolate(sigma: str):
     func_1 = interp1d(df["N"], df[sigma])
     func_2 = interp1d(df["N"], df[sigma], kind="cubic")
 
@@ -41,7 +40,7 @@ def interpolate(sigma):
     lt.plt.show()
 
 
-def spline(sigma):
+def spline(sigma: str):
     tck = splrep(df["N"], df[sigma], s=0)
     x = lt.np.arange(2, 200)
     y = lt.np.round(splev(x, tck, der=0), 3)

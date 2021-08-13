@@ -2,10 +2,10 @@
 
 # dunders
 __author__ = "Andreas Zach"
-__all__ = ["cd", "plt_latex", "pd_format", "write_table", "profile"]
+__all__ = ["cd", "plt_latex", "pd_format", "write_table", "profile", "tracer"]
 
 # typing imports
-from typing import Callable, Union, Any
+from typing import Callable, Union
 
 
 def cd() -> None:
@@ -47,7 +47,7 @@ def pd_format(format_spec: str) -> None:
     return None
 
 
-def write_table(df: Any,
+def write_table(content,
                 path: str,
                 environ: str = "tblr",
                 colspec: str = "",
@@ -58,11 +58,12 @@ def write_table(df: Any,
                 uarray: bool = False,
                 sisetup: list[str] = [],
                 msg: bool = False
-                ) -> None:
+                ) -> str:
     """Creates a tex-file with a correctly formatted table for LaTeX-package 'tabularray' from the given input-array.
+    Returns the created string.
 
     Mandatory parameters:
-    -> df\t\t\tarray-like, must be convertible to pandas.DataFrame
+    -> content\t\t\tmust be convertible to pandas.DataFrame
     -> path\t\t\tname (or relative path) to tex-file for writing the table to
 
     Optional parameters:
@@ -81,7 +82,7 @@ def write_table(df: Any,
     import re
 
     # input must be convertible to pandas.DataFrame
-    df = pd.DataFrame(df)
+    df = pd.DataFrame(content)
 
     # format_specifier
     formatter = f"{{:{format_spec}}}".format if format_spec is not None else None
@@ -103,7 +104,8 @@ def write_table(df: Any,
     sisetup_str = ", ".join(sisetup)
     inner_settings_str = ", ".join(inner_settings)
     df_str = df.to_csv(sep="&", line_terminator="\\\\\n",  # to_csv without path returns string
-                       float_format=formatter, header=columns, index=index)
+                       float_format=formatter, header=columns, index=index)  # type: ignore
+    # type ignore because: pylance overload error because path is empty
 
     if uarray:
         # delete string quotes
@@ -116,28 +118,25 @@ def write_table(df: Any,
         df_str = re.sub(r"\((\d+\.?\d*) \+- (\d+\.?\d*)\)e",
                         r"\1 +- \2 e", df_str)
 
+    # create complete string
+    complete_str = f"\\sisetup{{{sisetup_str}}}\n\n" if sisetup_str else ""
+    complete_str += (f"\\begin{{{environ}}}{{{inner_settings_str}}}\n"
+                     f"{df_str}"
+                     f"\\end{{{environ}}}")
+
     # write to file
     with open(path, "w", encoding="utf-8") as f:  # open() does not encode in utf-8 by default
-
-        if sisetup_str:
-            f.write(f"\\sisetup{{{sisetup_str}}}\n\n")
-
-        f.write(f"\\begin{{{environ}}}{{{inner_settings_str}}}\n"
-                f"{df_str}"
-                f"\\end{{{environ}}}")
+        f.write(complete_str)
 
     # message printing
     if msg:
         pd.options.display.float_format = formatter
 
-        with open(path, "r", encoding="utf-8") as f:
-            string = f.read()
-
         print(f"\nSuccessfully written pandas.DataFrame:\n\n{df}\n\n"
               f"as tabularray environment '{environ}' to file: '{path}'\n\n"
-              f"output:\n\n{string}")
+              f"output:\n\n{complete_str}")
 
-    return None
+    return complete_str
 
 
 def profile(func: Callable) -> Callable:
@@ -154,3 +153,28 @@ def profile(func: Callable) -> Callable:
         stats.dump_stats(f"_profiling_{func.__name__}.snakeviz")
         stats.print_stats()
     return decorator
+
+
+def tracer(frame, event, arg):
+    indent = [0]
+
+    def list_arguments():
+        try:
+            for i in range(frame.f_code.co_argcount):
+                name = frame.f_code.co_varnames[i]
+                print(f"\tArgument {name} = {frame.f_locals[name]}")
+        except Exception as e:
+            string = f"EXCEPTION: {e}"
+            line = "\n" + "-" * len(string) + "\n"
+            print(line + string + line)
+
+    if event == "call":
+        indent[0] += 2
+        print("-" * indent[0] + "> call function", frame.f_code.co_name)
+        list_arguments()
+    elif event == "return":
+        print("<" + "-" * indent[0], "exit function", frame.f_code.co_name)
+        indent[0] -= 2
+        list_arguments()
+    else:
+        pass

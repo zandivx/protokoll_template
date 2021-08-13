@@ -19,12 +19,13 @@ from .src import monkeypatch_uncertainties
 # __all__
 from .src.classes import __all__ as cls_all
 from .src.functions import __all__ as func_all
-__all__ = sorted(cls_all + func_all
-                 + ["np", "pd", "plt", "u", "unp"])  # type: ignore
+__all__ = sorted(cls_all +
+                 func_all +
+                 ["np", "pd", "plt", "u", "unp"])  # type: ignore
 del cls_all
 del func_all
 
 
 # apply monkey patches
-monkeypatch_uncertainties.Rounding.display()
-monkeypatch_uncertainties.Rounding.init()
+# monkeypatch_uncertainties.init()
+# monkeypatch_uncertainties.display()
