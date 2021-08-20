@@ -111,7 +111,7 @@ class AbstractFit:
         if grid:
             plt.grid()
 
-        # pass plot=None if other plt.methods() are needed,
+        # pass plot=None if other plt.functions() are needed,
         # plt.show() afterwards
         if plot:
             plt.show()
@@ -122,7 +122,7 @@ class AbstractFit:
 class CurveFit(AbstractFit):
     """A class for fits with scipy.optimize.curve_fit"""
 
-    from numpy import inf
+    from numpy import inf as __inf
 
     def __init__(self,
                  function: Callable,
@@ -130,7 +130,7 @@ class CurveFit(AbstractFit):
                  y: ArrayLike,
                  p0: Union[ArrayLike, None] = None,
                  sigma: Union[ArrayLike, None] = None,
-                 bounds: tuple[ArrayLike, ArrayLike] = ((-inf,), (inf,)),
+                 bounds: tuple[ArrayLike, ArrayLike] = ((-__inf,), (__inf,)),
                  divisions: int = 0):
 
         import numpy as np
@@ -140,8 +140,6 @@ class CurveFit(AbstractFit):
                                      absolute_sigma=True, bounds=bounds)
         self.u = np.sqrt(np.diag(pcov))
         super().__init__(x, y, lambda x: function(x, *self.p), divisions=divisions)
-
-    del inf
 
     def __str__(self):
 
@@ -188,23 +186,32 @@ class Interpolate(AbstractFit):
 
 class Student:
     """A class for Student-t distributions.
-    Calculates the mean of a given series and the uncertainty of the
-    mean with a given sigma-niveau.
+
+    Calculate the mean of a given series and the uncertainty of the mean
+    with a given sigma-niveau.
     """
 
-    from pandas import DataFrame
+    from pandas import DataFrame as __DF
 
-    _t_df_old = DataFrame({"N": [2, 3, 4, 5, 6, 8, 10, 20, 30, 50, 100, 200],
-                           "1": [1.84, 1.32, 1.20, 1.15, 1.11, 1.08, 1.06, 1.03, 1.02, 1.01, 1.00, 1.00],
-                           "2": [13.97, 4.53, 3.31, 2.87, 2.65, 2.43, 2.32, 2.14, 2.09, 2.05, 2.03, 2.01],
-                           "3": [235.8, 19.21, 9.22, 6.62, 5.51, 4.53, 4.09, 3.45, 3.28, 3.16, 3.08, 3.04]})
+    # class attributes
+    _t_df_old = __DF({"N": [2, 3, 4, 5, 6, 8, 10, 20, 30, 50, 100, 200],
+                      "1": [1.84, 1.32, 1.20, 1.15, 1.11, 1.08, 1.06, 1.03, 1.02, 1.01, 1.00, 1.00],
+                      "2": [13.97, 4.53, 3.31, 2.87, 2.65, 2.43, 2.32, 2.14, 2.09, 2.05, 2.03, 2.01],
+                      "3": [235.8, 19.21, 9.22, 6.62, 5.51, 4.53, 4.09, 3.45, 3.28, 3.16, 3.08, 3.04]})
 
-    # class attribute
-    t_df = DataFrame({
-        "1": [1.84, 1.32, 1.2, 1.15, 1.11, 1.09, 1.08, 1.07, 1.06, 1.051, 1.045, 1.04, 1.036, 1.033, 1.032, 1.031, 1.03, 1.03, 1.03, 1.03, 1.029, 1.028, 1.027, 1.026, 1.025, 1.024, 1.022, 1.021, 1.02, 1.019, 1.018, 1.017, 1.016, 1.016, 1.015, 1.014, 1.014, 1.013, 1.013, 1.012, 1.012, 1.012, 1.011, 1.011, 1.011, 1.011, 1.01, 1.01, 1.01],
-        "2": [13.97, 4.53, 3.31, 2.87, 2.65, 2.53, 2.43, 2.364, 2.32, 2.285, 2.255, 2.23, 2.209, 2.191, 2.177, 2.165, 2.155, 2.147, 2.14, 2.133, 2.127, 2.121, 2.116, 2.111, 2.106, 2.102, 2.097, 2.094, 2.09, 2.087, 2.083, 2.08, 2.078, 2.075, 2.072, 2.07, 2.068, 2.066, 2.064, 2.062, 2.06, 2.059, 2.057, 2.056, 2.055, 2.053, 2.052, 2.051, 2.05],
-        "3": [235.8, 19.21, 9.22, 6.62, 5.51, 5.02, 4.53, 4.31, 4.09, 4.026, 3.962, 3.898, 3.834, 3.77, 3.706, 3.642, 3.578, 3.514, 3.45, 3.433, 3.416, 3.399, 3.382, 3.365, 3.348, 3.331, 3.314, 3.297, 3.28, 3.274, 3.268, 3.262, 3.256, 3.25, 3.244, 3.238, 3.232, 3.226, 3.22, 3.214, 3.208, 3.202, 3.196, 3.19, 3.184, 3.178, 3.172, 3.166, 3.16]
-    }, index=list(range(2, 51)))
+    t_df = __DF({"1": [1.84, 1.32, 1.2, 1.15, 1.11, 1.09, 1.08, 1.07, 1.06, 1.051, 1.045, 1.04, 1.036,
+                       1.033, 1.032, 1.031, 1.03, 1.03, 1.03, 1.03, 1.029, 1.028, 1.027, 1.026, 1.025,
+                       1.024, 1.022, 1.021, 1.02, 1.019, 1.018, 1.017, 1.016, 1.016, 1.015, 1.014, 1.014,
+                       1.013, 1.013, 1.012, 1.012, 1.012, 1.011, 1.011, 1.011, 1.011, 1.01, 1.01, 1.01],
+                 "2": [13.97, 4.53, 3.31, 2.87, 2.65, 2.53, 2.43, 2.364, 2.32, 2.285, 2.255, 2.23, 2.209,
+                       2.191, 2.177, 2.165, 2.155, 2.147, 2.14, 2.133, 2.127, 2.121, 2.116, 2.111, 2.106,
+                       2.102, 2.097, 2.094, 2.09, 2.087, 2.083, 2.08, 2.078, 2.075, 2.072, 2.07, 2.068,
+                       2.066, 2.064, 2.062, 2.06, 2.059, 2.057, 2.056, 2.055, 2.053, 2.052, 2.051, 2.05],
+                 "3": [235.8, 19.21, 9.22, 6.62, 5.51, 5.02, 4.53, 4.31, 4.09, 4.026, 3.962, 3.898, 3.834,
+                       3.77, 3.706, 3.642, 3.578, 3.514, 3.45, 3.433, 3.416, 3.399, 3.382, 3.365, 3.348,
+                       3.331, 3.314, 3.297, 3.28, 3.274, 3.268, 3.262, 3.256, 3.25, 3.244, 3.238, 3.232,
+                       3.226, 3.22, 3.214, 3.208, 3.202, 3.196, 3.19, 3.184, 3.178, 3.172, 3.166, 3.16]},
+                index=list(range(2, 51)))
 
     def __init__(self, series: ArrayLike, sigma: str = "1"):
 
@@ -213,8 +220,8 @@ class Student:
         from uncertainties import ufloat
 
         # test if sigma is reasonable
-        assert sigma in (
-            "1", "2", "3"), "Sigma must be amongst the following:\n'1', '2', '3'"
+        assert sigma in {"1", "2", "3"}, \
+            "Sigma must be amongst the following:\n['1', '2', '3']"
 
         # maximum length of series is 50
         try:

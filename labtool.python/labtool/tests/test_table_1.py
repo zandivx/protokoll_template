@@ -1,7 +1,7 @@
 from labtool_ import lt
 
 
-def table1():
+def table3():
     columns = ["Gerät", "Hersteller", "Modell",
                "Unsicherheit", "Anmerkung"]
     df = lt.pd.DataFrame(lt.np.round(lt.np.linspace(0.1, 1e8, 35),
@@ -16,20 +16,29 @@ def table1():
                    )
 
 
-def table2():
-    uarr = lt.unp.uarray(lt.np.linspace(1, 1e9, 36).reshape(-1, 4),
-                         lt.np.array([i**2 for i in range(36)]).reshape(-1, 4))
+def table4():
+    uarr = lt.unp.uarray(lt.np.linspace(1, 1e8, 36).reshape(-1, 4),
+                         (lt.np.arange(36)**1.5).reshape(-1, 4))
 
-    df = lt.pd.DataFrame(uarr, dtype="string")
-
-    lt.write_table(df, "tables.latex/table4.tex",
-                   colspec="S[table-number-alignment = center]"*4,
-                   columns=["Test +/- 4e", "1", "2", "3"],
+    lt.write_table(uarr, "tables.latex/table4.tex",
+                   colspec="S[table-number-alignment = center]" * 4,
+                   columns=False,  # ["Test +/- 4e", "1", "2", "3"],
                    uarray=True,
                    sisetup=["uncertainty-mode=compact"],
                    msg=True)
 
-# print(write_table.__doc__)
+
+def table5():
+    arr = lt.np.arange(24).reshape(-1, 4)
+
+    lt.write_table(arr, "tables.latex/table5.tex",
+                   environ="tabular",
+                   inner_settings=["|c|c|c|c|"],
+                   columns=["T1", "T2", "T3", "T4"],
+                   hlines_old=True,
+                   msg=True)
 
 
-table2()
+print(lt.write_table.__doc__)
+print(lt.cd.__doc__)
+# table4()
