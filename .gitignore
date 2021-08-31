@@ -38,6 +38,9 @@
 *.synctex.gz(busy)
 *.pdfsync
 
+# indent
+__latexindent_temp.tex
+
 
 ## Python
 
