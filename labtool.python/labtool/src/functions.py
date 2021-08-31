@@ -4,44 +4,35 @@
 __author__ = "Andreas Zach"
 __all__ = ["cd", "plt_latex", "pd_format", "write_table", "profile", "tracer"]
 
-# typing imports
+# std library
+import cProfile
+import os
+import pstats
+import re
 from typing import Callable, Union, Any as DataFrameLike
+
+# 3rd party
+import pandas as pd
+import matplotlib.pyplot as plt
 
 
 def cd() -> None:
-    """Change current working directory to the directory of the calling script."""
-
-    import os
-
+    """Change the current working directory to the directory of the calling script."""
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
-
-    # future:
-    # additional information through module inspect
-
     return None
 
 
 def plt_latex() -> None:
     """Use LaTeX as backend for matplotlib.pyplot."""
-
-    import matplotlib.pyplot as plt
-
-    plt.rcParams.update({  # type: ignore
-        "text.usetex": True,
-        "text.latex.preamble": r"\usepackage{lmodern}",
-        "font.family": "Latin Modern Roman"
-    })
-
+    plt.rcParams.update({"text.usetex": True,  # type: ignore
+                         "text.latex.preamble": r"\usepackage{lmodern}",
+                         "font.family": "Latin Modern Roman"})
     return None
 
 
 def pd_format(format_spec: str) -> None:
     """Update float-formatting of pandas.DataFrame."""
-
-    import pandas as pd
-
     pd.options.display.float_format = f"{{:{format_spec}}}".format
-
     return None
 
 
@@ -81,10 +72,6 @@ def write_table(content: DataFrameLike,
     -> hlines_old=False\t\tif standard tabular environment is used, this can be set to True to draw all hlines
     -> msg=False\t\tboolean if the reformatted DataFrame and the created string should be printed to the console
     """
-
-    import pandas as pd
-    import re
-
     # input must be convertible to pandas.DataFrame
     df = pd.DataFrame(content)
 
@@ -173,9 +160,6 @@ def write_table(content: DataFrameLike,
 def profile(func: Callable) -> Callable:
     """A decorator for profiling a certain function call"""
 
-    import cProfile
-    import pstats
-
     def decorator(*args, **kwargs):
         with cProfile.Profile() as pr:
             func(*args, **kwargs)
@@ -183,10 +167,12 @@ def profile(func: Callable) -> Callable:
         stats.sort_stats(pstats.SortKey.TIME)
         stats.dump_stats(f"_profiling_{func.__name__}.snakeviz")
         stats.print_stats()
+
     return decorator
 
 
 def tracer(frame, event, arg):
+    """Copy from StackOverflow"""
     indent = [0]
 
     def list_arguments():
