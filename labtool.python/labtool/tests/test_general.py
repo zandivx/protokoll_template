@@ -10,7 +10,7 @@ import uncertainties as u
 import uncertainties.unumpy as unp
 
 # own
-from labtool_ import lt
+import labtool as lt
 
 
 def test0():

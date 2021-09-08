@@ -5,34 +5,34 @@ __author__ = "Andreas Zach"
 __all__ = ["cd", "plt_latex", "pd_format", "write_table", "profile", "tracer"]
 
 # std library
-import cProfile
-import os
-import pstats
-import re
+from cProfile import Profile
+from os import chdir, path
+from pstats import Stats, SortKey
+from re import sub
 from typing import Callable, Union, Any as DataFrameLike
 
 # 3rd party
-import pandas as pd
-import matplotlib.pyplot as plt
+from pandas import DataFrame, options
+from matplotlib import rcParams
 
 
 def cd() -> None:
     """Change the current working directory to the directory of the calling script."""
-    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    chdir(path.dirname(path.abspath(__file__)))
     return None
 
 
 def plt_latex() -> None:
     """Use LaTeX as backend for matplotlib.pyplot."""
-    plt.rcParams.update({"text.usetex": True,  # type: ignore
-                         "text.latex.preamble": r"\usepackage{lmodern}",
-                         "font.family": "Latin Modern Roman"})
+    rcParams.update({"text.usetex": True,
+                     "text.latex.preamble": r"\usepackage{lmodern}",
+                     "font.family": "Latin Modern Roman"})
     return None
 
 
 def pd_format(format_spec: str) -> None:
     """Update float-formatting of pandas.DataFrame."""
-    pd.options.display.float_format = f"{{:{format_spec}}}".format
+    options.display.float_format = f"{{:{format_spec}}}".format
     return None
 
 
@@ -73,7 +73,7 @@ def write_table(content: DataFrameLike,
     -> msg=False\t\tboolean if the reformatted DataFrame and the created string should be printed to the console
     """
     # input must be convertible to pandas.DataFrame
-    df = pd.DataFrame(content)
+    df = DataFrame(content)
 
     # format_specifier
     formatter = f"{{:{format_spec}}}".format if format_spec is not None else None
@@ -101,11 +101,12 @@ def write_table(content: DataFrameLike,
         # non-empty container
         else:
             # check if right amount of column labels was provided
-            assert len(columns) == len(  # type: ignore[arg-type]
-                df.columns), "'content' had a different amount of columns than provided 'columns'"
-
-            # update columns of DataFrame
-            df.columns = columns  # type: ignore
+            if len(columns) != len(df.columns):
+                raise IndexError(
+                    "'content' had a different amount of columns than provided 'columns'")
+            else:
+                # update columns of DataFrame
+                df.columns = columns  # type: ignore
 
         # if columns was True, it's now a list
         # else it's still the provided Iterable with correct length
@@ -128,11 +129,11 @@ def write_table(content: DataFrameLike,
         df_str = df_str.replace('"', '')
 
         # replace +/- with +-
-        df_str = re.sub(r"(\d)\+/-(\d)", r"\1 +- \2", df_str)
+        df_str = sub(r"(\d)\+/-(\d)", r"\1 +- \2", df_str)
 
         # delete parantheses and make extra spaces if exponents
-        df_str = re.sub(r"\((\d+\.?\d*) \+- (\d+\.?\d*)\)e",
-                        r"\1 +- \2 e", df_str)
+        df_str = sub(r"\((\d+\.?\d*) \+- (\d+\.?\d*)\)e",
+                     r"\1 +- \2 e", df_str)
 
     # create complete string
     complete_str = f"\\sisetup{{{sisetup_str}}}\n\n" if sisetup_str else ""
@@ -148,7 +149,8 @@ def write_table(content: DataFrameLike,
 
     # message printing
     if msg:
-        pd.options.display.float_format = formatter
+        # pd.options
+        options.display.float_format = formatter
 
         print(f"Wrote pandas.DataFrame\n\n{df}\n\n"
               f"as tabularray environment '{environ}' to file '{path}'\n\n\n"
@@ -161,10 +163,10 @@ def profile(func: Callable) -> Callable:
     """A decorator for profiling a certain function call"""
 
     def decorator(*args, **kwargs):
-        with cProfile.Profile() as pr:
+        with Profile() as pr:
             func(*args, **kwargs)
-        stats = pstats.Stats(pr)
-        stats.sort_stats(pstats.SortKey.TIME)
+        stats = Stats(pr)
+        stats.sort_stats(SortKey.TIME)
         stats.dump_stats(f"_profiling_{func.__name__}.snakeviz")
         stats.print_stats()
 

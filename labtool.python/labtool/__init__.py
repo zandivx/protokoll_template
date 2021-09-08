@@ -2,7 +2,7 @@
 
 # dunders
 __author__ = "Andreas Zach"
-__version__ = 0.1
+__version__ = "0.1.2"
 
 try:
     # 3rd party library imports

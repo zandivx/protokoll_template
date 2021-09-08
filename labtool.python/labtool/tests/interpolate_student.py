@@ -1,6 +1,6 @@
 # type: ignore[attr-defined]
 from numpy import dtype
-from labtool_ import lt
+import labtool as lt
 from scipy.interpolate import interp1d, splrep, splev
 
 df = lt.Student._t_df_old
@@ -56,3 +56,4 @@ def spline(sigma: str):
 
 interpolate("1")
 spline("1")
+fit("1")

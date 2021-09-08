@@ -1,5 +1,5 @@
 # type: ignore
-from labtool_ import lt
+import labtool as lt
 from uncertainties import ufloat
 lt.monkeypatch_uncertainties.init()
 lt.monkeypatch_uncertainties.display()

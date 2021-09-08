@@ -8,9 +8,6 @@ Eric O. LEBIGOT, http://pythonhosted.org/uncertainties/
 __author__ = "Andreas Zach"
 __all__ = ["display", "init", "undo"]
 
-# std lib
-from typing import Union
-
 # 3rd party
 import uncertainties.core as uc
 
@@ -63,7 +60,7 @@ def init() -> None:
     EPM at the instantiation of an uncertainties.core.Variable.
     """
 
-    def round_n_s(nominal_value: Union[int, float], std_dev: Union[int, float]) -> tuple[float, float]:
+    def round_n_s(nominal_value: float, std_dev: float) -> tuple[float, float]:
         """Round nominal value and standard deviation according to EPM."""
         _, exponent, s = _digits_exponent_std_dev(std_dev)
         # don't round if std_dev == exponent == 0
@@ -124,7 +121,7 @@ def _digits_exponent_std_dev(std_dev: float) -> tuple[int, int, float]:
         return sig_digits, exponent, s
 
     else:  # std_dev == 0
-        return 0, 0, 0.
+        return 0, 0, 0.0
 
 
 # development stuff
