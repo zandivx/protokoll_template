@@ -8,6 +8,10 @@ Eric O. LEBIGOT, http://pythonhosted.org/uncertainties/
 __author__ = "Andreas Zach"
 __all__ = ["display", "init", "undo"]
 
+# std lib
+from importlib import reload
+from math import ceil
+
 # 3rd party
 import uncertainties.core as uc
 
@@ -82,7 +86,6 @@ def init() -> None:
 
 def undo() -> None:
     """Reloads module 'uncertainties', therefore removes applied monkey patches."""
-    from importlib import reload
     reload(uc)
     return None
 
@@ -94,8 +97,6 @@ def _digits_exponent_std_dev(std_dev: float) -> tuple[int, int, float]:
     This function provides data needed by function display (EPM_precision) and
     function init (round_conventional)
     """
-
-    from math import ceil
 
     if std_dev:  # std_dev != 0
 
@@ -122,30 +123,3 @@ def _digits_exponent_std_dev(std_dev: float) -> tuple[int, int, float]:
 
     else:  # std_dev == 0
         return 0, 0, 0.0
-
-
-# development stuff
-_old_doc_for_cls = """A class which only contains two staticmethods:
-    -> display
-    -> init
-
-    Function 'display' changes the style ufloats are formatted and printed.
-
-    Function 'init' changes how uncertainties.core.Variable-instances are initialized,
-    nominal value and standard deviation for instantiation are rounded by the same
-    principles they are displayed.
-    """
-
-
-def _copy_func(f, name=None):
-    from types import FunctionType
-    '''Return a function with same code, globals, defaults, closure, and 
-        name (or provide a new name)
-        
-        From StackOverflow, not needed (yet)
-        '''
-    fn = FunctionType(f.__code__, f.__globals__, name or f.__name__,
-                      f.__defaults__, f.__closure__)
-    # in case f was given attrs (note this dict is a shallow copy):
-    fn.__dict__.update(f.__dict__)
-    return fn

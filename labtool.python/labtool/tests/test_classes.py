@@ -14,7 +14,7 @@ def fit():
     fit = lt.CurveFit(func, xdata, ydata)
     print(fit)
     fit.save("saves/fit.csv")
-    fit.plot(title="fit")
+    fit.plot()
 
 
 def student():
@@ -25,23 +25,23 @@ def student():
 
     print(series)
     series.save("saves/series.csv")
-    series.plot(title="student")
+    series.plot(grid=False, legend=False, xlim=(-4, 20))
 
 
 def interpolate():
     data = [28.89, 28.85, 28.92, 28.93, 28.98, 28.90, 28.85, 28.98, 28.88,
             28.91, 28.84, 28.86, 28.90, 28.87, 28.86, 28.91, 28.93, 28.86, 28.89, 28.89]
 
-    interp = lt.Interpolate(range(len(data)), data)
+    interp = lt.Interpolation(range(len(data)), data)
     print(interp)
     interp.save("saves/interp.csv")
-    interp.plot(style_in="o", title="interpolate")
+    interp.plot(style_in="o")
 
 
 def main():
-    fit()
+    # fit()
     student()
-    interpolate()
+    # interpolate()
 
 
 main()

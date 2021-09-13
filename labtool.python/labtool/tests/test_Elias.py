@@ -1,8 +1,9 @@
 # type: ignore
 import labtool as lt
-from uncertainties import ufloat
 lt.monkeypatch_uncertainties.init()
 lt.monkeypatch_uncertainties.display()
+
+ufloat = lt.u.ufloat
 
 x = ufloat(1.23987, 0)
 y = ufloat(2.852, 0)

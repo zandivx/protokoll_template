@@ -1,4 +1,3 @@
-#type: ignore
 # std library
 import os
 
@@ -59,7 +58,8 @@ def test3():
 
 @lt.profile
 def test4():
-    print(map(lambda v, s: unp.core.uncert_core.Variable(v, s), zip(lst_n, lst_s)))
+    print(map(lambda v, s: unp.core.uncert_core.Variable(
+        v, s), zip(lst_n, lst_s)))  # type: ignore
 
 
 @lt.profile
@@ -110,13 +110,13 @@ def test10():
 def test11():
     x = lt.u.ufloat(1, 3)
     y = lt.u.ufloat(1, 1.2e-4)
-    print(x*y)
+    print(x*y)  # type: ignore
     print(lt.u.ufloat(3, 0.24))
 
 
 def test12():
     uf = lt.u.ufloat(2.978, 0.2)
-    print(uf.format(".5f"))
+    print(uf.format(".5f"))  # type: ignore
 
 
 test12()

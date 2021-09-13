@@ -23,10 +23,11 @@ def cd() -> None:
 
 
 def plt_latex() -> None:
-    """Use LaTeX as backend for matplotlib.pyplot."""
+    """Use LaTeX as backend for matplotlib"""
     rcParams.update({"text.usetex": True,
                      "text.latex.preamble": r"\usepackage{lmodern}",
-                     "font.family": "Latin Modern Roman"})
+                     "font.family": "Latin Modern Roman",
+                     })
     return None
 
 

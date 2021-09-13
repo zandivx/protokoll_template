@@ -1,5 +1,5 @@
+matplotlib
 numpy
 pandas
-matplotlib
-uncertainties
 scipy
+uncertainties
