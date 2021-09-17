@@ -85,7 +85,7 @@ def test8():
     x = np.linspace(-np.pi, np.pi, 1000)
     y = np.sin(x**2)
 
-    fit = lt.Interpolate(x, y)
+    fit = lt.Interpolation(x, y)
     print(fit)
     fit.plot(style_in="o", style_out=".--")
 
@@ -119,4 +119,9 @@ def test12():
     print(uf.format(".5f"))  # type: ignore
 
 
-test12()
+def test13():
+    print(lt.u.ufloat(2245345743767e-7, 5345234563456e-9))
+
+
+if __name__ == "__main__":
+    test13()

@@ -25,7 +25,7 @@
 \usepackage[hypcap=false, labelfont=bf]{caption, subcaption}  % caption editing - hypcap warning with hyperref
 \usepackage{float}  % for [H] (forced here) specifier
 \usepackage{tabularray}
-\UseTblrLibrary{diagbox}  % diagonal boxes in tables (import suited for tabularray)
+\usepackage{diagbox}  % table cells with diagonal lines
 
 
 % input
@@ -36,7 +36,6 @@
 
 % text
 \usepackage[locale=DE, uncertainty-mode=separate]{siunitx}  % SI units, German formatting - \pm stays \pm instead of ..(.)
-\UseTblrLibrary{siunitx}  % S column for tabularray - TRIPLE BRACKETS!! {{{}}} - separate import in order to use options
 \usepackage{icomma}  % no space after commas instead of English points) in decimal values
 \usepackage{enumitem}  % better enumerating with style options
 \usepackage{nicefrac}  % inline-fractions in n/d-style
@@ -127,7 +126,7 @@
 \renewcommand*{\sqrt}[2][\ ]{\oldsqrt[#1]{#2} }
 \makeatother
 
-    
+ 
 % tabularray
 % imports_and_setups{
 %     expl3,
@@ -135,18 +134,7 @@
 %     ninecolors
 %     \hypersetup{pdfborder={0 0 0}}
 % }
-\SetTblrInner{  % set mandatory options
-    hlines,
-    vlines,
-    columns={
-        halign=c,
-        valign=m,
-        co=-1,  % ~ X column with best fit (standard: co=1)
-    },
-    width=\linewidth,
-    hspan=even,     % not sure if those two work
-    vspan=minimal,  % not sure if those two work
-}
+\input{C:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/files/environments/tabularray-environments.tex}
 
 
 % own commands
@@ -183,7 +171,7 @@ Text4\footcite{ref:genol2013}
 % Gleichungsumgebung
 \begin{equation}
     \label{eq:grenzen-oben-unten}
-    \int \limits_{a}^{b} x^2 \, dx =\frac{b^3-a^3}{3}  % \, -> small space, single character exponent doesn't need curly braces
+    \int \limits_{a}^{b} x^2 \, \mathrm{d}x =\frac{b^3-a^3}{3}  % \, -> small space, single character exponent doesn't need curly braces
 \end{equation}
 %
 % inline math
@@ -222,7 +210,7 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very discouraged
     \begin{samepage}  % caption and table on same page
         \caption[Geräteliste]{Verwendete Geräte und wichtige Materialien}  % optional argument for List of Tables, mandatory argument for caption
         \label{tab:geraeteliste}
-        \begin{tblr}{
+        \begin{tblrx}{
                 colspec={
                         *{3}{Q}  % multiplication syntax: *{n}{thing}
                         S[table-format=2.2]
@@ -231,12 +219,12 @@ $$ \textbf{F} = m \cdot \textbf{a} $$  % old, very discouraged
                 cell{2}{2}={r=2}{},  % empty specifier for not overwriting standard values of preamble
                 cell{4}{3}={r=2,c=2}{},
             }
-            Gerät   & Hersteller & Modell   & {{{Unsicherheit}}}    & Anmerkung                           \\
-            Gerät 1 & ich        & meins    & 0.01                  & {quasi \\ perfekt \\ genau}         \\
-            Gerät 2 &            & passt so & 21.4                  & quasi perfekt genau                 \\
-            Gerät 3 & -          & passt so &                       & --//--                              \\
+            Gerät   & Hersteller & Modell   & {{{Unsicherheit}}}    & Anmerkung                             \\
+            Gerät 1 & ich        & meins    & 0.01                  & {quasi \\ perfekt \\ genau}           \\
+            Gerät 2 &            & passt so & 21.4                  & quasi perfekt genau                   \\
+            Gerät 3 & -          & passt so &                       & $\nabla$                              \\
             Gerät 4 & -          &          &                       & \diagbox[dir=NE]{Alle meine}{Entchen} \\  % if diagbox is not the widest column, width must be typeset manually -.-
-        \end{tblr}
+        \end{tblrx}
     \end{samepage}
 \end{table}
 

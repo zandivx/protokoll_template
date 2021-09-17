@@ -25,7 +25,7 @@ def display() -> None:
         """Return the number of significant digits to be used for the given
         standard deviation, according to the rounding rules of EPM instead
         of PDG (Particle Data Group).
-        Also returns the effective standard deviation to be used for display.
+        Also return the effective standard deviation to be used for display
         """
         dig, _, s = _digits_exponent_std_dev(std_dev)
         return dig, s
@@ -60,12 +60,12 @@ def display() -> None:
 
 
 def init() -> None:
-    """Round nominal value and standard deviation according to the convention of
-    EPM at the instantiation of an uncertainties.core.Variable.
+    """Round nominal value and standard deviation according to the convention
+    of EPM at the instantiation of an uncertainties.core.Variable
     """
 
     def round_n_s(nominal_value: float, std_dev: float) -> tuple[float, float]:
-        """Round nominal value and standard deviation according to EPM."""
+        """Round nominal value and standard deviation according to EPM"""
         _, exponent, s = _digits_exponent_std_dev(std_dev)
         # don't round if std_dev == exponent == 0
         n = round(nominal_value, -exponent) if s else nominal_value
@@ -85,17 +85,16 @@ def init() -> None:
 
 
 def undo() -> None:
-    """Reloads module 'uncertainties', therefore removes applied monkey patches."""
+    """Reload uncertainties.core and remove applied monkey patches"""
     reload(uc)
     return None
 
 
 def _digits_exponent_std_dev(std_dev: float) -> tuple[int, int, float]:
-    """Find the amount of significant digits and in reference to that the exponent
-    of base 10. Also returns the effective standard deviation.
+    """Find the amount of significant digits the exponent of those digits to the base 10.
+    Also return the effective standard deviation.
 
-    This function provides data needed by function display (EPM_precision) and
-    function init (round_conventional)
+    Provide data needed by function 'display' (EPM_precision) and function 'init' (round_conventional)
     """
 
     if std_dev:  # std_dev != 0
@@ -103,12 +102,12 @@ def _digits_exponent_std_dev(std_dev: float) -> tuple[int, int, float]:
         # exponent of base 10
         exponent = uc.first_digit(std_dev)
 
-        # normalized floating point number
-        # round to 3 decimals to minimize machine epsilon
-        mantissa = round(std_dev * 10**(-exponent), 3)
+        # generate float from string to avoid floating point arithmetic error
+        # round to minimize machine epsilon
+        mantissa: float = round(std_dev * 10**(-exponent), 3)
 
         # significant digits to consider for rounding
-        sig_digits = 1
+        sig_digits: int = 1
 
         # two significant digits if first digit is 1, one digit otherwise
         if mantissa <= 1.9:
@@ -116,8 +115,8 @@ def _digits_exponent_std_dev(std_dev: float) -> tuple[int, int, float]:
             exponent -= 1
             mantissa *= 10
 
-        # round up according to significant digits
-        s = ceil(mantissa) * 10**exponent
+        # round up according to significant digits, generate from string
+        s: float = ceil(mantissa) * 10**exponent
 
         return sig_digits, exponent, s
 
