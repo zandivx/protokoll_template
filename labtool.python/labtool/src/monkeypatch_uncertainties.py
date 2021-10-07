@@ -102,12 +102,12 @@ def _digits_exponent_std_dev(std_dev: float) -> tuple[int, int, float]:
         # exponent of base 10
         exponent = uc.first_digit(std_dev)
 
-        # generate float from string to avoid floating point arithmetic error
-        # round to minimize machine epsilon
-        mantissa: float = round(std_dev * 10**(-exponent), 3)
+        # calculate mantissa of std_dev
+        # round to 3 digits to minimize machine epsilon
+        mantissa = round(std_dev * 10**(-exponent), 3)
 
         # significant digits to consider for rounding
-        sig_digits: int = 1
+        sig_digits = 1
 
         # two significant digits if first digit is 1, one digit otherwise
         if mantissa <= 1.9:
@@ -115,7 +115,7 @@ def _digits_exponent_std_dev(std_dev: float) -> tuple[int, int, float]:
             exponent -= 1
             mantissa *= 10
 
-        # round up according to significant digits, generate from string
+        # round up according to significant digits
         s: float = ceil(mantissa) * 10**exponent
 
         return sig_digits, exponent, s

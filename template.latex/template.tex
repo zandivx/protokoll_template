@@ -6,13 +6,14 @@
 \documentclass[ngerman]{scrartcl}
 
 
-% input and font
+% text input and font
 \usepackage[utf8]{inputenc}  % input in UTF-8
 \usepackage[T1]{fontenc}  % output in T1 fonts (west European encoding)
 \usepackage{lmodern}  % Latin modern font
 \usepackage[mono]{zi4}  % Consolas font for monospaced text
 \usepackage{babel}  % language package
 \usepackage{amsmath, amssymb, amstext, mathtools}  % math packages (American Math Society) + correction of amsmath (mathtools) [loads amsmath automatically]
+\usepackage{physics}  % macros for easier typesetting of physical formulas
 \usepackage{letltxmacro}  % \let command for robust macros (new sqrt)
 
 
@@ -28,7 +29,7 @@
 \usepackage{diagbox}  % table cells with diagonal lines
 
 
-% input
+% graphical input
 \usepackage{graphicx}  % input JPEG, PNG, PDF, etc.
 \usepackage{pdfpages}  % input PDF as whole pages
 \usepackage{lastpage}  % reference to last page
@@ -71,7 +72,7 @@
 % package setups
 
 % BibLaTeX source
-\addbibresource{C:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/files/JabRef_Database/physics.bib}  % database import with absolute path - file ending!
+\addbibresource{C:/Users/andre/OneDrive - Universität Graz/Uni/Physik/Allgemeines/protokoll_template/files/JabRef_Database/physics.bib}  % database import with absolute path - file ending!
 
 
 % rewrite names (babel overwrites German with standard English names, therefore at document beginn [after everything is loaded])
@@ -134,14 +135,16 @@
 %     ninecolors
 %     \hypersetup{pdfborder={0 0 0}}
 % }
-\input{C:/Users/andre/Dropbox/Uni/Physik/Allgemeines/protokoll_template/files/environments/tabularray-environments.tex}
+\input{C:/Users/andre/OneDrive - Universität Graz/Uni/Physik/Allgemeines/protokoll_template/files/environments/tabularray-environments.tex}
 
 
 % own commands
-\newcommand*{\der}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}  % derivative
-\newcommand*{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}     % partial derivative
 % \newcommand* can't contain multiple lines
 % \newcommand can
+
+% legacy: 
+% \newcommand*{\der}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}  % derivative
+% \newcommand*{\pder}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}     % partial derivative
 
 
 
@@ -171,7 +174,7 @@ Text4\footcite{ref:genol2013}
 % Gleichungsumgebung
 \begin{equation}
     \label{eq:grenzen-oben-unten}
-    \int \limits_{a}^{b} x^2 \, \mathrm{d}x =\frac{b^3-a^3}{3}  % \, -> small space, single character exponent doesn't need curly braces
+    \int \limits_{a}^{b} x^2 \dd{x} =\frac{b^3-a^3}{3}  % \, -> small space, single character exponent doesn't need curly braces
 \end{equation}
 %
 % inline math
@@ -180,11 +183,11 @@ Inline math: $\lim \limits_{n \to \infty} \frac{1}{2n} = 0$  % old, discouraged
 %
 % display math
 \begin{displaymath}
-    \sqrt[3]{27} = 3 \implies A \times B \implies \SI{30.0(2)}{\meter\per\second}
+    \sqrt[3]{27} = 3 \implies \va{A} \cross \va{B} \implies \SI{30.0(2)}{\meter\per\second}
 \end{displaymath}
 %
-\[ \int \frac{1}{x} \, dx = \ln|x| \]  % new, encouraged - same as \begin{equation*} when using amsmath
-$$ \textbf{F} = m \cdot \textbf{a} $$  % old, very discouraged
+\[ \int \frac{1}{x} \dd{x} = \ln|x| \qq{quad text, additionaly:} \dv{f}{x} \land \pdv{g}{y}\]  % new, encouraged - same as \begin{equation*} when using amsmath
+$$ \vb{F} = m \cdot \vb{a} $$  % old, very discouraged
 
 
 
