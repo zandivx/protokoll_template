@@ -2,18 +2,24 @@
 
 # dunders
 __author__ = "Andreas Zach"
-__all__ = ["cd", "plt_latex", "pd_format", "write_table", "profile", "tracer"]
+__all__ = ["cd", "plt_latex", "pd_format",
+           "write_table", "profile", "tracer", "plt_uplot"]
 
 # std library
 from cProfile import Profile
 from os import chdir, path
 from pstats import Stats, SortKey
 from re import sub
-from typing import Callable, Union, Any as DataFrameLike
+from typing import Callable, Union, Any
 
 # 3rd party
-from pandas import DataFrame, options
 from matplotlib import rcParams
+from matplotlib.pyplot import errorbar, fill_between
+from numpy import array
+from numpy.typing import ArrayLike
+from pandas import DataFrame, options
+
+DataFrameLike = Any
 
 
 def cd() -> None:
@@ -199,3 +205,33 @@ def tracer(frame, event, arg):
         list_arguments()
     else:
         pass
+
+
+def plt_uplot(x: ArrayLike,
+              y: ArrayLike,
+              band: bool = False,
+              *args,
+              **kwargs,
+              ) -> Any:
+    """Take two uncertainties.unumpy.uarrays as input and plot them with matplotlib.pyplot.plot"""
+
+    # try if x and y are uncertainties.unumpy.uarrays
+    try:
+        x_n = array([i.n for i in x])  # type: ignore
+        x_s = array([i.s for i in x])  # type: ignore
+    except AttributeError:
+        x_n = array(x)
+        x_s = 0
+
+    try:
+        y_n = array([i.n for i in y])  # type: ignore
+        y_s = array([i.s for i in y])  # type: ignore
+    except AttributeError:
+        y_n = array(y)
+        y_s = 0
+
+    if band:
+        return fill_between(x_n, y_n-y_s, y_n+y_s,  # type: ignore
+                            *args, **kwargs)
+    else:
+        return errorbar(x_n, y_n, xerr=x_s, yerr=y_s, *args, **kwargs)
