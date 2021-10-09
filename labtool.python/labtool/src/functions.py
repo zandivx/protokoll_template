@@ -2,18 +2,25 @@
 
 # dunders
 __author__ = "Andreas Zach"
-__all__ = ["cd", "plt_latex", "pd_format", "write_table", "profile", "tracer"]
+__all__ = ["cd", "plt_latex", "pd_format",
+           "write_table", "profile", "tracer",
+           "plt_uplot", "separate_uarray"]
 
 # std library
 from cProfile import Profile
 from os import chdir, path
 from pstats import Stats, SortKey
 from re import sub
-from typing import Callable, Union, Any as DataFrameLike
+from typing import Callable, Union, Any
 
 # 3rd party
-from pandas import DataFrame, options
 from matplotlib import rcParams
+from matplotlib.pyplot import errorbar, fill_between, plot
+from numpy import array, ndarray
+from numpy.typing import ArrayLike
+from pandas import DataFrame, options
+
+DataFrameLike = UArrayLike = ItDepends = Any
 
 
 def cd() -> None:
@@ -199,3 +206,62 @@ def tracer(frame, event, arg):
         list_arguments()
     else:
         pass
+
+
+def plt_uplot(x: ArrayLike,
+              y: ArrayLike,
+              *args,
+              band: bool = False,
+              kwfill: dict = {},
+              **kwargs,
+              ) -> ItDepends:
+    """Take two uncertainties.unumpy.uarrays as input and plot them with matplotlib.pyplot.plot.
+    Return the return value of either pyplot.fill_between or pyplot.errorbar
+
+    Parameters:
+    -> x\t\tuarray
+    -> y\t\tuarray
+    -> band\twheter to plot an error band (fill_between) or errorbars
+    -> kwfill\tdictionary like **kwargs transmitted to pyplot.fill_between
+    """
+
+    # try if x and y are uncertainties.unumpy.uarrays
+    try:
+        x_n, x_s = separate_uarray(x)
+    except AttributeError:
+        x_n, x_s = array(x), 0
+
+    try:
+        y_n, y_s = separate_uarray(y)
+    except AttributeError:
+        y_n, y_s = array(y), 0
+
+    if band:
+        kwargs.update({
+            "linewidth": kwargs.get("linewidth", 1.0),
+        })
+
+        ret_plot = plot(x_n, y_n, *args, **kwargs)
+
+        kwfill.update({
+            "alpha": kwfill.get("alpha", 0.6),
+        })
+
+        ret_fill = fill_between(x=x_n,
+                                y1=y_n-y_s,  # type: ignore
+                                y2=y_n+y_s,
+                                **kwfill)
+
+        return ret_plot, ret_fill
+    else:
+        kwargs.update({
+            "capsize": kwargs.get("capsize", 2),
+        })
+        return errorbar(x_n, y_n, xerr=x_s, yerr=y_s, *args, **kwargs)
+
+
+def separate_uarray(uarr: UArrayLike) -> tuple[ndarray, ndarray]:
+    """Seperate an uncertainties.unumpy.uarray in n and s parts."""
+    n = array([x.n for x in uarr])
+    s = array([x.s for x in uarr])
+    return n, s
