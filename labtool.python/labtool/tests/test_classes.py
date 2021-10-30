@@ -25,7 +25,6 @@ def student():
 
     print(series)
     series.save("saves/series.csv")
-    series.plot(grid=False, legend=False, xlim=(-4, 20))
 
 
 def interpolate():
@@ -38,10 +37,20 @@ def interpolate():
     interp.plot(style_in="o")
 
 
-def main():
-    # fit()
-    student()
-    # interpolate()
+def student_array():
+    lst = []
+    for i in range(5):
+        if i == 0:
+            x = lt.pd.read_csv(f"data/{i}.csv", names=["x", "0"]).iloc[:, 0]
+        lst.append(lt.pd.read_csv(
+            f"data/{i}.csv", names=["x", f"{i}"]).iloc[:, 1])
+
+    sa = lt.StudentArray(lst)
+    print(lt.np.array(sa))
+    print(sa.n)
+    lt.plt_uplot(x, sa, band=True)  # type: ignore
+    lt.plt.show()
 
 
-main()
+if __name__ == "__main__":
+    student_array()

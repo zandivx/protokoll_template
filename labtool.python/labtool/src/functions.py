@@ -4,7 +4,7 @@
 __author__ = "Andreas Zach"
 __all__ = ["cd", "plt_latex", "pd_format",
            "write_table", "profile", "tracer",
-           "plt_uplot", "separate_uarray"]
+           "plt_uplot", "separate_uarray", "integrate"]
 
 # std library
 from cProfile import Profile
@@ -19,6 +19,7 @@ from matplotlib.pyplot import errorbar, fill_between, plot
 from numpy import array, ndarray
 from numpy.typing import ArrayLike
 from pandas import DataFrame, options
+from scipy.integrate import trapezoid
 
 DataFrameLike = UArrayLike = ItDepends = Any
 
@@ -265,3 +266,19 @@ def separate_uarray(uarr: UArrayLike) -> tuple[ndarray, ndarray]:
     n = array([x.n for x in uarr])
     s = array([x.s for x in uarr])
     return n, s
+
+
+def integrate(x: ArrayLike,
+              y: ArrayLike,
+              start: int = 0,
+              stop: int = -1,
+              ) -> float:
+    """Numerically integrate a given array with specified boundaries
+
+    Paramters:
+    -> x\tarray of x-coordinates
+    -> y\tarray of y-coordinates
+    -> start=0\tlower integration boundary as index of array
+    -> stop=-1\tupper integration boundary as index of array
+    """
+    return trapezoid(y[start:stop], x=x[start:stop])  # type: ignore

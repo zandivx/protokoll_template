@@ -2,11 +2,10 @@
 
 # dunders
 __author__ = "Andreas Zach"
-__all__ = ["CDContxt", "CurveFit", "Interpolation", "Student"]
+__all__ = ["CDContxt", "CurveFit", "Interpolation", "Student", "StudentArray"]
 
 # std library
 from os import chdir, getcwd
-# from sys import path as sys_path
 from typing import Callable, Union
 
 # 3rd party
@@ -21,7 +20,7 @@ from uncertainties import ufloat
 from uncertainties.unumpy import uarray
 
 # own
-from .functions import cd
+from .functions import cd, separate_uarray
 
 
 class CDContxt:
@@ -44,22 +43,6 @@ class CDContxt:
         chdir(self.olddir)
 
 
-# class SysPathContxt:
-#     """A context manager that appends the sys.path-variable with a given init-path.
-#     Useful for relative imports in a package, where the importing module should be run
-#     as a script.
-#     """
-
-#     def __init__(self, path: str):
-#         self.path = path
-
-#     def __enter__(self):
-#         sys_path.append(self.path)
-
-#     def __exit__(self, *args):
-#         sys_path.pop()
-
-
 class AbstractFit:
     """An abstract class as superclass for other fit-like classes.
     Currently for:
@@ -74,7 +57,20 @@ class AbstractFit:
                  divisions: int,
                  type_: str = "AbstractFit",
                  ):
-        """Initiate an AbstractFit instance"""
+        """Initiate an AbstractFit instance
+
+        Attributes:
+        -> f
+        -> x_in
+        -> y_in
+        -> x_out
+        -> y_out
+        -> _type
+
+        Methods:
+        -> plot
+        -> save
+        """
 
         self.f = f
         self.x_in = x_in
@@ -82,7 +78,7 @@ class AbstractFit:
 
         a = min(x_in)
         b = max(x_in)
-        c = int(divisions) if divisions > 0 else int(20 * (b - a))
+        c = int(divisions) if divisions > 0 else 3000
 
         self.x_out = linspace(a, b, c)
         self.y_out = f(self.x_out)
@@ -94,8 +90,8 @@ class AbstractFit:
         """Call the instance like a function"""
         return self.f(*args)
 
-    def __str__(self):
-        return "AbstractFit string representation"
+    def __len__(self):
+        return len(self.x_out)
 
     def plot(self,
              style_in: str = "-",
@@ -150,7 +146,7 @@ class CurveFit(AbstractFit):
                  **kwargs,
                  ):
         """
-        kwargs are transmitted to curve_fit
+        **kwargs are provided to curve_fit
 
         Attributes:
         -> f
@@ -160,7 +156,12 @@ class CurveFit(AbstractFit):
         -> y_out
         -> p
         -> u
+        -> df
         -> _p_names
+
+        Methods:
+        -> plot
+        -> save
         """
 
         curve_fit_return = curve_fit(f, x, y, **kwargs)
@@ -175,20 +176,18 @@ class CurveFit(AbstractFit):
         # store names of parameters in a tuple
         self._p_names = f.__code__.co_varnames[1:]
 
-    def __str__(self):
-        uarr = uarray(self.p, self.u)
-        ufloat_df = DataFrame({"n": [x.n for x in uarr],
-                               "s": [x.s for x in uarr]},
-                              index=self._p_names)
+        # create a dataframe of parameters with uncertainties
+        n, s = separate_uarray(uarray(self.p, self.u))
+        self.df = DataFrame({"n": n,
+                             "s": s},
+                            index=self._p_names)
 
+    def __str__(self):
         precise_df = DataFrame({"n": self.p,
                                 "s": self.u},
                                index=self._p_names)
 
-        return f"Fit parameters:\n\nufloats:\n{ufloat_df}\n\nprecisely:\n{precise_df}"
-
-    def __repr__(self):
-        return self.__str__()
+        return f"Fit parameters:\n\nufloats:\n{self.df}\n\nprecisely:\n{precise_df}"
 
 
 class Interpolation(AbstractFit):
@@ -210,16 +209,14 @@ class Interpolation(AbstractFit):
         -> x_out
         -> y_out
         -> data
+
+        Methods:
+        -> plot
+        -> save
         """
         f = interp1d(x, y, **kwargs)
         super().__init__(x, y, lambda x: f(x), divisions, type_="Interpolation")
         self.data = DataFrame({"x": self.x_out, "y": self.y_out})
-
-    def __str__(self):
-        return "Interpolation"
-
-    def __repr__(self):
-        return self.__str__()
 
 
 class Student:
@@ -260,10 +257,13 @@ class Student:
         -> _n
         -> _s
         -> _factor_used
+
+        Methods:
+        -> save
         """
 
         # test if sigma is reasonable
-        if sigma not in {1, 2, 3}:
+        if sigma not in [1, 2, 3]:
             raise ValueError(
                 "Sigma must be amongst the following integers: [1, 2, 3]")
 
@@ -295,32 +295,39 @@ class Student:
         return ret
 
     def __repr__(self):
-        return self.__str__()
+        return str(self.mean)
 
-    def plot(self,
-             style: str = "-",
-             label: str = "Data",
-             label_u: str = "Mean with uncertainty band",
-             title: str = "Student",
-             **kwargs,
-             ) -> None:
-        """Plot Student-t distribution"""
+    def __len__(self):
+        return len(self.series)
 
-        # plot data
-        plt.clf()
-        plt.plot(self.series, style, label=label)
+    def __getitem__(self, key):
+        return self.series[key]
 
-        length = len(self.series)
-        plt.plot([self.mean.n]*length, "k--", label=label_u)
-
-        n = self.mean.n
-        s = self.mean.s
-        plt.fill_between(range(length), n-s, n+s, color="gray", alpha=0.2)
-
-        # additional calls to pyplot
-        _plot(title=title, **kwargs)
-
-        return None
+#    def plot(self,
+#             style: str = "-",
+#             label: str = "Data",
+#             label_u: str = "Mean with uncertainty band",
+#             title: str = "Student",
+#             kwfill: dict = {},
+#             **kwargs,
+#             ) -> None:
+#        """Plot Student-t distribution"""
+#
+#        # plot data
+#        plt.clf()
+#        plt.plot(self.series, style, label=label)
+#
+#        length = len(self.series)
+#        plt.plot([self.mean.n]*length, "k--", label=label_u)
+#
+#        n = self.mean.n
+#        s = self.mean.s
+#        plt.fill_between(range(length), n-s, n+s, color="gray", alpha=0.2)
+#
+#        # additional calls to pyplot
+#        _plot(title=title, **kwargs)
+#
+#        return None
 
     def save(self, path: str) -> None:
         """Save Student-t data to a file"""
@@ -329,6 +336,63 @@ class Student:
             f.write(str(self))
 
         return None
+
+
+class StudentArray:
+    """A class for Student-t-distributions in every point over multiple arrays"""
+
+    def __init__(self,
+                 *series: ArrayLike,
+                 sigma: int = 1,
+                 ):
+        """Attributes:
+        -> raw_data
+        -> array
+        -> n
+        -> s
+        """
+
+        # check if provided tuple is already ArrayLike
+        if len(series) == 1:
+            data = array(series[0])
+        else:
+            data = array(*series)  # type: ignore
+
+        # check if more than 50 distinct arrays are passed
+        if all(array(data.shape) > 50):
+            raise ValueError("Too many arrays, maximum amount is 50.")
+
+        # TODO: manual validating option
+        # this one is error prone
+        if data.shape[1] > data.shape[0]:
+            data = data.T
+
+        self.raw_data = DataFrame(data, columns=range(data.shape[1]))
+
+        # initialize DataFrame
+        self.raw_data = DataFrame(series, index=range(len(series)))
+        print(self.raw_data)
+        exit()
+        # append provided series as columns
+        # for i in range(len(series)):
+        #    self.raw_data[f"{i}"] = series[i]
+
+        # create uarray
+        student = self.raw_data.apply(lambda x: Student(x, sigma), axis=1)
+        self.array = array([x.mean for x in student])
+
+        # create n and s arrays
+        self.n, self.s = separate_uarray(self.array)
+
+    # container methods
+    # https://rszalski.github.io/magicmethods/  # for Python 2
+    # https://stackoverflow.com/questions/56468788/list-of-custom-class-converted-to-numpy-array
+
+    def __len__(self):
+        return len(self.array)
+
+    def __getitem__(self, key):
+        return self.array[key]
 
 
 def _plot(**kwargs) -> None:
