@@ -6,7 +6,12 @@
 \documentclass[ngerman]{scrartcl}
 
 % input preamble
-\input{shared_preamble.tex}
+\input{C:/Users/andre/OneDrive - Universität Graz/Uni/Physik/Allgemeines/protokoll_template/template.latex/input/shared_preamble.tex}
+
+% manual header
+\ihead{Versuchsname}  % inner (left) head
+\chead{\textsc{Zach} Andreas (12004790)}  % center head
+\ohead{Datum der Messung}  % outer (right) head
 
 
 
@@ -48,25 +53,23 @@ Inline math: $\lim \limits_{n \to \infty} \frac{1}{2n} = 0$  % old, discouraged
 %
 Display math: \[\lim_{n \to \infty} \left( 1 + \frac{1}{n} \right) ^{n} = e\]  \\ \\ % new, encouraged  % _ in inline math: no limits - in display math: limits
 \[ \int \frac{1}{x} \dd{x} = \ln|x| \qq{quad text, additionaly:} \dv{f}{x} \land \pdv{g}{y}\]  % new, encouraged - same as \begin{equation*} when using amsmath
-$$ \vb{F} = m \cdot \vb{a} $$  % old, very discouraged
+$$ \vb*{F} = m \cdot \vb*{a} = \dot{\mup{p}}$$  % old, very discouraged
 
-Testzahl = \SI{3e0}{\meter}
+Test: \texttt{typewriter}
 
-Test typewriter: \texttt{typewriter}
+\subsection{Unsicherheitsberechnungen}
+\label{subsec:unsicherheitsberechnungen}
+
+Die explizit angegebenen Unsicherheiten der ermittelten Messgrößen basieren auf Berechnungen durch die Unsicherheitsangabe nach den Datenblättern der verwendeten Messgeräte. Diese sind in \autoref{tab:geraeteliste} vermerkt beziehungsweise. referenziert.
+
+Die Fehlerfortpflanzung der berechneten Werte basiert auf der verallgemeinerten Methode der Gauß'schen Fehlerfortpflanzung.
+\[\vb*{\Sigma}_{\vb*{y}} = \vb{J}(\vb*{x}) \, \vb*{\Sigma}_{\vb*{x}} \, \vb{J}^*(\vb*{x})\]
+Dabei beschreibt $\displaystyle \vb*{\Sigma}_{\vb*{i}}$ die Kovarianzmatrix des Vektors $\vb*{i}$ und $\vb{J}(\vb*{i})$ die Jakobi-Matrix desselben. Die zweite Matrix $\vb{J}^*(\vb*{i})$ beschreibt die Hermetisch-konjungierte der Jakobi-Matrix. Um diese Berechnungen effizient auszuführen, wird für jeden Unterpunkt der Laborübung ein Skript in der Programmiersprache \verb!Python! implementiert. Kernstück dessen ist das package \verb!uncertainties!\footcite{ref:uncertainties}, dass intern die Matrixmultiplikationen berechnet. Gerundet wird nach den Angaben des Skriptums der Lehrveranstaltung \enquote{Einführung in die physikalischen Messmethoden} in der gültigen Version 7.\footcite{ref:messmethoden}
 
 
 
 \section{Versuchsanordnung}
 \label{sec:versuchsanordnung}
-
-\begin{figure}[H]
-    \centering
-    \begin{samepage}
-        \includegraphics[width=0.6\linewidth]{example-image-golden}
-        \caption{Example image golden}
-        \label{fig:example-image-golden}
-    \end{samepage}
-\end{figure}
 
 
 

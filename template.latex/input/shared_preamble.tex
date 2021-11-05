@@ -16,8 +16,10 @@
 
 % text processing
 \usepackage{babel}  % language package
-\usepackage[intlimits]{amsmath}
-\usepackage{amssymb, amstext, mathtools}  % math packages (American Math Society) + correction of amsmath (mathtools) [loads amsmath automatically]
+\usepackage[intlimits]{mathtools}  % upgrade of amsmath (automatically loaded) - \int^_ like \limits^_
+\usepackage{amssymb}  % upgrade of amsfonts (American Math Society)
+\usepackage{amstext}  % \text command in math environments
+%\usepackage{bm}  % bold math fonts
 \usepackage{physics}  % macros for easier typesetting of physical formulas
 \usepackage{letltxmacro}  % \let command for robust macros (new sqrt)
 
@@ -25,6 +27,9 @@
 % page geometry
 \usepackage{scrlayer-scrpage}  % page formatting with KOMA options
 \usepackage[paper=a4paper, hmargin=3cm, vmargin=2.5cm, includehead, includefoot]{geometry}  % horizontal: 3cm, vertical: 2.5cm strict with or without headers and footers
+\usepackage{tabto}  % tab stops
+\NumTabs{8}  % 8 equally spaced of \textwidth tab stops
+
 
 
 % floats
@@ -67,9 +72,6 @@
 \clearpairofpagestyles  % reset
 \setkomafont{pageheadfoot}{\normalfont}  % standard font in header and footer
 \setlength{\headheight}{27.2pt}  % just look at the warning
-\ihead{Versuchsname}  % inner (left) head
-\chead{\textsc{Zach} Andreas \\ 12004790}  % center head
-\ohead{Datum der Messung}  % outer (right) head
 \cfoot{\pagemark{} / \pageref*{LastPage}}  % center foot - *: ref but no hyperlink
 % {}: empty statement
 % \ : protected space
@@ -80,9 +82,8 @@
 
 % package setups
 
-% BibLaTeX source
-\addbibresource{C:/Users/andre/OneDrive - Universität Graz/Uni/Physik/Allgemeines/protokoll_template/files/JabRef_Database/physics.bib}  % database import with absolute path - file ending!
-
+% biblatex
+\addbibresource{C:/Users/andre/OneDrive - Universität Graz/Uni/Physik/Allgemeines/protokoll_template/template.latex/files/JabRef_Database/physics.bib}
 
 % rewrite names (babel overwrites German with standard English names, therefore at document beginn [after everything is loaded])
 \AtBeginDocument{\renewcommand{\refname}{Literaturverzeichnis}}
@@ -98,6 +99,9 @@
 \definecolor{code_comment}{HTML}{6A9955}
 %\definecolor{code_basic}{HTML}{D4D4D4}
 %\definecolor{code_background}{HTML}{1E1E1E}
+
+% siunitx
+\DeclareSIUnit{\dig}{dig}  % digits for uncertainty of electronical measurement devices
 
 
 % listings
@@ -146,9 +150,10 @@
 %     ninecolors
 %     \hypersetup{pdfborder={0 0 0}}
 % }
-\input{C:/Users/andre/OneDrive - Universität Graz/Uni/Physik/Allgemeines/protokoll_template/files/environments/tabularray-environments.tex}
+\input{C:/Users/andre/OneDrive - Universität Graz/Uni/Physik/Allgemeines/protokoll_template/template.latex/input/tabularray-environments.tex}
 
 
 % own commands
 % \newcommand* can't contain multiple lines
 % \newcommand can
+\newcommand{\mup}[1]{\ensuremath{\text{\textup{#1}}}}  % upright normal font in math mode
