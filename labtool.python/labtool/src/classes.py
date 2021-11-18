@@ -60,38 +60,37 @@ class AbstractFit:
         """Initiate an AbstractFit instance
 
         Attributes:
-        -> f
-        -> x_in
-        -> y_in
-        -> x_out
-        -> y_out
-        -> _type
+        -> x_in\tx data input
+        -> y_in\ty data input
+        -> x_out\toutgoing x data (numpy.linspace)
+        -> y_out\toutgoing y data (fit_function(x_out))
+        -> _f\tfit_function
+        -> _type\tinternal class recognition
 
         Methods:
         -> plot
         -> save
         """
 
-        self.f = f
-        self.x_in = x_in
-        self.y_in = y_in
+        self.x_in = array(x_in)
+        self.y_in = array(y_in)
 
-        a = min(x_in)
-        b = max(x_in)
+        a = min(self.x_in)
+        b = max(self.x_in)
         c = int(divisions) if divisions > 0 else 3000
 
         self.x_out = linspace(a, b, c)
         self.y_out = f(self.x_out)
 
-        # to differentiate subclasses of ABC
+        self._f = f
         self._type = type_
 
     def __call__(self, *args):
         """Call the instance like a function"""
-        return self.f(*args)
+        return self._f(*args)
 
     def __len__(self):
-        return len(self.x_out)
+        return len(self.x_in)
 
     def plot(self,
              style_in: str = "-",
@@ -100,37 +99,37 @@ class AbstractFit:
              label_out: str = "Data out",
              title: Union[str, None] = None,
              **kwargs,
-             ) -> None:
+             ):  # TODO: return type
         """Plot AbstractFit instance. Transmit kwargs to pyplot in
         the style of method: value
         """
 
         # plot data
-        plt.clf()
-        plt.plot(self.x_in, self.y_in, style_in, label=label_in)
-        plt.plot(self.x_out, self.y_out, style_out, label=label_out)
+        fig, ax = plt.subplots()
+        ax.plot(self.x_in, self.y_in, style_in, label=label_in)
+        ax.plot(self.x_out, self.y_out, style_out, label=label_out)
 
         # check title
-        title = "" if title is not None else self._type
+        title = title if title is not None else self._type
 
         # additional calls to pyplot
-        _plot(title=title, **kwargs)
+        _plot(fig, ax, title=title, **kwargs)
 
-        return None
+        return fig, ax
 
     def save(self, path: str) -> None:
         """Save fit to a file"""
 
-        df_in = DataFrame({"x_in": self.x_in,
-                           "y_in": self.y_in},
-                          ).to_string()
+        df_in_str = DataFrame({"x_in": self.x_in,
+                               "y_in": self.y_in},
+                              ).to_string()
 
-        df_out = DataFrame({"x_out": self.x_out,
-                            "y_out": self.y_out},
-                           ).to_string()
+        df_out_str = DataFrame({"x_out": self.x_out,
+                                "y_out": self.y_out},
+                               ).to_string()
 
         with open(path, "w", encoding="utf-8") as f:
-            f.write(f"{self}\n\n{df_in}\n\n{df_out}")
+            f.write(f"{self}\n\n{df_in_str}\n\n{df_out_str}")
 
         return None
 
@@ -146,29 +145,28 @@ class CurveFit(AbstractFit):
                  **kwargs,
                  ):
         """
-        **kwargs are provided to curve_fit
+        kwargs are provided to scipy.optimize.curve_fit
 
         Attributes:
-        -> f
-        -> x_in
-        -> y_in
-        -> x_out
-        -> y_out
-        -> p
-        -> u
-        -> df
-        -> _p_names
+        -> f\tfunction where x_in and y_in should be fitted on (see scipy.optimize.curve_fit documentation)
+        -> x_in\tx data input
+        -> y_in\ty data input
+        -> x_out\tx data output (numpy.linspace)
+        -> y_out\ty data output (fit_function(x_out))
+        -> p\tcalculated parameters of f
+        -> u\tuncertainties of the parameter
+        -> pu\tuarray with ufloats
+        -> df\tpandas.DataFrame with parameter names, nominal values and uncertainites
+        -> _p_names\tnames of the parameters p in definition of function f
 
         Methods:
         -> plot
         -> save
         """
 
-        curve_fit_return = curve_fit(f, x, y, **kwargs)
-
-        self.p: ndarray = curve_fit_return[0]
-        pcov: ndarray = curve_fit_return[1]
-        self.u: ndarray = sqrt(diag(pcov))
+        self.p, pcov, *_ = curve_fit(f, x, y, **kwargs)
+        self.u = sqrt(diag(pcov))
+        self.pu = uarray(self.p, self.u)
 
         super().__init__(x, y, lambda x: f(x, *self.p),  # array-unpacking (same as tuple unpacking)
                          divisions, type_="CurveFit")
@@ -177,7 +175,7 @@ class CurveFit(AbstractFit):
         self._p_names = f.__code__.co_varnames[1:]
 
         # create a dataframe of parameters with uncertainties
-        n, s = separate_uarray(uarray(self.p, self.u))
+        n, s = separate_uarray(self.pu)
         self.df = DataFrame({"n": n,
                              "s": s},
                             index=self._p_names)
@@ -200,10 +198,9 @@ class Interpolation(AbstractFit):
                  **kwargs,
                  ):
         """
-        kwargs are transmitted to interp1d
+        kwargs are provided to scipy.interpolate.interp1d
 
         Attributes:
-        -> f
         -> x_in
         -> y_in
         -> x_out
@@ -227,6 +224,8 @@ class Student:
     """
 
     # class attributes
+
+    # from "Einführung in die physikalischen Messmethoden": S.7, Tabelle 2"
     # _t_df_old = DataFrame({"N": [2, 3, 4, 5, 6, 8, 10, 20, 30, 50, 100, 200],
     #                        "1": [1.84, 1.32, 1.20, 1.15, 1.11, 1.08, 1.06, 1.03, 1.02, 1.01, 1.00, 1.00],
     #                        "2": [13.97, 4.53, 3.31, 2.87, 2.65, 2.43, 2.32, 2.14, 2.09, 2.05, 2.03, 2.01],
@@ -263,35 +262,36 @@ class Student:
         """
 
         # test if sigma is reasonable
-        if sigma not in [1, 2, 3]:
-            raise ValueError(
-                "Sigma must be amongst the following integers: [1, 2, 3]")
+        if sigma not in {1, 2, 3}:
+            raise ValueError("Sigma must be amongst the following integers: {1, 2, 3}")
 
-        # maximum length of series is 50
+        # maximum length of series in order to get a distinct t-factor is 50
+        # t = 1, 2, 3 otherwise
         # try-except is faster than if
         try:
             self.t = self.t_df.loc[len(series), str(sigma)]  # type: ignore
         except KeyError:
-            raise IndexError("Series is too big, maximum length is 50")
+            self.t = sigma
 
         self.series = array(series)
 
-        # precise n
+        # precise n (no rounding by uncertainties)
         self._n = mean(self.series)
 
-        # precise s
+        # precise s (no rounding by uncertainties)
         self._s = sem(self.series)
 
-        # ufloat mean
+        # ufloat mean (rounded by uncertainties)
         self.mean = ufloat(self._n, self.t*self._s)
 
         # check if t is neglibible
         self._factor_used = True if self.mean.s != self._s else False
 
     def __str__(self):
-        ret = f"Student-t distribution of series:\n{self.series}\n\n"
-        ret += "" if self._factor_used else "!!! t-factor is negligible!\n\n"
-        ret += f"Mean:\nufloat:\n\t{self.mean.n} +/- {self.mean.s}\nprecisely:\n\t{self._n} +/- {self._s}"
+        ret = (f"Student-t distribution\n\n"
+               f"t-factor:\n\t{self.t if self._factor_used else 'unused'}\n"
+               f"ufloat:\n\t{self.mean}\n"
+               f"precisely:\n\t{self._n}+/-{self._s}")
         return ret
 
     def __repr__(self):
@@ -302,32 +302,6 @@ class Student:
 
     def __getitem__(self, key):
         return self.series[key]
-
-#    def plot(self,
-#             style: str = "-",
-#             label: str = "Data",
-#             label_u: str = "Mean with uncertainty band",
-#             title: str = "Student",
-#             kwfill: dict = {},
-#             **kwargs,
-#             ) -> None:
-#        """Plot Student-t distribution"""
-#
-#        # plot data
-#        plt.clf()
-#        plt.plot(self.series, style, label=label)
-#
-#        length = len(self.series)
-#        plt.plot([self.mean.n]*length, "k--", label=label_u)
-#
-#        n = self.mean.n
-#        s = self.mean.s
-#        plt.fill_between(range(length), n-s, n+s, color="gray", alpha=0.2)
-#
-#        # additional calls to pyplot
-#        _plot(title=title, **kwargs)
-#
-#        return None
 
     def save(self, path: str) -> None:
         """Save Student-t data to a file"""
@@ -356,26 +330,10 @@ class StudentArray:
         if len(series) == 1:
             data = array(series[0])
         else:
-            data = array(*series)  # type: ignore
-
-        # check if more than 50 distinct arrays are passed
-        if all(array(data.shape) > 50):
-            raise ValueError("Too many arrays, maximum amount is 50.")
-
-        # TODO: manual validating option
-        # this one is error prone
-        if data.shape[1] > data.shape[0]:
-            data = data.T
-
-        self.raw_data = DataFrame(data, columns=range(data.shape[1]))
+            data = array(*series).T  # type: ignore
 
         # initialize DataFrame
-        self.raw_data = DataFrame(series, index=range(len(series)))
-        print(self.raw_data)
-        exit()
-        # append provided series as columns
-        # for i in range(len(series)):
-        #    self.raw_data[f"{i}"] = series[i]
+        self.raw_data = DataFrame(data, index=range(len(series)))
 
         # create uarray
         student = self.raw_data.apply(lambda x: Student(x, sigma), axis=1)
@@ -395,11 +353,11 @@ class StudentArray:
         return self.array[key]
 
 
-def _plot(**kwargs) -> None:
+def _plot(fig, ax, **kwargs) -> None:
     """Wrapper for pyplot calls"""
 
     # standard value = True
-    for key in ("legend", "grid", "show"):
+    for key in {"legend", "grid", "show"}:
         kwargs[key] = kwargs.get(key, True)
         # print(f"Updated {key} to {kwargs[key]}")
 
@@ -409,9 +367,9 @@ def _plot(**kwargs) -> None:
             continue
         elif type(value) is bool:  # catch all booleans
             if value:  # only if True
-                plt.__dict__[key]()
+                ax.__dict__[key]()
         else:
-            plt.__dict__[key](value)
+            ax.__dict__[key](value)
 
     # show must be last one to be called
     if kwargs["show"]:

@@ -47,6 +47,7 @@
 \usepgfplotslibrary{groupplots,dateplot}
 \usetikzlibrary{patterns,shapes.arrows}
 \pgfplotsset{compat=newest}
+\usepackage{import}
 
 
 % text
@@ -156,4 +157,5 @@
 % own commands
 % \newcommand* can't contain multiple lines
 % \newcommand can
-\newcommand{\mup}[1]{\ensuremath{\text{\textup{#1}}}}  % upright normal font in math mode
+\newcommand*{\mup}[1]{\ensuremath{\text{\textup{#1}}}}  % upright normal font in math mode
+\newcommand*{\inkgraphics}[3][\linewidth]{\def\svgwidth{#1}\import{#2}{#3}}
