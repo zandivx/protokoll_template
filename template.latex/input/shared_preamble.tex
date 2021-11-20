@@ -22,6 +22,7 @@
 %\usepackage{bm}  % bold math fonts
 \usepackage{physics}  % macros for easier typesetting of physical formulas
 \usepackage{letltxmacro}  % \let command for robust macros (new sqrt)
+\usepackage{chemformula}  % typeset chemical formulas
 
 
 % page geometry
@@ -84,7 +85,7 @@
 % package setups
 
 % biblatex
-\addbibresource{C:/Users/andre/OneDrive - Universität Graz/Uni/Physik/Allgemeines/protokoll_template/template.latex/files/JabRef_Database/physics.bib}
+\addbibresource{files/JabRef_Database/physics.bib}
 
 % rewrite names (babel overwrites German with standard English names, therefore at document beginn [after everything is loaded])
 \AtBeginDocument{\renewcommand{\refname}{Literaturverzeichnis}}
@@ -144,6 +145,13 @@
 \makeatother
 
 
+% own commands
+% \newcommand* can't contain multiple lines
+% \newcommand can
+\newcommand*{\mup}[1]{\ensuremath{\text{\textup{#1}}}}  % upright normal font in math mode
+\newcommand*{\inkgraphics}[3][\linewidth]{\def\svgwidth{#1}\import{#2}{#3}}
+
+
 % tabularray
 % imports_and_setups{
 %     expl3,
@@ -151,11 +159,68 @@
 %     ninecolors
 %     \hypersetup{pdfborder={0 0 0}}
 % }
-\input{C:/Users/andre/OneDrive - Universität Graz/Uni/Physik/Allgemeines/protokoll_template/template.latex/input/tabularray-environments.tex}
 
+% tabularray environments
+\RequirePackage{tabularray}  % like \usepackage but for packages
+\UseTblrLibrary{siunitx}  % siunitx suited for tabularray
+% TRIPLE BRACKETS {{{}}} to protect strings from \num{} interpretation in S columns
+\UseTblrLibrary{diagbox}  % diagbox suited for tabularray
+\UseTblrLibrary{varwidth}  % measure cell width using package 'varwidth'
 
-% own commands
-% \newcommand* can't contain multiple lines
-% \newcommand can
-\newcommand*{\mup}[1]{\ensuremath{\text{\textup{#1}}}}  % upright normal font in math mode
-\newcommand*{\inkgraphics}[3][\linewidth]{\def\svgwidth{#1}\import{#2}{#3}}
+% standard environment
+\SetTblrInner{
+    hlines,
+    vlines,
+    columns={
+            halign=c,
+            valign=m,
+        },
+    measure=vbox,
+}
+
+% X columns
+\NewTblrEnviron{tblrx}
+\SetTblrInner[tblrx]{
+    hlines,
+    vlines,
+    columns={
+            halign=c,
+            valign=m,
+            co=1,  % coefficient of width for expendable columns (X columns)
+        },
+    width=\linewidth,
+    vspan=minimal,
+    measure=vbox,
+}
+
+% -X columns
+\NewTblrEnviron{tblr-x}
+\SetTblrInner[tblr-x]{
+    hlines,
+    vlines,
+    columns={
+            halign=c,
+            valign=m,
+            co=-1,  % shrinks X column down to natural width
+        },
+    width=\linewidth,
+    vspan=minimal,
+    measure=vbox,
+}
+
+% no hline and vline left and on top of first cell
+\NewTblrEnviron{tblr_omit_first_cell}
+\SetTblrInner[tblr_omit_first_cell]{
+    hlines,
+    vlines,
+    columns={
+            halign=c,
+            valign=m,
+        },
+    hspan=even,
+    vspan=minimal,
+    %
+    hline{1}={1}{white},  % first row, only first cell
+    vline{1}={1}{white},
+    measure=vbox,
+}

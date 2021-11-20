@@ -6,7 +6,7 @@
 \documentclass[ngerman]{scrartcl}
 
 % input preamble
-\input{C:/Users/andre/OneDrive - Universität Graz/Uni/Physik/Allgemeines/protokoll_template/template.latex/input/shared_preamble.tex}
+\input{input/shared_preamble.tex}
 
 % manual header
 \ihead{Versuchsname}  % inner (left) head
@@ -64,7 +64,7 @@ Die explizit angegebenen Unsicherheiten der ermittelten Messgrößen basieren au
 
 Die Fehlerfortpflanzung der berechneten Werte basiert auf der verallgemeinerten Methode der Gauß'schen Fehlerfortpflanzung.
 \[\vb*{\Sigma}_{\vb*{y}} = \vb{J}(\vb*{x}) \, \vb*{\Sigma}_{\vb*{x}} \, \vb{J}^*(\vb*{x})\]
-Dabei beschreibt $\displaystyle \vb*{\Sigma}_{\vb*{i}}$ die Kovarianzmatrix des Vektors $\vb*{i}$ und $\vb{J}(\vb*{i})$ die Jakobi-Matrix desselben. Die zweite Matrix $\vb{J}^*(\vb*{i})$ beschreibt die Hermetisch-konjungierte der Jakobi-Matrix. Um diese Berechnungen effizient auszuführen, wird für jeden Unterpunkt der Laborübung ein Skript in der Programmiersprache \verb!Python! implementiert. Kernstück dessen ist das package \verb!uncertainties!\footcite{ref:uncertainties}, dass intern die Matrixmultiplikationen berechnet. Gerundet wird nach den Angaben des Skriptums der Lehrveranstaltung \enquote{Einführung in die physikalischen Messmethoden} in der gültigen Version 7.\footcite{ref:messmethoden}
+Dabei beschreibt $\displaystyle \vb*{\Sigma}_{\vb*{i}}$ die Kovarianzmatrix des Vektors $\vb*{i}$ und $\vb{J}(\vb*{i})$ die Jakobi-Matrix desselben. Die zweite Matrix $\vb{J}^*(\vb*{i})$ beschreibt die Hermetisch-konjungierte der Jakobi-Matrix. Um diese Berechnungen effizient auszuführen, wird für jeden Unterpunkt der Laborübung ein Skript in der Programmiersprache \texttt{Python} implementiert. Kernstück dessen ist das package \href{https://github.com/lebigot/uncertainties}{\texttt{uncertainties}}\footcite{ref:uncertainties}, dass intern die Matrixmultiplikationen berechnet. Gerundet wird nach den Angaben des Skriptums der Lehrveranstaltung \enquote{Einführung in die physikalischen Messmethoden} in der gültigen Version 7.\footcite{ref:messmethoden}
 
 
 
@@ -124,7 +124,7 @@ Dabei beschreibt $\displaystyle \vb*{\Sigma}_{\vb*{i}}$ die Kovarianzmatrix des 
 \addsec{Python-Skript}
 \label{sec:python}
 
-\lstinputlisting[language=Python]{../labtool.python/labtool/__init__.py}
+\lstinputlisting[language=Python]{../../labtool/__init__.py}
 
 
 
