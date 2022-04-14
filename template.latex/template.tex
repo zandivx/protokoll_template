@@ -8,6 +8,9 @@
 % input preamble
 \input{input/shared_preamble.tex}
 
+% biblatex
+\addbibresource{files/JabRef_Database/physics.bib}
+
 % manual header
 \ihead{Versuchsname}  % inner (left) head
 \chead{\textsc{Zach} Andreas (12004790)}  % center head
@@ -17,7 +20,7 @@
 
 \begin{document}
 
-\includepdf{deckblatt.pdf}
+\includepdf{input/deckblatt.pdf}
 
 \clearpage
 \tableofcontents
@@ -104,6 +107,29 @@ Dabei beschreibt $\displaystyle \vb*{\Sigma}_{\vb*{i}}$ die Kovarianzmatrix des 
 \section{Versuchsdurchführung und Messergebnisse}
 \label{sec:versuchsdurchfuehrung_messergebnisse}
 
+% example of longtblr
+\begin{longtblr}[
+    entry={Short entry},
+    caption={Caption of example longtblr},
+    label={tab:example_longtblr},
+    note{a} = {note},  % footnote in table
+    ]{}
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000\TblrNote{a} \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
+\end{longtblr}
 
 
 \section{Auswertung}
@@ -124,7 +150,7 @@ Dabei beschreibt $\displaystyle \vb*{\Sigma}_{\vb*{i}}$ die Kovarianzmatrix des 
 \addsec{Python-Skript}
 \label{sec:python}
 
-\lstinputlisting[language=Python]{../../labtool/__init__.py}
+\lstinputlisting[language=Python]{input/python_example.py}
 
 
 

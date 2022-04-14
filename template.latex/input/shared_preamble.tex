@@ -20,7 +20,6 @@
 \usepackage{amssymb}  % upgrade of amsfonts (American Math Society)
 \usepackage{amstext}  % \text command in math environments
 %\usepackage{bm}  % bold math fonts
-\usepackage{physics}  % macros for easier typesetting of physical formulas
 \usepackage{letltxmacro}  % \let command for robust macros (new sqrt)
 \usepackage{chemformula}  % typeset chemical formulas
 
@@ -36,8 +35,7 @@
 % floats
 \usepackage[hypcap=false, labelfont=bf]{caption, subcaption}  % caption editing - hypcap warning with hyperref
 \usepackage{float}  % for [H] (forced here) specifier
-\usepackage{tabularray}
-\usepackage{diagbox}  % table cells with diagonal lines
+\usepackage{tabularray}  % better tables
 
 
 % graphical input
@@ -45,14 +43,16 @@
 \usepackage{pdfpages}  % input PDF as whole pages
 \usepackage{lastpage}  % reference to last page
 \usepackage{pgfplots}  % for tikzplotlib
-\usepgfplotslibrary{groupplots,dateplot}
-\usetikzlibrary{patterns,shapes.arrows}
+\usepgfplotslibrary{groupplots, dateplot}
+\usetikzlibrary{patterns, shapes.arrows}
 \pgfplotsset{compat=newest}
 \usepackage{import}
 
 
 % text
 \usepackage[locale=DE, uncertainty-mode=separate]{siunitx}  % SI units, German formatting - \pm stays \pm instead of ..(.)
+\let\sqty\qty  % physics overrides \qty of siunitx, therefore make it available as \sqty
+\usepackage{physics}  % macros for easier typesetting of physical formulas
 \usepackage{icomma}  % no space after commas instead of English points) in decimal values
 \usepackage{enumitem}  % better enumerating with style options
 \usepackage{nicefrac}  % inline-fractions in n/d-style
@@ -73,7 +73,7 @@
 \pagestyle{scrheadings}  % KOMA style
 \clearpairofpagestyles  % reset
 \setkomafont{pageheadfoot}{\normalfont}  % standard font in header and footer
-\setlength{\headheight}{27.2pt}  % just look at the warning
+\setlength{\headheight}{27.2pt}  % warning
 \cfoot{\pagemark{} / \pageref*{LastPage}}  % center foot - *: ref but no hyperlink
 % {}: empty statement
 % \ : protected space
@@ -83,9 +83,6 @@
 
 
 % package setups
-
-% biblatex
-\addbibresource{files/JabRef_Database/physics.bib}
 
 % rewrite names (babel overwrites German with standard English names, therefore at document beginn [after everything is loaded])
 \AtBeginDocument{\renewcommand{\refname}{Literaturverzeichnis}}
@@ -102,8 +99,9 @@
 %\definecolor{code_basic}{HTML}{D4D4D4}
 %\definecolor{code_background}{HTML}{1E1E1E}
 
-% siunitx
+% custom siunitx units
 \DeclareSIUnit{\dig}{dig}  % digits for uncertainty of electronical measurement devices
+\DeclareSIUnit{\px}{px}  % pixels
 
 
 % listings
@@ -141,31 +139,42 @@
     \setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
     {\box0\lower0.4pt\box2}}
 \LetLtxMacro{\oldsqrt}{\sqrt}
-\renewcommand*{\sqrt}[2][\ ]{\oldsqrt[#1]{#2} }
+\renewcommand{\sqrt}[2][\ ]{\oldsqrt[#1]{#2} }
 \makeatother
 
 
 % own commands
 % \newcommand* can't contain multiple lines
 % \newcommand can
-\newcommand*{\mup}[1]{\ensuremath{\text{\textup{#1}}}}  % upright normal font in math mode
+\newcommand*{\mup}[1]{\ensuremath{\text{\textup{#1}}}}  % math mode upright normal font
 \newcommand*{\inkgraphics}[3][\linewidth]{\def\svgwidth{#1}\import{#2}{#3}}
 
 
-% tabularray
-% imports_and_setups{
+% custom tabularray environments
+
+% imports and setups of tabularray: {
 %     expl3,
 %     xparse,
 %     ninecolors
 %     \hypersetup{pdfborder={0 0 0}}
 % }
 
-% tabularray environments
-\RequirePackage{tabularray}  % like \usepackage but for packages
+% additionally loaded libraries:
+% diagbox
+% varwidth
+% booktabs
+% counter
+
+\UseTblrLibrary{amsmath}  % +array, +matrix, +bmatrix, +Bmatrix, +pmatrix, +vmatrix, +Vmatrix and +cases like tabularray with graphical options
 \UseTblrLibrary{siunitx}  % siunitx suited for tabularray
 % TRIPLE BRACKETS {{{}}} to protect strings from \num{} interpretation in S columns
-\UseTblrLibrary{diagbox}  % diagbox suited for tabularray
-\UseTblrLibrary{varwidth}  % measure cell width using package 'varwidth'
+\UseTblrLibrary{diagbox}  % table cells with diagonal lines, suited for tabularray
+\UseTblrLibrary{varwidth}  % measure cell width
+\UseTblrLibrary{booktabs}
+\UseTblrLibrary{counter}
+
+
+% custom tabularray environments
 
 % standard environment
 \SetTblrInner{
@@ -222,5 +231,19 @@
     %
     hline{1}={1}{white},  % first row, only first cell
     vline{1}={1}{white},
+    measure=vbox,
+}
+
+% longtblr
+\DefTblrTemplate{conthead-text}{default}{(Fortsetzung)}  % default: define and set at the same time
+\DefTblrTemplate{contfoot-text}{default}{Fortsetzung auf nächster Seite}
+\SetTblrStyle{caption-tag}{font=\bfseries}  % caption tag bold
+\SetTblrInner[longtblr]{
+    hlines,
+    vlines,
+    columns={
+            halign=c,
+            valign=m,
+        },
     measure=vbox,
 }
