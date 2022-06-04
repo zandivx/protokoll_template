@@ -87,18 +87,18 @@ Dabei beschreibt $\displaystyle \vb*{\Sigma}_{\vb*{i}}$ die Kovarianzmatrix des 
         \begin{tblrx}{
                 colspec={
                         *{3}{Q}  % multiplication syntax: *{n}{thing}
-S[table-format=-2.2(2)]
+                        S[table-format=-2.2(2)]
                         Q[co=0]  % Q column for not overwriting standard values of preamble (no extendable width in order to work with diagbox)
                     },
                 cell{2}{2}={r=2}{},  % empty specifier for not overwriting standard values of preamble
                 cell{4}{3}={r=2,c=2}{},
-row{1}={guard},  % guard 1st row from being interpreted by a S column
+                row{1}={guard},  % guard 1st row from being interpreted by a S column
             }
-Gerät   & Hersteller & Modell   & Unsicherheit  & Anmerkung                             \\
-Gerät 1 & ich        & meins    & 0.01(2)       & {quasi \\ perfekt \\ genau}           \\
-Gerät 2 &            & passt so & -21.4(13)     & quasi perfekt genau                   \\
-Gerät 3 & -          & passt so &               & $\nabla$                              \\
-Gerät 4 & -          &          &               & \diagbox[dir=NE]{Alle meine}{Entchen} \\  % if diagbox is not the widest column, width must be typeset manually -.-
+            Gerät   & Hersteller & Modell   & Unsicherheit  & Anmerkung                             \\
+            Gerät 1 & ich        & meins    & 0.01(2)       & {quasi \\ perfekt \\ genau}           \\
+            Gerät 2 &            & passt so & -21.4(13)     & quasi perfekt genau                   \\
+            Gerät 3 & -          & passt so &               & $\nabla$                              \\
+            Gerät 4 & -          &          &               & \diagbox[dir=NE]{Alle meine}{Entchen} \\  % if diagbox is not the widest column, width must be typeset manually -.-
         \end{tblrx}
     \end{samepage}
 \end{table}
@@ -110,26 +110,26 @@ Gerät 4 & -          &          &               & \diagbox[dir=NE]{Alle meine}{
 
 % example of longtblr
 \begin{longtblr}[
-    entry={Short entry},
-    caption={Caption of example longtblr},
-    label={tab:example_longtblr},
-    note{a} = {note},  % footnote in table
+        entry={Short entry},
+        caption={Caption of example longtblr},
+        label={tab:example_longtblr},
+        note{a} = {note},  % footnote in table
     ]{}
     1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000\TblrNote{a} \\
-    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
-    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
-    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
-    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
-    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
-    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
-    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
-    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
-    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
-    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
-    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
-    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
-    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
-    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000 \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000             \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000             \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000             \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000             \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000             \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000             \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000             \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000             \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000             \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000             \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000             \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000             \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000             \\
+    1 & 2 & 3 & 4 & 5 & 6 & 7.000.000.000.000.000.000.000.000             \\
 \end{longtblr}
 
 
