@@ -34,6 +34,9 @@
 
 % floats
 \usepackage[hypcap=false, labelfont=bf]{caption, subcaption}  % caption editing - hypcap warning with hyperref
+% counter prefixed with section number and therefore reset at each section:
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
 \usepackage{float}  % for [H] (forced here) specifier
 \usepackage{tabularray}  % better tables
 
