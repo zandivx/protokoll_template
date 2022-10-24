@@ -108,12 +108,20 @@
 \definecolor{code_keyword}{HTML}{A06E9D}
 \definecolor{code_string}{HTML}{AD6E3E}
 \definecolor{code_comment}{HTML}{6A9955}
+% \definecolor{keyword_pink}{HTML}{c678dd}
+% \definecolor{vscode_bg}{HTML}{282c34}
+% \definecolor{vscode_var}{HTML}{e06c75}
+% \definecolor{vscode_comment}{HTML}{7f848e}
+% \definecolor{vscode_constant}{HTML}{d19a66}
+% \definecolor{vscode_function}{HTML}{61afe3}
+% \definecolor{background_grey}{HTML}{f8f8f8}
 %\definecolor{code_basic}{HTML}{D4D4D4}
 %\definecolor{code_background}{HTML}{1E1E1E}
 
 % custom siunitx units
 \DeclareSIUnit{\dig}{dig}  % digits for uncertainty of electronical measurement devices
 \DeclareSIUnit{\px}{px}  % pixels
+\sisetup{table-align-uncertainty=true}
 
 
 % listings
@@ -192,6 +200,9 @@
 % info:
 % colcycle: https://github.com/lvjr/tabularray/issues/74
 % guard: https://github.com/lvjr/tabularray/issues/175#event-6567229210
+
+% guard S columns if latest feature ={guard} is not yet available
+\newcommand\SiGuard[1]{{#1}}
 
 % standard environment
 \SetTblrInner{
