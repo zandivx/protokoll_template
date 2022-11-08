@@ -29,6 +29,11 @@
 \section{Aufgabenstellung}
 \label{sec:aufgabenstellung}
 
+\paragraph{Absatz}
+\label{par:absatz}
+
+Dies ist ein Testabsatz. Bitte diesen zu ignorieren.
+
 
 
 \section{Grundlagen und Voraussetzungen}
@@ -65,9 +70,7 @@ Test: \texttt{typewriter}
 
 Die explizit angegebenen Unsicherheiten der ermittelten Messgrößen basieren auf Berechnungen durch die Unsicherheitsangabe nach den Datenblättern der verwendeten Messgeräte. Diese sind in \autoref{tab:geraeteliste} vermerkt beziehungsweise referenziert.
 
-Die Fehlerfortpflanzung der berechneten Werte basiert auf der verallgemeinerten Methode der Gauß'schen Fehlerfortpflanzung.
-\[\vb*{\Sigma}_{\vb*{y}} = \vb{J}(\vb*{x}) \, \vb*{\Sigma}_{\vb*{x}} \, \vb{J}^*(\vb*{x})\]
-Dabei beschreibt $\displaystyle \vb*{\Sigma}_{\vb*{i}}$ die Kovarianzmatrix des Vektors $\vb*{i}$ und $\vb{J}(\vb*{i})$ die Jakobi-Matrix desselben. Die zweite Matrix $\vb{J}^*(\vb*{i})$ beschreibt die Hermetisch-konjungierte der Jakobi-Matrix. Um diese Berechnungen effizient auszuführen, wird für jeden Unterpunkt der Laborübung ein Skript in der Programmiersprache \texttt{Python} implementiert. Kernstück dessen ist das package \href{https://github.com/lebigot/uncertainties}{\texttt{uncertainties}}\footcite{ref:uncertainties}, dass intern die Matrixmultiplikationen berechnet. Gerundet wird nach den Angaben des Skriptums der Lehrveranstaltung \enquote{Einführung in die physikalischen Messmethoden} in der gültigen Version 7.\footcite{ref:messmethoden}
+Die Fehlerfortpflanzung der berechneten Werte basiert auf der Größtunsicherheitsmethode nach Gauß. Um diese Berechnungen zeiteffizient durchführen zu können, wird für jeden Unterpunkt der Laborübung ein Skript in \verb!Python! implementiert. Kernstück dessen ist das package \verb!uncertainties!\footcite{ref:uncertainties}, dass intern die Fehlerfortpflanzung berechnet. Gerundet wird nach den Angaben des Skriptums der Lehrveranstaltung \enquote{Einführung in die physikalischen Messmethoden}.\footcite{ref:messmethoden}
 
 
 
