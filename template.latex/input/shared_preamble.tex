@@ -4,17 +4,22 @@
 \ifluatex  % LuaLaTeX
     \usepackage{fontspec}
     % main font automatically: Latin Modern
-    \setmonofont{Fira Code}[
-        Contextuals=Alternate,  % Activate the calt feature
-        StylisticSet={1,3,5,8}, % fontspec docs S. 46
-        CharacterVariant={16}, % fontspec docs S. 37
-        Numbers={SlashedZero} % fontspec docs S. 44
-    ]
+    \IfFontExistsTF{Fira Code}{% true branch
+        \setmonofont{Fira Code}[
+            Contextuals=Alternate,  % Activate the calt feature
+            StylisticSet={1,3,5,8}, % fontspec docs S. 46
+            CharacterVariant={16}, % fontspec docs S. 37
+            Numbers={SlashedZero} % fontspec docs S. 44
+        ]}{% false branch
+    }
 \else  % pdfLaTeX
     \usepackage[utf8]{inputenc}  % input in UTF-8
     \usepackage[T1]{fontenc}  % output in T1 fonts (west European encoding)
     \usepackage{lmodern}  % Latin modern font for main text
-    \usepackage[mono]{fira}  % Fira (not Code!) font for monospaced text
+    \IfFileExists{fira.sty}{% true branch
+        \usepackage[mono]{fira}  % Fira (not Code!) font for monospaced text
+    }{% false branch
+    }
 \fi
 
 % text processing
@@ -22,7 +27,6 @@
 \usepackage[intlimits]{mathtools}  % upgrade of amsmath (automatically loaded) - \int^_ like \limits^_
 \usepackage{amssymb}  % upgrade of amsfonts (American Math Society)
 \usepackage{amstext}  % \text command in math environments
-%\usepackage{bm}  % bold math fonts
 \usepackage{letltxmacro}  % \let command for robust macros (new sqrt)
 \usepackage{chemformula}  % typeset chemical formulas
 
@@ -48,11 +52,7 @@
 \usepackage{graphicx}  % input JPEG, PNG, PDF, etc.
 \usepackage{pdfpages}  % input PDF as whole pages
 \usepackage{lastpage}  % reference to last page
-\usepackage{pgfplots}  % for tikzplotlib
-\usepgfplotslibrary{groupplots, dateplot}
-\usetikzlibrary{patterns, shapes.arrows}
-\pgfplotsset{compat=newest}
-\usepackage{import}
+\usepackage{import} % include files from other directories
 
 
 % text
@@ -64,12 +64,19 @@
 \usepackage{nicefrac}  % inline-fractions in n/d-style
 \usepackage{xcolor}  % custom colors
 \usepackage{listings, scrhack}  % code display; listings in combination with KOMA
-\usepackage[verbatim]{lstfiracode}  % Fira Code in listings
+\ifluatex
+    \IfFontExistsTF{Fira Code}{%
+        \usepackage[verbatim]{lstfiracode}  % Fira Code in listings
+        \lstset{style=FiraCodeStyle}
+    }{}
+\fi
 \usepackage{fancyvrb}  % Verbatim environment with better options (capital V!)
 
 
 % literacy
-\usepackage[style=apa]{biblatex}  % backend=Biber is standard
+\usepackage[sorting=none, giveninits=true]{biblatex}  % defaults: backend=Biber, style=numeric
+% bibliography styles: https://www.overleaf.com/learn/latex/Biblatex_bibliography_styles
+% citation styles: https://www.overleaf.com/learn/latex/Biblatex_citation_styles
 \usepackage{csquotes}  % better quotation - should also be used in combination with package babel (warning)
 \usepackage{xurl}  % breaks links - after BibLaTeX, but before hyperref!
 \usepackage[hidelinks]{hyperref}  % produces most errors, last to load
@@ -97,7 +104,8 @@
 % {}: empty statement
 % \ : protected space
 % \,: small space
-\DeclareTOCStyleEntry{dottedtocline}{section}  % sections in TableOfContents with dotted lines
+\DeclareTOCStyleEntry[linefill=\TOCLineLeaderFill]{tocline}{section}  % sections in TableOfContents with dotted lines
+% source: https://tex.stackexchange.com/a/651532
 \KOMAoptions{parskip=half-}  % paragraphs with half a line height space instead of indentation, last line with no special treatment
 
 
@@ -109,6 +117,11 @@
 % \contentsname
 % \listtablename
 % \listfigurename
+
+% make title in bibliography upright
+\DeclareFieldFormat{title}{#1}  % https://tex.stackexchange.com/a/311837
+% make size of url in bibliography smaller
+\renewcommand{\UrlFont}{\footnotesize\ttfamily}  % https://tex.stackexchange.com/a/151115, https://www.overleaf.com/learn/latex/Font_sizes%2C_families%2C_and_styles
 
 
 % xcolor
@@ -122,8 +135,8 @@
 % \definecolor{vscode_constant}{HTML}{d19a66}
 % \definecolor{vscode_function}{HTML}{61afe3}
 % \definecolor{background_grey}{HTML}{f8f8f8}
-%\definecolor{code_basic}{HTML}{D4D4D4}
-%\definecolor{code_background}{HTML}{1E1E1E}
+% \definecolor{code_basic}{HTML}{D4D4D4}
+% \definecolor{code_background}{HTML}{1E1E1E}
 
 % custom siunitx units
 \DeclareSIUnit{\dig}{dig}  % digits for uncertainty of electronical measurement devices
@@ -132,8 +145,7 @@
 
 
 % listings
-\lstdefinestyle{python}{
-    style=FiraCodeStyle,
+\lstset{
     basicstyle=\ttfamily\footnotesize,%\color{code_basic},  % \footnotesize contains \selectfont implicitly
     %backgroundcolor=\color{code_background},
     commentstyle=\color{code_comment},
@@ -149,12 +161,8 @@
     showspaces=false,
     showstringspaces=false,
     showtabs=false,
-    tabsize=2,
+    tabsize=2
 }
-\lstset{style=python}
-\ifPDFTeX
-    \renewcommand*{\ttdefault}{lmvtt}  % Latin Modern Typewriter Proportional
-\fi
 
 
 % new sqrt
@@ -195,21 +203,20 @@
 
 \UseTblrLibrary{amsmath}  % +array, +matrix, +bmatrix, +Bmatrix, +pmatrix, +vmatrix, +Vmatrix and +cases like tabularray with graphical options
 \UseTblrLibrary{siunitx}  % siunitx suited for tabularray
-% TRIPLE BRACKETS {{{}}} to protect strings from \num{} interpretation in S columns
 \UseTblrLibrary{diagbox}  % table cells with diagonal lines, suited for tabularray
 \UseTblrLibrary{varwidth}  % measure cell width
 \UseTblrLibrary{booktabs}
 \UseTblrLibrary{counter}
 
 
-% custom tabularray environments
+% custom tabularray environments:
 
 % info:
 % colcycle: https://github.com/lvjr/tabularray/issues/74
 % guard: https://github.com/lvjr/tabularray/issues/175#event-6567229210
 
 % guard S columns if latest feature ={guard} is not yet available
-\newcommand\SiGuard[1]{{#1}}
+\newcommand*{\SiGuard}[1]{{#1}}
 
 % standard environment
 \SetTblrInner{

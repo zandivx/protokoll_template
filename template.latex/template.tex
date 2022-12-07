@@ -39,10 +39,10 @@ Dies ist ein Testabsatz. Bitte diesen zu ignorieren.
 \section{Grundlagen und Voraussetzungen}
 \label{sec:grundlagen_voraussetzungen}
 
-Text1\footcite[1000]{ref:dem1} \\
-Text2\footcite[Kapitel 74]{ref:knoll} \\
+Text1 \cite[1000]{ref:dem1} \\
+Text2 \cite[Kapitel 74]{ref:knoll} \\
 Text3\footnote{\url{https://online.uni-graz.at/kfu_online/ee/ui/ca2/app/desktop/\#/login?$ctx=&redirect=Li4vLi4vLi4vZWUvdWkvY2EyL2FwcC9kZXNrdG9wLyMvc2xjLnRtLmNwL3N0dWRlbnQvY291cnNlcy82Mjg3OTk=}} \\  % must escape the # (\#), error otherwise!!
-Text4\footcite{ref:genol2013}
+Text4 \cite{ref:genol2013}
 %
 % Gleichungsumgebung
 \begin{equation}
@@ -70,7 +70,7 @@ Test: \texttt{typewriter}
 
 Die explizit angegebenen Unsicherheiten der ermittelten Messgrößen basieren auf Berechnungen durch die Unsicherheitsangabe nach den Datenblättern der verwendeten Messgeräte. Diese sind in \autoref{tab:geraeteliste} vermerkt beziehungsweise referenziert.
 
-Die Fehlerfortpflanzung der berechneten Werte basiert auf der Größtunsicherheitsmethode nach Gauß. Um diese Berechnungen zeiteffizient durchführen zu können, wird für jeden Unterpunkt der Laborübung ein Skript in \verb!Python! implementiert. Kernstück dessen ist das package \verb!uncertainties!\footcite{ref:uncertainties}, dass intern die Fehlerfortpflanzung berechnet. Gerundet wird nach den Angaben des Skriptums der Lehrveranstaltung \enquote{Einführung in die physikalischen Messmethoden}.\footcite{ref:messmethoden}
+Die Fehlerfortpflanzung der berechneten Werte basiert auf der Größtunsicherheitsmethode nach Gauß. Um diese Berechnungen zeiteffizient durchführen zu können, wird für jeden Unterpunkt der Laborübung ein Skript in \verb!Python! implementiert. Kernstück dessen ist das package \verb!uncertainties! \cite{ref:uncertainties}, dass intern die Fehlerfortpflanzung berechnet. Gerundet wird nach den Angaben des Skriptums der Lehrveranstaltung \enquote{Einführung in die physikalischen Messmethoden} \cite{ref:messmethoden}.
 
 
 
